@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/snailthrone-custom.css">
+
+		<title>SnailThrone Testing</title>
+	</head>
+	<body style="background-color:#e1e8e1;">
+  
+		
+		<!-- TITLE. FIND SOMETHING CLEVER HERE. -->
+		<div  align="center" style="background-color:#77aa6b; width:100%;">
+			<h1 class="text-white">SNAILTHRONE</h1>
+		</div>
+		<br>
+		<br>
+		<br>
+		<!-- HEADER. CONTAINS CURRENT WINNER, TIMER, AND POT. DOESN'T WORK! -->
+		<div class="container" style="background-color:#ffffff;><!-- style="background-image: url(mayan.jpg); background-size: contain; background-repeat: no-repeat; background-position: center;"-->
+			<div align="center">
+				<h1>20.374 ETH</h1>
+			</div>
+			<br><br>
+			<div align="center">
+				<h2>0x000000 Ascends To Godhood</h2>		
+				<h1 id="getting-started"></h1>
+				<br><br>
+				<h1>Usurp Their Reign</h1>
+				<h2>402 Snails</h2>
+			</div>
+			<div class="progress" style="max-width: 20rem;">
+				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+			</div>
+			<br>
+		</div>
+		
+
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<!-- NEW TEST NAV -->
+		<div class="container" align="center" style="background-color:#77aa6b;">
+
+			<ul class="nav nav-pills" align="center">
+				<li class="nav-item"><a class="nav-link" href="#snails" data-toggle="tab">Snails</a></li>
+				<li class="nav-item"><a class="nav-link" href="#eggs" data-toggle="tab">Eggs</a></li>
+				<li class="nav-item"><a class="nav-link" href="#rewards" data-toggle="tab">Rewards</a></li>
+			</ul>
+			
+			<div class="tab-content">
+			
+				<div class="tab-pane active fade in" id="snails">
+					<h3>MY SNAILS</h3>
+					<h4>12000 snails</h4>
+					<h5>(estimate worth: 20 ETH)</h5><br>
+					<div class="card-deck" style="max-width: 60rem;">
+						<div class="card border-success mb-3" style="max-width: 20rem;">
+							<div class="card-header">
+								<h4>Buy</h4>
+							</div>
+							<div class="card-body">
+								<p>ETH per snail: 0.0002</p>
+								<p>ETH to spend:<input type="text" id="fieldBuy" value="4" size="6"></p>
+								<button type="button" class="btn btn-primary">Buy ? ETH worth of Snails</button>
+							</div>
+						</div>
+						<div class="card border-success mb-3" style="max-width: 20rem;">
+							<div class="card-header" align="center">
+								<h4>Rule</h4>
+							</div>
+							<div class="card-body">
+								<p>Sacrifice needed to become Pharaoh: 400 snails</p>
+								<p>Maximum amount of snails to sacrifice:<input type="text" id="fieldSacrifice" value="400" size="6"></p>
+								<button type="button" class="btn btn-primary">Sacrifice ? Snails</button>
+							</div>
+						</div>
+						<div class="card border-success mb-3" style="max-width: 20rem;">
+							<div class="card-header" align="center">
+								<h4>Sell</h4>
+							</div>
+							<div class="card-body">
+								<p>1 snail sells for 0.00004 ETH, and a max of 4000 snails can be sold</p>
+								<p>Snails to sell:<input type="text" id="fieldSell" value="500" size="6"></p>
+								<button type="button" class="btn btn-primary">Sell ? Snails</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="tab-pane active fade in" id="eggs">
+					<h3>MY EGGS</h3>
+					<h4>480 eggs</h4>
+					<h5>(producing 20 eggs per hour)</h5><br>
+					<div class="card-deck" style="max-width: 52rem;">
+						<div class="card border-success mb-3" style="max-width: 26rem;">
+							<div class="card-header">
+								<h4>Hatch</h2>
+							</div>
+							<div class="card-body">
+								<p>ETH needed to hatch: 0.048 (0.0001 per egg)</p>
+								<button type="button" class="btn btn-primary">Hatch My Eggs</button>
+							</div>
+						</div>
+						<div class="card border-success mb-3" style="max-width: 26rem;">
+							<div class="card-header" align="center">
+								<h4>Feed</h2>
+							</div>
+							<div class="card-body">
+								<p>ETH reward: 0.21 (0.004 per egg)</p>
+								<button type="button" class="btn btn-primary">Feed The Frogking</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="tab-pane active fade in" id="rewards">
+					<h3>MY REWARDS</h3>
+					<h4>Lifetime earnings: 28.8 ETH</h4><br>
+					<div class="card-deck" style="max-width: 40rem;">
+						<div class="card border-success mb-3" style="max-width: 20rem;">
+							<div class="card-header">
+								<h4>Claim</h2>
+							</div>
+							<div class="card-body">
+								<p>Unclaimed dividends: 0.37 ETH</p>
+								<button type="button" class="btn btn-primary">Claim Dividends</button>
+							</div>
+						</div>
+						<div class="card border-success mb-3" style="max-width: 20rem;">
+							<div class="card-header" align="center">
+								<h4>Withdraw</h2>
+							</div>
+							<div class="card-body">
+								<p>Current balance: 0.72 ETH</p>
+								<button type="button" class="btn btn-primary">Withdraw My Earnings</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+		</div>
+		
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+		<!-- Custom jquery for Countdown, and script -->
+		<script src="js/jquery.countdown.js"></script>	
+		<script type="text/javascript">
+		  $("#getting-started")
+		  .countdown("2019/01/01", function(event) {
+			$(this).text(
+			  event.strftime('%I:%M:%S')
+			);
+		  });
+		  
+		</script>
+		
+	</body>
+</html>
