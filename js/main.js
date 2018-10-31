@@ -496,6 +496,13 @@ function enableButtons(){
     }
 }
 
+function updateGodTimer(){
+	var godtimerdoc = document.getElementById('godtimer')
+	godTimer(function(req) {
+		godtimerdoc.textContent = req;//translateQuantity(req, 0);
+	});
+}
+
 web3.version.getNetwork((err, netId) => {
     if(netId!="3"){
         displayModalMessage("Please switch to Ropsten "+netId)
