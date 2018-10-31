@@ -503,6 +503,13 @@ function updateGodTimer(){
 	});
 }
 
+function isGameStarted(){
+	var gamestartdoc = document.getElementById('gamestart')
+	gameStarted(function(req) {
+		gamestartdoc.textContent = req;//translateQuantity(req, 0);
+	});
+}
+	
 web3.version.getNetwork((err, netId) => {
     if(netId!="3"){
         displayModalMessage("Please switch to Ropsten "+netId)
