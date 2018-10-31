@@ -704,7 +704,7 @@ abiDefinition=[
 	}
 ]
 
-contractAddress=""
+contractAddress="0x854D743d8da78C94CE5fD3c713Fb512Bbd671EeD" // ROPSTEN v1
 
 function ClaimDivs(callback){
     var contractAbi = web3.eth.contract(abiDefinition);
