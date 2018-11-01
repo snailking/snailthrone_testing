@@ -1,3 +1,17 @@
+var modal
+var modalContent
+var lastNumEggs=-1
+var lastNumShrimp=-1
+var lastSecondsUntilFull=100
+lastHatchTime=0
+var eggstohatch1=864
+var lastUpdate=new Date().getTime()
+var snailpot;
+var previoussnailpot;
+var acornprice;
+var numplayeracorns;
+var numtotalacorns;
+
 function main(){
     console.log('test')
     controlLoop()
