@@ -1,9 +1,24 @@
+var modal
+var modalContent
+var lastNumEggs=-1
+var lastNumShrimp=-1
+var lastSecondsUntilFull=100
+lastHatchTime=0
+var eggstohatch1=864
+var lastUpdate=new Date().getTime()
+var snailpot;
+var previoussnailpot;
+var acornprice;
+var numplayeracorns;
+var numtotalacorns;
+
 function main(){
     console.log('test')
+    modal = document.getElementById('myModal');
+    modalContent=document.getElementById('modal-internal')
     controlLoop()
     controlLoopFaster()
 }
-
 
 function controlLoop(){
     refreshData()
@@ -17,8 +32,6 @@ function controlLoopFaster(){
 }
 
 function refreshData(){
-	updateRound();
-	/*
     var marketeggsdoc=document.getElementById('marketeggs')
     marketEggs(function(eggs){
         eggs=eggs
@@ -88,8 +101,7 @@ function refreshData(){
 	//prldoc.textContent = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0]; 
 	//var copyText = document.getElementById("copytextthing"); 
 	//copyText.value = prldoc.textContent;
-	updatePharaoh();
-	*/
+
 }
 
 function updateRound(){
@@ -421,11 +433,18 @@ function translateQuantity(quantity,precision){
     return finalquantity.toFixed(precision)+modifier;
 }
 
+function removeModal(){
+        modalContent.innerHTML=""
+        modal.style.display = "none";
+}
 function displayTransactionMessage(){
     displayModalMessage("Transaction Submitted. This can take a moment depending on the state of the Ethereum Network.")
 }
 
 function displayModalMessage(message){
+    modal.style.display = "block";
+    modalContent.textContent=message;
+    setTimeout(removeModal,3000)
 }
 
 function weiToDisplay(ethprice){
@@ -453,6 +472,7 @@ function copyRef() {
   copyText.select();
   document.execCommand("Copy");
   copyText.style.display="none"
+  displayModalMessage("copied link to clipboard")
   //alert("Copied the text: " + copyText.value);
 }
 
@@ -471,7 +491,7 @@ function secondsToString(seconds)
     //    endstr+=numdays + " days "
     //}
     
-    return numhours + "h " + numminutes + "m " + numseconds + "s";
+    return numhours + "h " + numminutes + "m "//+numseconds+"s";
 }
 
 function disableButtons(){
@@ -492,29 +512,9 @@ function enableButtons(){
     }
 }
 
-function updateGodTimer(){
-	var godtimerdoc = document.getElementById('godtimer')
-	godTimer(function(req) {
-		godtimerdoc.textContent = req;//translateQuantity(req, 0);
-	});
-}
-
-function isGameStarted(){
-	var gamestartdoc = document.getElementById('gamestart')
-	gameStarted(function(req) {
-		gamestartdoc.textContent = req;//translateQuantity(req, 0);
-	});
-}
-
-function updateRound(){
-	var godrounddoc = document.getElementById('godround')
-	godRound(function(req) {
-		godrounddoc.textContent = req;
-	});
-}
-
 web3.version.getNetwork((err, netId) => {
-    if(netId!="3"){
+    if(netId!="1"){
+        displayModalMessage("Please switch to the Ethereum main network "+netId)
         disableButtons()
     }
     /*
@@ -533,4 +533,3 @@ web3.version.getNetwork((err, netId) => {
       
   }*/
 })
-
