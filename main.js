@@ -16,6 +16,7 @@ function refreshData(){
 	updateGodPot();
 	updatePharaoh();
 	updateGodTimer();
+	updatePharaohReq();
 }
 
 //Truncates ETH value to 3 decimals
@@ -49,12 +50,22 @@ function updatePharaoh(){
 
 //Current round timer
 function updateGodTimer(){
+	var blocktime = Math.round((new Date()).getTime() / 1000); //current blocktime should be Unix timestamp
 	var godtimerdoc = document.getElementById('godtimer');
 	godTimer(function(req) {
-		godtimerdoc.textContent = req;
+		var result = req - blocktime;
+		godtimerdoc.textContent = result;
 	});
 }
-	
+
+//Current pharaoh requirement
+function updatePharaohReq(){
+	var pharaohreqdoc = document.getElementById('pharaohreq');
+	ComputePharaohReq(function(req) {
+		pharaohreqdoc.textContent = req;
+	});
+}
+
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
     if(netId!="3"){
