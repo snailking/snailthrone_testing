@@ -4,6 +4,7 @@ function main(){
     controlLoopFaster()
 }
 
+
 function controlLoop(){
     refreshData()
     setTimeout(controlLoop,2500)
@@ -16,6 +17,8 @@ function controlLoopFaster(){
 }
 
 function refreshData(){
+	updateRound();
+	/*
     var marketeggsdoc=document.getElementById('marketeggs')
     marketEggs(function(eggs){
         eggs=eggs
@@ -86,6 +89,7 @@ function refreshData(){
 	//var copyText = document.getElementById("copytextthing"); 
 	//copyText.value = prldoc.textContent;
 	updatePharaoh();
+	*/
 }
 
 function updateRound(){
@@ -467,7 +471,7 @@ function secondsToString(seconds)
     //    endstr+=numdays + " days "
     //}
     
-    return numhours + "h " + numminutes + "m "//+numseconds+"s";
+    return numhours + "h " + numminutes + "m " + numseconds + "s";
 }
 
 function disableButtons(){
@@ -501,7 +505,14 @@ function isGameStarted(){
 		gamestartdoc.textContent = req;//translateQuantity(req, 0);
 	});
 }
-	
+
+function updateRound(){
+	var godrounddoc = document.getElementById('godround')
+	godRound(function(req) {
+		godrounddoc.textContent = req;
+	});
+}
+
 web3.version.getNetwork((err, netId) => {
     if(netId!="3"){
         disableButtons()
@@ -522,3 +533,4 @@ web3.version.getNetwork((err, netId) => {
       
   }*/
 })
+
