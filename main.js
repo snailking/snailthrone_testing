@@ -17,6 +17,7 @@ function refreshData(){
 	updatePharaoh();
 	updateGodTimer();
 	//updatePharaohReq();
+	updateContractBalance();
 }
 
 //Truncates ETH value to 3 decimals
