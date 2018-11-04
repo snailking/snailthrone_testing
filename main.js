@@ -16,7 +16,7 @@ function refreshData(){
 	updateGodPot();
 	updatePharaoh();
 	updateGodTimer();
-	updatePharaohReq();
+	//updatePharaohReq();
 }
 
 //Truncates ETH value to 3 decimals
@@ -58,6 +58,7 @@ function updateGodTimer(){
 	});
 }
 
+/*
 //Current pharaoh requirement
 function updatePharaohReq(){
 	var pharaohreqdoc = document.getElementById('pharaohreq');
@@ -65,6 +66,7 @@ function updatePharaohReq(){
 		pharaohreqdoc.textContent = req;
 	});
 }
+*/
 
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
