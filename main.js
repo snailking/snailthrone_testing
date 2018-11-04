@@ -1,13 +1,13 @@
 //Started once, to trigger the main loop and the egg loop
 function main(){
-    console.log('test');
+    console.log('Main loop started.');
     controlLoop();
 }
 
 //Main loop
 function controlLoop(){
     refreshData();
-    setTimeout(controlLoop,2500);
+    setTimeout(controlLoop,4000);
 }
 
 //Refreshes game data
@@ -53,8 +53,14 @@ function updateGodTimer(){
 	var blocktime = Math.round((new Date()).getTime() / 1000); //current blocktime should be Unix timestamp
 	var godtimerdoc = document.getElementById('godtimer');
 	godTimer(function(req) {
-		var result = req - blocktime;
-		godtimerdoc.textContent = result;
+		var seconds = req - blocktime; //godTimer is the planned blocktime for the end
+		
+		//Convert result to hour minute second format
+		var numhours = Math.floor(seconds / 3600);
+		var numminutes = Math.floor((seconds % 3600) / 60);
+		var numseconds = (seconds % 3600) % 60;
+
+		godtimerdoc.textContent = numhours + "h " + numminutes + "m " + numseconds + "s ";
 	});
 }
 
@@ -67,6 +73,20 @@ function updatePharaohReq(){
 	});
 }
 */
+
+//Current max supply of snails
+function updateMaxSnail(){
+	var maxsnaildoc = document.getElementById('maxsnail');
+	maxSnail(function(req) {
+		maxsnaildoc.textContent = req;
+	});
+}
+
+//Current ETH balance in contract
+function updateContractBalance(){
+	var contractbalancedoc = document.getElementById('contractbalance');
+	contractbalancedoc.textContent = web3.fromWei(web3.eth.getBalance('0x854D743d8da78C94CE5fD3c713Fb512Bbd671EeD')); //Remember to change this, or set a variable somewhere else
+}
 
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
