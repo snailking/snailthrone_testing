@@ -46,6 +46,11 @@ function formatEthValue(ethstr){
     return parseFloat(parseFloat(ethstr).toFixed(3));
 }
 
+//Truncates ETH value to 6 decimals
+function formatEthValue2(ethstr){
+	return parseFloat(parseFloat(ethstr).toFixed(6));
+}
+
 //Current round
 function updateGodRound(){
 	var godrounddoc = document.getElementById('godround');
@@ -133,7 +138,7 @@ function updatePlayerSnail(){
 function updateTokenPrice(){
 	var tokenpricedoc = document.getElementById('tokenprice');
 	ComputeTokenPrice(function(req) {
-		a_tokenPrice = formatEthValue(web3.fromWei(req,'ether'));
+		a_tokenPrice = formatEthValue2(web3.fromWei(req,'ether'));
 		a_tokenSellPrice = a_tokenPrice / 2;
 		tokenpricedoc.textContent = a_tokenPrice;
 	});
@@ -162,7 +167,7 @@ function updateFieldBuy2(){
 //Current player eggs
 function updatePlayerEgg(){
 	var playereggdoc = document.getElementById('playeregg');
-	ComputeMyEgg(function(req) {
+	ComputeMyEggs(function(req) {
 		a_playerEgg = req;
 		playereggdoc.textContent = a_playerEgg;
 	});
