@@ -56,6 +56,7 @@ function refreshData(){
 	updateTokenSellPrice();
 	updateMaxSnailSell();
 	updateFieldBuy2();
+	updateFieldSacrifice2();
 	updateFieldSell2();
 	//updatePlayerEgg();
 	updatePlayerProd();
