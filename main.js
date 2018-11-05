@@ -139,7 +139,6 @@ function updateTokenPrice(){
 	var tokenpricedoc = document.getElementById('tokenprice');
 	ComputeTokenPrice(function(req) {
 		a_tokenPrice = formatEthValue2(web3.fromWei(req,'ether'));
-		a_tokenSellPrice = a_tokenPrice / 2;
 		tokenpricedoc.textContent = a_tokenPrice;
 	});
 }
@@ -168,7 +167,7 @@ function updateFieldBuy2(){
 function updatePlayerEgg(){
 	var playereggdoc = document.getElementById('playeregg');
 	ComputeMyEggs(function(req) {
-		a_playerEgg = req;
+		a_playerEgg = formatEthValue(req);
 		playereggdoc.textContent = a_playerEgg;
 	});
 }
