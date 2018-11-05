@@ -123,7 +123,7 @@ function updateFrogPot(){
 //Current player snail count PROBABLY WON'T WORK
 function updatePlayerSnail(){
 	var playersnaildoc = document.getElementById('playersnail');
-	hatcherySnail(function(req) {
+	hatcherySnail(web3.eth.accounts[0], function(req) {
 		a_playerSnail = req;
 		playersnaildoc.textContent = a_playerSnail;
 	});
