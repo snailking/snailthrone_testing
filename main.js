@@ -5,6 +5,8 @@ var a_frogPot = 0;
 var a_playerSnail = 0;
 var a_playerEgg = 0;
 var a_feedReward = 0;
+var f_buy = 0;
+var f_sell = 0;
 
 //Started once, to trigger the main loop and the egg loop
 function main(){
@@ -34,6 +36,7 @@ function refreshData(){
 	updateTokenSellPrice();
 	updateMaxSnailSell();
 	updateFieldBuy2();
+	updateFieldSell2();
 	//updatePlayerEgg();
 	updatePlayerProd();
 	updateHatchPrice();
@@ -168,9 +171,18 @@ function updatePlayerSnailValue(){
 
 //Player input on buy
 function updateFieldBuy2(){
-	var fieldbuydoc = document.getElementById('fieldBuy');
+	//var fieldbuydoc = document.getElementById('fieldBuy');
+	f_buy = document.getElementById('fieldBuy').value;
 	var fieldbuy2doc = document.getElementById('fieldBuy2');
-	fieldbuy2doc.textContent = fieldbuydoc.innerHTML;
+	fieldbuy2doc.textContent = f_buy;
+}
+
+//Player input on sell
+function updateFieldSell2(){
+	//var fieldbuydoc = document.getElementById('fieldBuy');
+	f_sell = document.getElementById('fieldSell').value;
+	var fieldsell2doc = document.getElementById('fieldSell2');
+	fieldsell2doc.textContent = f_sell;
 }
 
 //Current player eggs
@@ -227,6 +239,19 @@ function updatePlayerEarning(){
 	});
 }
 */	
+
+//Buy snail tokens
+function webBuySnail(){
+    var weitospend = web3.toWei(f_buy,'ether');
+    BuySnail(0x0000000000000000000000000000000000000000, weitospend,function(){ //NEED to change address
+    });
+}
+
+//Sell snail tokens
+function webSellSnail(){
+	SellSnail(f_sell, function(){
+	});
+}
 
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
