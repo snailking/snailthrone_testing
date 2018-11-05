@@ -156,7 +156,7 @@ function updateMaxSnailSell(){
 	snailPot(function(req) {
 	var a_snailPot = formatEthValue(web3.fromWei(req,'ether'));
 	a_snailPot = a_snailPot / 10; //the maximum obtainable in one sale is 10%
-	maxsnailselldoc.textContent = a_snailPot / a_tokenSellPrice; //divide that max by token price
+	maxsnailselldoc.textContent = parseFloat(a_snailPot / a_tokenSellPrice).toFixed(0); //divide that max by token price, round up to integer
 	});
 }
 	
@@ -170,7 +170,7 @@ function updatePlayerSnailValue(){
 function updateFieldBuy2(){
 	var fieldbuydoc = document.getElementById('fieldBuy');
 	var fieldbuy2doc = document.getElementById('fieldBuy2');
-	fieldbuy2doc.textContent = fieldbuydoc;
+	fieldbuy2doc.textContent = fieldbuydoc.innerHTML;
 }
 
 //Current player eggs
