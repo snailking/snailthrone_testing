@@ -1,12 +1,18 @@
+/* VARIABLES */
+
 var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
 var a_maxSnail = 0;
 var a_frogPot = 0;
 var a_playerSnail = 0;
 var a_playerEgg = 0;
+var a_playerHatchCost = 0;
 var a_feedReward = 0;
+var a_pharaohReq = 0;
 var f_buy = 0;
 var f_sell = 0;
+
+/* GLOBAL LOOP */
 
 //Started once, to trigger the main loop and the egg loop
 function main(){
@@ -19,6 +25,20 @@ function controlLoop(){
     refreshData();
     setTimeout(controlLoop,4000);
 }
+
+/* UTILITIES */
+
+//Truncates ETH value to 3 decimals
+function formatEthValue(ethstr){
+    return parseFloat(parseFloat(ethstr).toFixed(3));
+}
+
+//Truncates ETH value to 6 decimals
+function formatEthValue2(ethstr){
+	return parseFloat(parseFloat(ethstr).toFixed(6));
+}
+
+/* STATE UPDATES */
 
 //Refreshes game data
 function refreshData(){
@@ -44,16 +64,6 @@ function refreshData(){
 	updateFeedReward();
 	updateFullFeedReward();
 	//updatePlayerEarning();
-}
-
-//Truncates ETH value to 3 decimals
-function formatEthValue(ethstr){
-    return parseFloat(parseFloat(ethstr).toFixed(3));
-}
-
-//Truncates ETH value to 6 decimals
-function formatEthValue2(ethstr){
-	return parseFloat(parseFloat(ethstr).toFixed(6));
 }
 
 //Current round
@@ -99,8 +109,11 @@ function updateGodTimer(){
 //Current pharaoh requirement
 function updatePharaohReq(){
 	var pharaohreqdoc = document.getElementById('pharaohreq');
+	var pharaohreq2doc = document.getElementById('pharaohreq2');
 	ComputePharaohReq(function(req) {
-		pharaohreqdoc.textContent = req;
+		a_pharaohReq = req;
+		pharaohreqdoc.textContent = a_pharaohReq;
+		pharaohreq2doc.textContent = a_pharaohReq;
 	});
 }
 
@@ -169,22 +182,6 @@ function updatePlayerSnailValue(){
 	playersnailvaluedoc.textContent = a_playerSnail * a_tokenSellPrice;
 }
 
-//Player input on buy
-function updateFieldBuy2(){
-	//var fieldbuydoc = document.getElementById('fieldBuy');
-	f_buy = document.getElementById('fieldBuy').value;
-	var fieldbuy2doc = document.getElementById('fieldBuy2');
-	fieldbuy2doc.textContent = f_buy;
-}
-
-//Player input on sell
-function updateFieldSell2(){
-	//var fieldbuydoc = document.getElementById('fieldBuy');
-	f_sell = document.getElementById('fieldSell').value;
-	var fieldsell2doc = document.getElementById('fieldSell2');
-	fieldsell2doc.textContent = f_sell;
-}
-
 //Current player eggs
 function updatePlayerEgg(){
 	var playereggdoc = document.getElementById('playeregg');
@@ -209,13 +206,14 @@ function updateHatchPrice(){
 //Current hatch cost for player
 function updateFullHatchCost(){
 	var fullhatchcostdoc = document.getElementById('fullhatchcost');
-	fullhatchcostdoc.textContent = a_playerEgg * a_tokenSellPrice;
+	a_playerHatchCost = a_playerEgg * a_tokenSellPrice;
+	fullhatchcostdoc.textContent = a_playerHatchCost;
 }
 
 //Current feed reward per egg
 function updateFeedReward(){
 	var feedrewarddoc = document.getElementById('feedreward');
-	a_feedReward = a_frogPot / a_maxSnail;
+	a_feedReward = parseFloat(a_frogPot / a_maxSnail).toFixed(8);
 	feedrewarddoc.textContent = a_feedReward;
 }
 
@@ -240,6 +238,39 @@ function updatePlayerEarning(){
 }
 */	
 
+/* LOCAL FIELD INPUT */
+
+//Player input on buy
+function updateFieldBuy2(){
+	//var fieldbuydoc = document.getElementById('fieldBuy');
+	f_buy = document.getElementById('fieldBuy').value;
+	if(f_buy > 4){ 
+		f_buy = 4; //max 4 ETH per buy
+	}
+	var fieldbuy2doc = document.getElementById('fieldBuy2');
+	fieldbuy2doc.textContent = f_buy;
+}
+
+//Player input on sell
+function updateFieldSell2(){
+	//var fieldbuydoc = document.getElementById('fieldBuy');
+	f_sell = document.getElementById('fieldSell').value;
+	var fieldsell2doc = document.getElementById('fieldSell2');
+	fieldsell2doc.textContent = f_sell;
+}
+
+//Player input on sacrifice
+function updateFieldSacrifice2(){
+	f_sacrifice = document.getElementById('fieldSacrifice').value;
+	if(f_sacrifice < a_pharaohReq){
+		f_sacrifice = a_pharaohReq;
+	}
+	var fieldsacrifice2doc = document.getElementById('fieldSacrifice2');
+	fieldsacrifice2doc.textContent = f_sacrifice;
+}
+
+/* WEB3 TRANSACTIONS */
+
 //Buy snail tokens
 function webBuySnail(){
     var weitospend = web3.toWei(f_buy,'ether');
@@ -247,11 +278,43 @@ function webBuySnail(){
     });
 }
 
+//Sacrifice snail tokens
+function webSacrificeSnail(){
+	BecomePharaoh(f_sacrifice, function(){
+	});
+}
+
 //Sell snail tokens
 function webSellSnail(){
 	SellSnail(f_sell, function(){
 	});
 }
+
+//Hatch eggs
+function webHatchEgg(){
+	HatchEgg(a_playerHatchCost, function(){
+	});
+}
+
+//Feed eggs
+function webFeedFrog(){
+	FeedEgg(function(){
+	});
+}
+
+//Claim divs
+function webClaimDiv(){
+	ClaimDivs(function(){
+	});
+}
+
+//Withdraw earnings
+function webWithdrawEarning(){
+	WithdrawEarnings(function(){
+	});
+}
+
+/* NETWORK CHECK */
 
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {

@@ -33,12 +33,12 @@
 		<p>(estimate worth: <span id="playersnailvalue">(undefined)</span> ETH)</p>
 		<h4>Buy</h4>
 		<p>ETH per snail: <span id="tokenprice">(undefined)</span></p>
-		<p>ETH to spend:<input type="text" id="fieldBuy" value="4" size="6">(undefined)</p>
+		<p>ETH to spend:<input type="text" id="fieldBuy" value="4" size="6"></p>(maximum: 4 ETH)
 		<button type="button" class="btn btn-primary" onclick="webBuySnail()">Buy <span id="fieldBuy2">(undefined)</span> ETH worth of Snails</button>
 		<h4>Rule</h4>
-		<p>Sacrifice needed to become Pharaoh: <span id="pharaohreq">(undefined)</span> Snails</p>
+		<p>Sacrifice needed to become Pharaoh: <span id="pharaohreq2">(undefined)</span> Snails</p>
 		<p>Maximum amount of snails to sacrifice:<input type="text" id="fieldSacrifice" value="400" size="6"></p>
-		<button type="button" class="btn btn-primary">Sacrifice <span id="fieldSacrifice2">(undefined)</span> Snails</button>
+		<button type="button" class="btn btn-primary" onclick="webSacrificeSnail()">Sacrifice <span id="fieldSacrifice2">(undefined)</span> Snails</button>
 		<h4>Sell</h4>
 		<p>1 snail sells for <span id="tokensellprice">(undefined)</span> ETH, and a maximum of <span id="maxsnailsell">(undefined)</span> snails can be sold</p>
 		<p>Snails to sell:<input type="text" id="fieldSell" value="500" size="6"></p>
@@ -51,10 +51,10 @@
 		<p>(producing <span id="playerprod">(undefined)</span> eggs per hour)</p><br>
 		<h4>Hatch</h4>
 		<p>ETH needed to hatch: <span id="fullhatchcost">(undefined)</span> (<span id="hatchprice">(undefined)</span> per egg)</p>
-		<button type="button" class="btn btn-primary">Hatch My Eggs</button>
+		<button type="button" class="btn btn-primary" onclick="webHatchEgg()">Hatch My Eggs</button>
 		<h4>Feed</h2>
 		<p>ETH reward: <span id="fullfeedreward">(undefined)</span> (<span id="feedreward">(undefined)</span> per egg)</p>
-		<button type="button" class="btn btn-primary">Feed The Frogking</button>
+		<button type="button" class="btn btn-primary" onclick="webFeedFrog()">Feed The Frogking</button>
 		
 		<!-- REWARDS -->
 		<!-- CLAIM ON LEFT, WITHDRAW ON RIGHT. -->
@@ -62,7 +62,7 @@
 		<p>Lifetime earnings: <span id="lifetimeearning">(undefined)</span> ETH</p>
 		<h4>Claim</h2>
 		<p>Unclaimed dividends: (undefined) ETH</p>
-		<button type="button" class="btn btn-primary">Claim Dividends</button>
+		<button type="button" class="btn btn-primary" onclick="webClaimDiv()">Claim Dividends</button>
 		<h4>Withdraw</h2>
 		<p>Current balance: <span id="playerearning">(undefined)</span> ETH</p>
 		<button type="button" class="btn btn-primary">Withdraw My Earnings</button>
