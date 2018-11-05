@@ -27,7 +27,7 @@ function refreshData(){
 	//updatePharaohReq();
 	//updateContractBalance();
 	updateFrogPot();
-	updatePlayerSnail();
+	//updatePlayerSnail();
 	updateTokenPrice();
 	updatePlayerSnailValue();
 	updateTokenSellPrice();
