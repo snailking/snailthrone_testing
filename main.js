@@ -32,7 +32,7 @@ function refreshData(){
 	updatePlayerSnailValue();
 	updateTokenSellPrice();
 	updateFieldBuy2();
-	updatePlayerEgg();
+	//updatePlayerEgg();
 	updatePlayerProd();
 	updateHatchPrice();
 	updateFullHatchCost();
