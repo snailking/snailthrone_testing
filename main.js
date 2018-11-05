@@ -208,7 +208,7 @@ function updateLifetimeEarning(){
 	var lifetimeearningdoc = document.getElementById('lifetimeearning');
 	//Make new GETTER in smart contract for this
 }
-
+/*
 //Current balance for player
 function updatePlayerEarning(){
 	var playerearningdoc = document.getElementById('playerearning');
@@ -216,7 +216,7 @@ function updatePlayerEarning(){
 		playerearningdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
 	});
 }
-	
+*/	
 
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
