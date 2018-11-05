@@ -1,10 +1,10 @@
 var a_tokenPrice = 0;
-var a_tokenSellPrice = 2;
+var a_tokenSellPrice = 0;
 var a_maxSnail = 0;
 var a_frogPot = 0;
 var a_playerSnail = 0;
 var a_playerEgg = 0;
-var a_feedReward = 34;
+var a_feedReward = 0;
 
 //Started once, to trigger the main loop and the egg loop
 function main(){
