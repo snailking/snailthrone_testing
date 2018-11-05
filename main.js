@@ -154,7 +154,7 @@ function updatePlayerSnailValue(){
 
 //Player input on buy
 function updateFieldBuy2(){
-	var fieldbuydoc = document.getElementByid('fieldBuy');
+	var fieldbuydoc = document.getElementById('fieldBuy');
 	var fieldbuy2doc = document.getElementById('fieldBuy2');
 	fieldbuy2doc.textContent = fieldbuydoc.textContent;
 }
