@@ -24,13 +24,15 @@ function refreshData(){
 	updateGodPot();
 	updatePharaoh();
 	updateGodTimer();
-	//updatePharaohReq();
+	updatePharaohReq();
+	updateMaxSnail();
 	//updateContractBalance();
 	updateFrogPot();
 	//updatePlayerSnail();
 	updateTokenPrice();
 	updatePlayerSnailValue();
 	updateTokenSellPrice();
+	updateMaxSnailSell();
 	updateFieldBuy2();
 	//updatePlayerEgg();
 	updatePlayerProd();
@@ -91,7 +93,6 @@ function updateGodTimer(){
 	});
 }
 
-/*
 //Current pharaoh requirement
 function updatePharaohReq(){
 	var pharaohreqdoc = document.getElementById('pharaohreq');
@@ -99,7 +100,6 @@ function updatePharaohReq(){
 		pharaohreqdoc.textContent = req;
 	});
 }
-*/
 
 //Current max supply of snails
 function updateMaxSnail(){
@@ -150,6 +150,16 @@ function updateTokenSellPrice(){
 	tokensellpricedoc.textContent = a_tokenSellPrice;
 }
 
+//Maximum snails that can be sold
+function updateMaxSnailSell(){
+	var maxsnailselldoc = document.getElementById('maxsnailsell');
+	snailPot(function(req) {
+	var a_snailPot = formatEthValue(web3.fromWei(req,'ether'));
+	a_snailPot = a_snailPot / 10; //the maximum obtainable in one sale is 10%
+	maxsnailselldoc.textContent = a_snailPot / a_tokenSellPrice; //divide that max by token price
+	});
+}
+	
 //Current player snail ETH value
 function updatePlayerSnailValue(){
 	var playersnailvaluedoc = document.getElementById('playersnailvalue');
@@ -160,7 +170,7 @@ function updatePlayerSnailValue(){
 function updateFieldBuy2(){
 	var fieldbuydoc = document.getElementById('fieldBuy');
 	var fieldbuy2doc = document.getElementById('fieldBuy2');
-	fieldbuy2doc.textContent = fieldbuydoc.textContent;
+	fieldbuy2doc.textContent = fieldbuydoc;
 }
 
 //Current player eggs
