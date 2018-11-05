@@ -133,7 +133,7 @@ function updatePlayerSnail(){
 function updateTokenPrice(){
 	var tokenpricedoc = document.getElementById('tokenprice');
 	ComputeTokenPrice(function(req) {
-		a_tokenPrice = req;
+		a_tokenPrice = formatEthValue(web3.fromWei(req,'ether'));
 		a_tokenSellPrice = a_tokenPrice / 2;
 		tokenpricedoc.textContent = a_tokenPrice;
 	});
