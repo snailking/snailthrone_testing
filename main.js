@@ -11,6 +11,7 @@ var a_feedReward = 0;
 var a_pharaohReq = 0;
 var f_buy = 0;
 var f_sell = 0;
+var m_account = 0;
 
 /* GLOBAL LOOP */
 
@@ -42,6 +43,7 @@ function formatEthValue2(ethstr){
 
 //Refreshes game data
 function refreshData(){
+	updateEthAccount();
 	updateGodRound();
 	updateGodPot();
 	updatePharaoh();
@@ -58,13 +60,18 @@ function refreshData(){
 	updateFieldBuy2();
 	updateFieldSacrifice2();
 	updateFieldSell2();
-	//updatePlayerEgg();
+	updatePlayerEgg();
 	updatePlayerProd();
 	updateHatchPrice();
 	updateFullHatchCost();
 	updateFeedReward();
 	updateFullFeedReward();
 	//updatePlayerEarning();
+}
+
+//Current ETH address in use
+function updateEthAccount(){
+	m_account = web3.eth.accounts[0];
 }
 
 //Current round
@@ -186,7 +193,7 @@ function updatePlayerSnailValue(){
 //Current player eggs
 function updatePlayerEgg(){
 	var playereggdoc = document.getElementById('playeregg');
-	ComputeMyEggs(function(req) {
+	ComputeMyEggs(m_account, function(req) {
 		a_playerEgg = formatEthValue(req);
 		playereggdoc.textContent = a_playerEgg;
 	});
