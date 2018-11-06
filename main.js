@@ -303,7 +303,8 @@ function webSellSnail(){
 
 //Hatch eggs
 function webHatchEgg(){
-	HatchEgg(a_playerHatchCost, function(){
+	var weitospend = web3.toWei(a_playerHatchCost,'ether');
+	HatchEgg(weitospend, function(){
 	});
 }
 
