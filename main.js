@@ -39,6 +39,33 @@ function formatEthValue2(ethstr){
 	return parseFloat(parseFloat(ethstr).toFixed(6));
 }
 
+//Referrals
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+function copyRef() {
+  var copyText = document.getElementById("copytextthing");
+  copyText.style.display="block"
+  copyText.select();
+  document.execCommand("Copy");
+  copyText.style.display="none"
+  //displayModalMessage("copied link to clipboard")
+  //alert("Copied the text: " + copyText.value);
+}
+
+var prldoc = document.getElementById('playerreflink'); 
+prldoc.textContent = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0]; 
+var copyText = document.getElementById("copytextthing"); 
+copyText.value = prldoc.textContent;
+
 /* STATE UPDATES */
 
 //Refreshes game data
@@ -215,7 +242,7 @@ function updateHatchPrice(){
 //Current hatch cost for player
 function updateFullHatchCost(){
 	var fullhatchcostdoc = document.getElementById('fullhatchcost');
-	var roundup = 0.000003;
+	var roundup = 0.000004;
 	a_playerHatchCost = parseFloat(a_playerEgg * a_tokenSellPrice).toFixed(6);
 	a_playerHatchCost = parseFloat(a_playerHatchCost + roundup).toFixed(6);
 	fullhatchcostdoc.textContent = a_playerHatchCost;
@@ -231,7 +258,7 @@ function updateFeedReward(){
 //Current feed reward for player
 function updateFullFeedReward(){
 	var fullfeedrewarddoc = document.getElementById('fullfeedreward');
-	fullfeedrewarddoc.textContent = a_playerEgg * a_feedReward;
+	fullfeedrewarddoc.textContent = parseFloat(a_playerEgg * a_feedReward).toFixed(8);
 }
 
 //Lifetime earnings for player
