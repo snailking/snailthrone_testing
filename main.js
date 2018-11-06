@@ -195,6 +195,7 @@ function updatePlayerEgg(){
 	var playereggdoc = document.getElementById('playeregg');
 	ComputeMyEggs(m_account, function(req) {
 		a_playerEgg = formatEthValue(req);
+		a_playerEgg = a_playerEgg / 1080000; //TIME_TO_HATCH_1SNAIL
 		playereggdoc.textContent = a_playerEgg;
 	});
 }
