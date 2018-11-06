@@ -215,7 +215,7 @@ function updateHatchPrice(){
 //Current hatch cost for player
 function updateFullHatchCost(){
 	var fullhatchcostdoc = document.getElementById('fullhatchcost');
-	var roundup = 0.000002;
+	var roundup = 0.000003;
 	a_playerHatchCost = parseFloat(a_playerEgg * a_tokenSellPrice).toFixed(6);
 	a_playerHatchCost = parseFloat(a_playerHatchCost + roundup).toFixed(6);
 	fullhatchcostdoc.textContent = a_playerHatchCost;
