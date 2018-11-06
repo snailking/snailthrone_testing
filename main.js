@@ -40,8 +40,7 @@ function formatEthValue2(ethstr){
 }
 
 //Referrals
-function getQueryVariable(variable)
-{
+function getQueryVariable(variable){
        var query = window.location.search.substring(1);
        var vars = query.split("&");
        for (var i=0;i<vars.length;i++) {
@@ -311,8 +310,9 @@ function updateFieldSacrifice2(){
 
 //Buy snail tokens
 function webBuySnail(){
+	var ref = getQueryVariable('ref');
     var weitospend = web3.toWei(f_buy,'ether');
-    BuySnail(0x0000000000000000000000000000000000000000, weitospend,function(){ //NEED to change address
+    BuySnail(ref, weitospend,function(){
     });
 }
 
