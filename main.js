@@ -218,7 +218,6 @@ function updateMaxSnailSell(){
 	var maxsnailselldoc = document.getElementById('maxsnailsell');
 	var i_snailPot = a_snailPot / 10; //the maximum obtainable in one sale is 10%
 	maxsnailselldoc.textContent = parseFloat(i_snailPot / a_tokenSellPrice).toFixed(0); //divide that max by token price, round up to integer
-	});
 }
 	
 //Current player snail ETH value
