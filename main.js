@@ -79,6 +79,7 @@ function refreshData(){
 	updateMaxSnail();
 	updateContractBalance();
 	updateFrogPot();
+	updateSnailPot();
 	updatePlayerSnail();
 	updateTokenPrice();
 	updatePlayerSnailValue();
@@ -239,7 +240,7 @@ function updatePlayerEgg(){
 //Current player prod
 function updatePlayerProd(){
 	var playerproddoc = document.getElementById('playerprod');
-	playerproddoc.textContent = a_playerSnail * 0.08 / 24; //8% per day, divided by 24 hours
+	playerproddoc.textContent = parseFloat(a_playerSnail * 0.08 / 24).toFixed(3); //8% per day, divided by 24 hours
 }
 
 //Current hatch price per egg
