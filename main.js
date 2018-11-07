@@ -1,5 +1,11 @@
 /* VARIABLES */
 
+var a_godTimer = "";
+var godtimer_in_seconds = 0;
+var god_numhours = 0;
+var god_numminutes = 0;
+var god_numseconds = 0;
+
 var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
 var a_maxSnail = 0;
@@ -20,12 +26,19 @@ var m_account = 0;
 function main(){
     console.log('Main loop started.');
     controlLoop();
+	controlLoopFast();
 }
 
 //Main loop
 function controlLoop(){
     refreshData();
     setTimeout(controlLoop,4000);
+}
+
+//Secondary loop for actions that need faster refresh
+function controlLoopFast(){
+	refreshDataFast();
+	setTimeout(controlLoopFast,200);
 }
 
 /* UTILITIES */
@@ -98,6 +111,11 @@ function refreshData(){
 	updatePlayerEarning();
 }
 
+//Refreshes some game data faster
+function refreshDataFast(){
+	fastupdateGodTimer();
+}
+
 //Current ETH address in use
 function updateEthAccount(){
 	m_account = web3.eth.accounts[0];
@@ -132,17 +150,30 @@ function updateGodTimer(){
 	var blocktime = Math.round((new Date()).getTime() / 1000); //current blocktime should be Unix timestamp
 	var godtimerdoc = document.getElementById('godtimer');
 	godTimer(function(req) {
-		var seconds = req - blocktime; //godTimer is the planned blocktime for the end
+		godtimer_in_seconds = req - blocktime; //godTimer is the planned blocktime for the end
 		
 		//Convert result to hour minute second format
-		var numhours = Math.floor(seconds / 3600);
-		var numminutes = Math.floor((seconds % 3600) / 60);
-		var numseconds = (seconds % 3600) % 60;
+		god_numhours = Math.floor(seconds / 3600);
+		god_numminutes = Math.floor((seconds % 3600) / 60);
+		god_numseconds = (seconds % 3600) % 60;
 
-		godtimerdoc.textContent = numhours + "h " + numminutes + "m " + numseconds + "s ";
+		a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
+		godtimerdoc.textContent = a_godTimer;
 	});
 }
 
+//Fast local update for godtimer
+function fastupdateGodTimer(){
+	godtimer_in_seconds = godtimer_in_seconds - 0.2;
+	
+	god_numhours = Math.floor(seconds / 3600);
+	god_numminutes = Math.floor((seconds % 3600) / 60);
+	god_numseconds = (seconds % 3600) % 60;
+	
+	a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
+	godtimerdoc.textContent = a_godTimer;
+}	
+	
 //Current pharaoh requirement
 function updatePharaohReq(){
 	var pharaohreqdoc = document.getElementById('pharaohreq');
