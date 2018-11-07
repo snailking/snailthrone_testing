@@ -5,6 +5,7 @@ var godtimer_in_seconds = 0;
 var god_numhours = 0;
 var god_numminutes = 0;
 var god_numseconds = 0;
+var godtimerdoc;
 
 var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
@@ -148,7 +149,7 @@ function updatePharaoh(){
 //Current round timer
 function updateGodTimer(){
 	var blocktime = Math.round((new Date()).getTime() / 1000); //current blocktime should be Unix timestamp
-	var godtimerdoc = document.getElementById('godtimer');
+	godtimerdoc = document.getElementById('godtimer');
 	godTimer(function(req) {
 		godtimer_in_seconds = req - blocktime; //godTimer is the planned blocktime for the end
 		
