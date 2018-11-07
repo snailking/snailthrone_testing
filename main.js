@@ -165,7 +165,7 @@ function updateGodTimer(){
 //Fast local update for godtimer
 function fastupdateGodTimer(){
 	godtimer_in_seconds = godtimer_in_seconds - 0.2;
-	
+	console.log(godtimer_in_seconds);
 	god_numhours = Math.floor(godtimer_in_seconds / 3600);
 	god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
 	god_numseconds = (godtimer_in_seconds % 3600) % 60;
