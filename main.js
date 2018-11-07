@@ -224,7 +224,7 @@ function updateMaxSnailSell(){
 //Current player snail ETH value
 function updatePlayerSnailValue(){
 	var playersnailvaluedoc = document.getElementById('playersnailvalue');
-	playersnailvaluedoc.textContent = a_playerSnail * a_tokenSellPrice;
+	playersnailvaluedoc.textContent = parseFloat(a_playerSnail * a_tokenSellPrice).toFixed(4);
 }
 
 //Current player eggs
@@ -240,7 +240,7 @@ function updatePlayerEgg(){
 //Current player prod
 function updatePlayerProd(){
 	var playerproddoc = document.getElementById('playerprod');
-	playerproddoc.textContent = parseFloat(a_playerSnail * 0.08 / 24).toFixed(3); //8% per day, divided by 24 hours
+	playerproddoc.textContent = parseFloat(a_playerSnail * 0.08 / 24).toFixed(4); //8% per day, divided by 24 hours
 }
 
 //Current hatch price per egg
