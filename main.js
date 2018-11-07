@@ -99,9 +99,6 @@ function refreshData(){
 	updatePlayerSnailValue();
 	updateTokenSellPrice();
 	updateMaxSnailSell();
-	updateFieldBuy2();
-	updateFieldSacrifice2();
-	updateFieldSell2();
 	updatePlayerEgg();
 	updatePlayerProd();
 	updateHatchPrice();
@@ -115,6 +112,9 @@ function refreshData(){
 //Refreshes some game data faster
 function refreshDataFast(){
 	fastupdateGodTimer();
+	updateFieldBuy2();
+	updateFieldSacrifice2();
+	updateFieldSell2();
 }
 
 //Current ETH address in use
@@ -166,10 +166,10 @@ function updateGodTimer(){
 //Fast local update for godtimer
 function fastupdateGodTimer(){
 	godtimer_in_seconds = godtimer_in_seconds - 0.2;
-	console.log(godtimer_in_seconds);
+	//console.log(godtimer_in_seconds);
 	god_numhours = Math.floor(godtimer_in_seconds / 3600);
 	god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
-	god_numseconds = (godtimer_in_seconds % 3600) % 60;
+	god_numseconds = parseFloat((godtimer_in_seconds % 3600) % 60).toFixed(0);
 	
 	a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
 	godtimerdoc.textContent = a_godTimer;
