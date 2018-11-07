@@ -4,6 +4,7 @@ var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
 var a_maxSnail = 0;
 var a_frogPot = 0;
+var a_snailPot = 0;
 var a_playerSnail = 0;
 var a_playerEgg = 0;
 var a_playerHatchCost = 0;
@@ -76,9 +77,9 @@ function refreshData(){
 	updateGodTimer();
 	updatePharaohReq();
 	updateMaxSnail();
-	//updateContractBalance();
+	updateContractBalance();
 	updateFrogPot();
-	//updatePlayerSnail();
+	updatePlayerSnail();
 	updateTokenPrice();
 	updatePlayerSnailValue();
 	updateTokenSellPrice();
@@ -92,7 +93,8 @@ function refreshData(){
 	updateFullHatchCost();
 	updateFeedReward();
 	updateFullFeedReward();
-	//updatePlayerEarning();
+	updateUnclaimedDiv();
+	updatePlayerEarning();
 }
 
 //Current ETH address in use
@@ -160,10 +162,12 @@ function updateMaxSnail(){
 	});
 }
 
-//Current ETH balance in contract NOT WORKING, SHOULD ADD GET FUNCTIONS IN SMART CONTRACT TO MAKE THIS EASIER
+//Current ETH balance in contract
 function updateContractBalance(){
 	var contractbalancedoc = document.getElementById('contractbalance');
-	contractbalancedoc.textContent = web3.fromWei(web3.eth.getBalance('0x854D743d8da78C94CE5fD3c713Fb512Bbd671EeD')); //Remember to change this, or set a variable somewhere else
+	GetContractBalance(function(req) {
+		contractbalancedoc.textContent = formatEthValue2(web3.fromWei(req,'ether'));
+	});
 }
 
 //Current frog pot
@@ -174,11 +178,20 @@ function updateFrogPot(){
 		frogpotdoc.textContent = a_frogPot;
 	});
 }
+
+//Current snail pot
+function updateSnailPot(){
+	var snailpotdoc = document.getElementById('snailpot');
+	snailPot(function(req) {
+		a_snailPot = formatEthValue(web3.fromWei(req,'ether'));
+		snailpotdoc.textContent = a_snailPot;
+	});
+}
 	
-//Current player snail count PROBABLY WON'T WORK
+//Current player snail count
 function updatePlayerSnail(){
 	var playersnaildoc = document.getElementById('playersnail');
-	hatcherySnail(web3.eth.accounts[0], function(req) {
+	GetMySnails(function(req) {
 		a_playerSnail = req;
 		playersnaildoc.textContent = a_playerSnail;
 	});
@@ -203,10 +216,8 @@ function updateTokenSellPrice(){
 //Maximum snails that can be sold
 function updateMaxSnailSell(){
 	var maxsnailselldoc = document.getElementById('maxsnailsell');
-	snailPot(function(req) {
-	var a_snailPot = formatEthValue(web3.fromWei(req,'ether'));
-	a_snailPot = a_snailPot / 10; //the maximum obtainable in one sale is 10%
-	maxsnailselldoc.textContent = parseFloat(a_snailPot / a_tokenSellPrice).toFixed(0); //divide that max by token price, round up to integer
+	var i_snailPot = a_snailPot / 10; //the maximum obtainable in one sale is 10%
+	maxsnailselldoc.textContent = parseFloat(i_snailPot / a_tokenSellPrice).toFixed(0); //divide that max by token price, round up to integer
 	});
 }
 	
@@ -221,7 +232,7 @@ function updatePlayerEgg(){
 	var playereggdoc = document.getElementById('playeregg');
 	ComputeMyEggs(m_account, function(req) {
 		a_playerEgg = formatEthValue(req);
-		a_playerEgg = parseFloat(a_playerEgg / 1080000).toFixed(0); //TIME_TO_HATCH_1SNAIL
+		//a_playerEgg = parseFloat(a_playerEgg / 1080000).toFixed(0); //TIME_TO_HATCH_1SNAIL
 		playereggdoc.textContent = a_playerEgg;
 	});
 }
@@ -260,20 +271,22 @@ function updateFullFeedReward(){
 	fullfeedrewarddoc.textContent = parseFloat(a_playerEgg * a_feedReward).toFixed(8);
 }
 
-//Lifetime earnings for player
-function updateLifetimeEarning(){
-	var lifetimeearningdoc = document.getElementById('lifetimeearning');
-	//Make new GETTER in smart contract for this
+//Current unclaimed dividends for player
+function updateUnclaimedDiv(){
+	var playerdivdoc = document.getElementById('playerdiv')
+	ComputeMyDivs(m_account, function(req) {
+		playerdivdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
+	});
 }
-/*
+	
 //Current balance for player
 function updatePlayerEarning(){
 	var playerearningdoc = document.getElementById('playerearning');
-	playerEarnings(function(req) {
+	GetMyEarnings(function(req) {
 		playerearningdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
 	});
 }
-*/	
+	
 
 /* LOCAL FIELD INPUT */
 
