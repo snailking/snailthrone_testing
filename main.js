@@ -153,9 +153,9 @@ function updateGodTimer(){
 		godtimer_in_seconds = req - blocktime; //godTimer is the planned blocktime for the end
 		
 		//Convert result to hour minute second format
-		god_numhours = Math.floor(seconds / 3600);
-		god_numminutes = Math.floor((seconds % 3600) / 60);
-		god_numseconds = (seconds % 3600) % 60;
+		god_numhours = Math.floor(godtimer_in_seconds / 3600);
+		god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
+		god_numseconds = (godtimer_in_seconds % 3600) % 60;
 
 		a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
 		godtimerdoc.textContent = a_godTimer;
@@ -166,9 +166,9 @@ function updateGodTimer(){
 function fastupdateGodTimer(){
 	godtimer_in_seconds = godtimer_in_seconds - 0.2;
 	
-	god_numhours = Math.floor(seconds / 3600);
-	god_numminutes = Math.floor((seconds % 3600) / 60);
-	god_numseconds = (seconds % 3600) % 60;
+	god_numhours = Math.floor(godtimer_in_seconds / 3600);
+	god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
+	god_numseconds = (godtimer_in_seconds % 3600) % 60;
 	
 	a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
 	godtimerdoc.textContent = a_godTimer;
