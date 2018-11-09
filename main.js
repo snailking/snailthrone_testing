@@ -316,7 +316,8 @@ function updateFullFeedReward(){
 function updateUnclaimedDiv(){
 	var playerdivdoc = document.getElementById('playerdiv');
 	ComputeMyDivs(m_account, function(req) {
-		playerdivdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
+		var b_playerdiv = formatEthValue(web3.fromWei(req,'ether'));
+		playerdivdoc.textContent = b_playerdiv;
 	});
 }
 	
