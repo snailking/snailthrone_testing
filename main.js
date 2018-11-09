@@ -314,7 +314,7 @@ function updateFullFeedReward(){
 
 //Current unclaimed dividends for player
 function updateUnclaimedDiv(){
-	var playerdivdoc = document.getElementById('playerdiv')
+	var playerdivdoc = document.getElementById('playerdiv');
 	ComputeMyDivs(m_account, function(req) {
 		playerdivdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
 	});
