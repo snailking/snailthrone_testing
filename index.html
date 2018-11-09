@@ -18,9 +18,9 @@
 		
 		<!-- HEADER. CONTAINS CURRENT WINNER, TIMER, AND POT. DOESN'T WORK! -->
 		<div class="container">
-			<p>Round: <span id="godround">(undefined)</span></p>
-			<p>GodPot: <span id="godpot">(undefined)</span> ETH</p>
-			<p>0x<span id="pharaoh">(undefined)</span> Ascends to Godhood in <span id="godtimer">(undefined)</span></p>
+			<h4>Round: <span id="godround">(undefined)</span></p>
+			<h4>Round Pot: <span id="roundpot">(undefined)</span> ETH</p>
+			<h4>0x<span id="pharaoh">(undefined)</span> Ascends to Godhood in <span id="godtimer">(undefined)</span></p>
 			<button type="button" onclick="webSacrificeSnail()">Usurp their Reign</button>
 			<p>Cost to become Pharaoh: <span id="pharaohreq">(undefined)</span> Snails</p>
 			<p>------</p>
@@ -29,10 +29,11 @@
 		</div>
 		
 		<!-- MISC INFO -->
-		<h4>Total number of snails: <span id="maxsnail">(undefined)</span></h4>
-		<h4>ETH in contract: <span id="contractbalance">(undefined)</span> ETH</h4>
-		<h4>Frogking pot: <span id="frogpot">(undefined)</span> ETH</h4>
-		<h4>Snailpot: <span id="snailpot">(undefined)</span> ETH</h4>
+		<p>Total number of snails: <span id="maxsnail">(undefined)</span></p>
+		<p>ETH in contract: <span id="contractbalance">(undefined)</span> ETH</p>
+		<p>Godpot: <span id="godpot">(undefined)</span> ETH</p>
+		<p>Frogking pot: <span id="frogpot">(undefined)</span> ETH</p>
+		<p>Snailpot: <span id="snailpot">(undefined)</span> ETH</p>
 		<p>------</p>
 		
 		<!-- BUY ON LEFT, SNAILS ON MIDDLE, SELL ON RIGHT. -->
@@ -49,7 +50,7 @@
 		<button type="button" class="btn btn-primary" onclick="webSacrificeSnail()">Sacrifice <span id="fieldSacrifice2">(undefined)</span> Snails</button>
 		<h4>Sell</h4>
 		<p>1 snail sells for <span id="tokensellprice">(undefined)</span> ETH, and a maximum of <span id="maxsnailsell">(undefined)</span> snails can be sold</p>
-		<p>Snails to sell?<input type="text" id="fieldSell" value="500" size="6"> (Approximately <span id="sellEstimate">(undefined)</span> ETH</p>
+		<p>Snails to sell?<input type="text" id="fieldSell" value="500" size="6"> (Approximately <span id="sellEstimate">(undefined)</span> ETH)</p>
 		<button type="button" class="btn btn-primary" onclick="webSellSnail()">Sell <span id="fieldSell2">(undefined)</span> Snails</button>
 		<p>------</p>
 		

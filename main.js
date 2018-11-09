@@ -10,6 +10,7 @@ var godtimerdoc;
 var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
 var a_maxSnail = 0;
+var a_godPot = 0;
 var a_frogPot = 0;
 var a_snailPot = 0;
 var a_playerSnail = 0;
@@ -87,6 +88,7 @@ function refreshData(){
 	updateEthAccount();
 	updateGodRound();
 	updateGodPot();
+	updateRoundPot();
 	updatePharaoh();
 	updateGodTimer();
 	updatePharaohReq();
@@ -131,14 +133,21 @@ function updateGodRound(){
 	});
 }
 
-//Current round pot
+//Full godpot
 function updateGodPot(){
 	var godpotdoc = document.getElementById('godpot');
 	godPot(function(req) {
-		godpotdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
+		a_godPot = formatEthValue(web3.fromWei(req,'ether'));
+		godpotdoc.textContent = a_godPot;
 	});
 }
 
+//Current round pot (90% of godpot)
+function updateRoundPot(){
+	var roundpotdoc = document.getElementById('roundpot');
+	roundpotdoc.textContent = a_godPot * 9 / 10;
+}
+	
 //Current pharaoh
 function updatePharaoh(){
 	var pharaohdoc = document.getElementById('pharaoh');
