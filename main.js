@@ -115,6 +115,7 @@ function refreshDataFast(){
 	updateFieldBuy2();
 	updateFieldSacrifice2();
 	updateFieldSell2();
+	updateSellEstimate();
 }
 
 //Current ETH address in use
@@ -327,8 +328,7 @@ function updatePlayerEarning(){
 	GetMyEarnings(function(req) {
 		playerearningdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
 	});
-}
-	
+}	
 
 /* LOCAL FIELD INPUT */
 
@@ -349,6 +349,12 @@ function updateFieldSell2(){
 	f_sell = document.getElementById('fieldSell').value;
 	var fieldsell2doc = document.getElementById('fieldSell2');
 	fieldsell2doc.textContent = f_sell;
+}
+
+//Sell estimate
+function updateSellEstimate(){
+	var sellEstimatedoc = document.getElementById('sellEstimate');
+	sellEstimatedoc.textContent = f_sell * a_tokenSellPrice;
 }
 
 //Player input on sacrifice
