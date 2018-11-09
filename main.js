@@ -153,26 +153,35 @@ function updateGodTimer(){
 	godTimer(function(req) {
 		godtimer_in_seconds = req - blocktime; //godTimer is the planned blocktime for the end
 		
-		//Convert result to hour minute second format
-		god_numhours = Math.floor(godtimer_in_seconds / 3600);
-		god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
-		god_numseconds = (godtimer_in_seconds % 3600) % 60;
+		//Check if round is over
+		if(godtimer_in_seconds <= 0){
+			godtimerdoc.textContent = "[Round is over. Press the magic button to start new round.]";
+		} else {
+			//Convert result to hour minute second format
+			god_numhours = Math.floor(godtimer_in_seconds / 3600);
+			god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
+			god_numseconds = (godtimer_in_seconds % 3600) % 60;
 
-		a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
-		godtimerdoc.textContent = a_godTimer;
+			a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
+			godtimerdoc.textContent = a_godTimer;
+		}
 	});
 }
 
 //Fast local update for godtimer
 function fastupdateGodTimer(){
-	godtimer_in_seconds = godtimer_in_seconds - 0.2;
-	//console.log(godtimer_in_seconds);
-	god_numhours = Math.floor(godtimer_in_seconds / 3600);
-	god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
-	god_numseconds = parseFloat((godtimer_in_seconds % 3600) % 60).toFixed(0);
 	
-	a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
-	godtimerdoc.textContent = a_godTimer;
+	//Check if round is ongoing
+	if(godtimer_in_seconds > 0){
+		godtimer_in_seconds = godtimer_in_seconds - 0.2;
+		//console.log(godtimer_in_seconds);
+		god_numhours = Math.floor(godtimer_in_seconds / 3600);
+		god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
+		god_numseconds = parseFloat((godtimer_in_seconds % 3600) % 60).toFixed(0);
+		
+		a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
+		godtimerdoc.textContent = a_godTimer;
+	}
 }	
 	
 //Current pharaoh requirement
@@ -395,6 +404,12 @@ function webClaimDiv(){
 //Withdraw earnings
 function webWithdrawEarning(){
 	WithdrawEarnings(function(){
+	});
+}
+
+//Start a new round
+function webAscendGod(){
+	AscendGod(function(){
 	});
 }
 
