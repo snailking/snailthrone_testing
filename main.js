@@ -307,12 +307,12 @@ function updatePlayerEgg(){
 }
 
 //Fast local update for player eggs
-function fastupdatePlayerEgg(){
+/*function fastupdatePlayerEgg(){
 	playereggdoc = document.getElementById('playeregg');
 	var b_playerEgg = a_playerEgg + (a_playerProd / 18000); //60 minutes * 60 seconds * 5 refreshes per second = 18000
 	a_playerEgg = parseFloat(b_playerEgg).toFixed(4);
 	playereggdoc.textContent = a_playerEgg;
-}
+}*/
 
 //Current player prod
 function updatePlayerProd(){
