@@ -210,12 +210,11 @@ function updatePharaohReq(){
 		a_removeSnailReq = req;
 	});
 	//Remove snails from pharaohReq
-	if(a_pharaohReq > a_removeSnailReq) {
-		a_pharaohReq2 = a_pharaohReq - a_removeSnailReq;
-		if(a_pharaohReq2 < 80) {
-			a_pharaohReq2 = 80; //minimum req
-		}
+	a_pharaohReq2 = a_pharaohReq - a_removeSnailReq;
+	if(a_pharaohReq2 < 80) {
+		a_pharaohReq2 = 80; //minimum req
 	}
+
 	pharaohreqdoc.textContent = a_pharaohReq2;
 	pharaohreq2doc.textContent = a_pharaohReq2;
 }
