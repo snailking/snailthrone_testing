@@ -309,7 +309,8 @@ function updatePlayerEgg(){
 //Fast local update for player eggs
 function fastupdatePlayerEgg(){
 	playereggdoc = document.getElementById('playeregg');
-	a_playerEgg = parseFloat(a_playerEgg + (a_playerProd / 18000)).toFixed(4); //60 minutes * 60 seconds * 5 refreshes per second = 18000
+	var b_playerEgg = a_playerEgg + (a_playerProd / 18000); //60 minutes * 60 seconds * 5 refreshes per second = 18000
+	a_playerEgg = parseFloat(b_playerEgg).toFixed(4);
 	playereggdoc.textContent = a_playerEgg;
 }
 
