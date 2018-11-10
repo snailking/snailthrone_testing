@@ -5,7 +5,9 @@ var godtimer_in_seconds = 0;
 var god_numhours = 0;
 var god_numminutes = 0;
 var god_numseconds = 0;
+
 var godtimerdoc;
+var playereggdoc;
 
 var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
@@ -15,6 +17,7 @@ var a_frogPot = 0;
 var a_snailPot = 0;
 var a_playerSnail = 0;
 var a_playerEgg = 0;
+var a_playerProd = 0;
 var a_playerHatchCost = 0;
 var a_feedReward = 0;
 var a_pharaohReq = 0;
@@ -117,6 +120,7 @@ function refreshData(){
 //Refreshes some game data faster
 function refreshDataFast(){
 	fastupdateGodTimer();
+	fastupdatePlayerEgg();
 	updateFieldBuy2();
 	updateFieldSacrifice2();
 	updateFieldSell2();
@@ -294,7 +298,7 @@ function updatePlayerSnailValue(){
 
 //Current player eggs
 function updatePlayerEgg(){
-	var playereggdoc = document.getElementById('playeregg');
+	playereggdoc = document.getElementById('playeregg');
 	ComputeMyEggs(m_account, function(req) {
 		a_playerEgg = formatEthValue(req);
 		//a_playerEgg = parseFloat(a_playerEgg / 1080000).toFixed(0); //TIME_TO_HATCH_1SNAIL
@@ -302,10 +306,18 @@ function updatePlayerEgg(){
 	});
 }
 
+//Fast local update for player eggs
+function fastupdatePlayerEgg(){
+	playereggdoc = document.getElementById('playeregg');
+	a_playerEgg = parseFloat(a_playerEgg + (a_playerProd / 18000)).toFixed(4); //60 minutes * 60 seconds * 5 refreshes per second = 18000
+	playereggdoc.textContent = a_playerEgg;
+}
+
 //Current player prod
 function updatePlayerProd(){
 	var playerproddoc = document.getElementById('playerprod');
-	playerproddoc.textContent = parseFloat(a_playerSnail * 0.08 / 24).toFixed(4); //8% per day, divided by 24 hours
+	a_playerProd = parseFloat(a_playerSnail * 0.08 / 24).toFixed(4); //8% per day, divided by 24 hours
+	playerproddoc.textContent = a_playerProd;
 }
 
 //Current hatch price per egg
@@ -386,7 +398,7 @@ function updateFieldSell2(){
 //Sell estimate
 function updateSellEstimate(){
 	var sellEstimatedoc = document.getElementById('sellEstimate');
-	sellEstimatedoc.textContent = f_sell * a_tokenSellPrice;
+	sellEstimatedoc.textContent = parseFloat(f_sell * a_tokenSellPrice).toFixed(6);
 }
 
 //Player input on sacrifice
