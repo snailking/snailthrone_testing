@@ -120,7 +120,7 @@ function refreshData(){
 //Refreshes some game data faster
 function refreshDataFast(){
 	fastupdateGodTimer();
-	fastupdatePlayerEgg();
+	//fastupdatePlayerEgg();
 	updateFieldBuy2();
 	updateFieldSacrifice2();
 	updateFieldSell2();
