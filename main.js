@@ -78,10 +78,10 @@ function copyRef() {
   //alert("Copied the text: " + copyText.value);
 }
 
-var prldoc = document.getElementById('playerreflink'); 
-prldoc.textContent = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0]; 
+var playerreflinkdoc = document.getElementById('playerreflink'); 
+var a_refLink = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0];
 var copyText = document.getElementById("copytextthing"); 
-copyText.value = prldoc.textContent;
+copyText.value = playerreflinkdoc.textContent;
 
 /* STATE UPDATES */
 
@@ -111,6 +111,7 @@ function refreshData(){
 	updateFullFeedReward();
 	updateUnclaimedDiv();
 	updatePlayerEarning();
+	updatePlayerRef();
 }
 
 //Refreshes some game data faster
@@ -352,6 +353,15 @@ function updatePlayerEarning(){
 		playerearningdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
 	});
 }	
+
+//Status of referral link for player
+function updatePlayerRef(){
+	if(a_playerSnail >= 300){
+		playerreflinkdoc.innerHTML = a_refLink + "<br>Any buy through this link gives you 6% of the ETH spent.";
+	} else {
+		playerreflinkdoc.textContent = "NOT active. You must have at least 300 snails in your hatchery.";
+	}
+}
 
 /* LOCAL FIELD INPUT */
 
