@@ -146,7 +146,7 @@ function updateGodPot(){
 //Current round pot (90% of godpot)
 function updateRoundPot(){
 	var roundpotdoc = document.getElementById('roundpot');
-	roundpotdoc.textContent = a_godPot * 9 / 10;
+	roundpotdoc.textContent = a_godPot / 2;
 }
 	
 //Current pharaoh
@@ -338,7 +338,7 @@ function updateFullFeedReward(){
 //Current unclaimed dividends for player
 function updateUnclaimedDiv(){
 	var playerdivdoc = document.getElementById('playerdiv');
-	ComputeMyDivs(m_account, function(req) {
+	ComputeMyDivs(function(req) {
 		var b_playerdiv = formatEthValue(web3.fromWei(req,'ether'));
 		playerdivdoc.textContent = b_playerdiv;
 	});
