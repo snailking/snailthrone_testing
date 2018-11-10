@@ -18,6 +18,7 @@ var a_playerEgg = 0;
 var a_playerHatchCost = 0;
 var a_feedReward = 0;
 var a_pharaohReq = 0;
+var a_pharaohReq2 = 0;
 var a_removeSnailReq = 0;
 var f_buy = 0;
 var f_sell = 0;
@@ -209,13 +210,13 @@ function updatePharaohReq(){
 	});
 	//Remove snails from pharaohReq
 	if(a_pharaohReq > a_removeSnailReq) {
-		a_pharaohReq = a_pharaohReq - a_removeSnailReq;
-		if(a_pharaohReq < 80) {
-			a_pharaohReq = 80; //minimum req
+		a_pharaohReq2 = a_pharaohReq - a_removeSnailReq;
+		if(a_pharaohReq2 < 80) {
+			a_pharaohReq2 = 80; //minimum req
 		}
 	}
-	pharaohreqdoc.textContent = a_pharaohReq;
-	pharaohreq2doc.textContent = a_pharaohReq;
+	pharaohreqdoc.textContent = a_pharaohReq2;
+	pharaohreq2doc.textContent = a_pharaohReq2;
 }
 
 //Current max supply of snails
@@ -382,8 +383,8 @@ function updateSellEstimate(){
 //Player input on sacrifice
 function updateFieldSacrifice2(){
 	f_sacrifice = document.getElementById('fieldSacrifice').value;
-	if(f_sacrifice < a_pharaohReq){
-		f_sacrifice = a_pharaohReq;
+	if(f_sacrifice < a_pharaohReq2){
+		f_sacrifice = a_pharaohReq2;
 	}
 	var fieldsacrifice2doc = document.getElementById('fieldSacrifice2');
 	fieldsacrifice2doc.textContent = f_sacrifice;
