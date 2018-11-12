@@ -25,6 +25,7 @@ var a_pharaohReq2 = 0;
 var a_removeSnailReq = 0;
 var f_buy = 0;
 var f_sell = 0;
+var f_sacrifice = 80;
 var m_account = 0;
 
 /* GLOBAL LOOP */
@@ -115,6 +116,7 @@ function refreshData(){
 	updateUnclaimedDiv();
 	updatePlayerEarning();
 	updatePlayerRef();
+	updateMaxDiv();
 }
 
 //Refreshes some game data faster
@@ -373,6 +375,14 @@ function updatePlayerRef(){
 	} else {
 		playerreflinkdoc.textContent = "NOT active. You must have at least 300 snails in your hatchery.";
 	}
+}
+
+//Lifetime divs
+function updateMaxDiv(){
+	var maxdivdoc = document.getElementById('maxdiv');
+	maxDivs(function(req) {
+		maxdivdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
+	});
 }
 
 /* LOCAL FIELD INPUT */
