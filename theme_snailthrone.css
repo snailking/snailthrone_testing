@@ -40,12 +40,19 @@
 }
 
 body {
-	background-image: url(img/mayan_pyramid2.png);
-	height: 840px;
+	/*background-image: url(img/mayan_pyramid2.png);
+	height: 800px;
 	background-position: center; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
 	background-color: black;
 	color: white;
+}
+
+.pyramid {
+	background-image: url(img/mayan_pyramid2.png);
+	background-position: center;
+    background-repeat: no-repeat;
+	background-color: black;
 }
 
 .ether {
