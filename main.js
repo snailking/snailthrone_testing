@@ -381,7 +381,7 @@ function updatePlayerRef(){
 function updateMaxDiv(){
 	var maxdivdoc = document.getElementById('maxdiv');
 	divsPerSnail(function(req) {
-		maxdivdoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
+		maxdivdoc.textContent = formatEthValue2(web3.fromWei(req,'ether'));
 	});
 }
 
