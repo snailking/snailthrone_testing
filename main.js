@@ -168,7 +168,7 @@ function updatePharaoh(){
 		if(a_pharaoh === n_account) {
 			pharaohdoc.textContent = "YOU";
 		} else {
-		pharaohdoc.textContent = a_pharaoh;
+		pharaohdoc.textContent = "0x" + a_pharaoh;
 		}
 	});
 }
