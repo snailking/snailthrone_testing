@@ -165,11 +165,12 @@ function updatePharaoh(){
 	var pharaohdoc = document.getElementById('pharaoh');
 	pharaoh(function(req) {
 		a_pharaoh = req.substring(26, 66);
+		if(a_pharaoh === n_account) {
+			pharaohdoc.textContent = "YOU";
+		} else {
 		pharaohdoc.textContent = a_pharaoh;
+		}
 	});
-	if(a_pharaoh === n_account) {
-		pharaohdoc.textContent = "YOU";
-	}
 }
 
 //Current round timer
