@@ -9,6 +9,7 @@ var god_numseconds = 0;
 var godtimerdoc;
 var playereggdoc;
 
+var a_pharaoh = "";
 var a_tokenPrice = 0;
 var a_tokenSellPrice = 0;
 var a_maxSnail = 0;
@@ -161,8 +162,12 @@ function updateRoundPot(){
 function updatePharaoh(){
 	var pharaohdoc = document.getElementById('pharaoh');
 	pharaoh(function(req) {
-		pharaohdoc.textContent = req.substring(26, 66);
+		a_pharaoh = req.substring(26, 66);
+		pharaohdoc.textContent = a_pharaoh;
 	});
+	if(a_pharaoh === m_account) {
+		pharaohdoc.textContent = "YOU";
+	}
 }
 
 //Current round timer
