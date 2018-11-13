@@ -40,17 +40,16 @@
 }
 
 body {
-	/*background-image: url(img/mayan_pyramid2.png);
-	height: 800px;
-	background-position: center; /* Center the image */
+	/*background-image: url(img/mayan_pyramid3.png);
+	background-position: 50% 20%; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
 	background-color: black;
 	color: white;
 }
 
 .pyramid {
-	background-image: url(img/mayan_pyramid2.png);
-	background-position: center;
+	background-image: url(img/mayan_pyramid3.png);
+	background-position: center center;
     background-repeat: no-repeat;
 	background-color: black;
 }
