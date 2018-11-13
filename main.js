@@ -371,7 +371,7 @@ function updatePlayerEarning(){
 //Status of referral link for player
 function updatePlayerRef(){
 	if(a_playerSnail >= 300){
-		playerreflinkdoc.innerHTML = a_refLink + "<br>Any buy through this link gives you 6% of the ETH spent.";
+		playerreflinkdoc.innerHTML = "<br>" + a_refLink; //+ "<br>Any buy through this link gives you 6% of the ETH spent.";
 	} else {
 		playerreflinkdoc.textContent = "NOT active. You must have at least 300 snails in your hatchery.";
 	}

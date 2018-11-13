@@ -138,6 +138,12 @@ code {
 	margin: 4px;
 }
 
+.icon-align-left {
+	width: 48px;
+	float: left;
+	margin: 4px;
+}
+
 .icon-align-center {
 	width: 48px;
 	display: block;
