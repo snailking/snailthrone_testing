@@ -27,7 +27,8 @@ var a_removeSnailReq = 0;
 var f_buy = 0;
 var f_sell = 0;
 var f_sacrifice = 40;
-var m_account = 0;
+var m_account = "";
+var n_account = "";
 
 /* GLOBAL LOOP */
 
@@ -133,6 +134,7 @@ function refreshDataFast(){
 //Current ETH address in use
 function updateEthAccount(){
 	m_account = web3.eth.accounts[0];
+	n_account = m_account.substring(2);
 }
 
 //Current round
@@ -165,7 +167,7 @@ function updatePharaoh(){
 		a_pharaoh = req.substring(26, 66);
 		pharaohdoc.textContent = a_pharaoh;
 	});
-	if(a_pharaoh === m_account) {
+	if(a_pharaoh === n_account) {
 		pharaohdoc.textContent = "YOU";
 	}
 }
