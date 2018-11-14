@@ -173,6 +173,7 @@ function updatePharaoh(){
 			} else {
 			pharaohdoc.textContent = "0x" + a_pharaoh + "<br>Will Ascend to Godhood in";
 			}
+		}
 		else {
 			if(a_pharaoh === n_account) {
 				pharaohdoc.textContent = "YOU ARE THE SNAILGOD!<br>Claim your winnings by starting a new round.";
