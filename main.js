@@ -6,6 +6,8 @@ var god_numhours = 0;
 var god_numminutes = 0;
 var god_numseconds = 0;
 
+var god_roundover = false;
+
 var godtimerdoc;
 var playereggdoc;
 
@@ -154,7 +156,7 @@ function updateGodPot(){
 	});
 }
 
-//Current round pot (90% of godpot)
+//Current round pot (50% of godpot)
 function updateRoundPot(){
 	var roundpotdoc = document.getElementById('roundpot');
 	roundpotdoc.textContent = a_godPot / 2;
@@ -165,10 +167,18 @@ function updatePharaoh(){
 	var pharaohdoc = document.getElementById('pharaoh');
 	pharaoh(function(req) {
 		a_pharaoh = req.substring(26, 66);
-		if(a_pharaoh === n_account) {
-			pharaohdoc.textContent = "YOU";
-		} else {
-		pharaohdoc.textContent = "0x" + a_pharaoh;
+		if(god_roundover === false) {
+			if(a_pharaoh === n_account) {
+				pharaohdoc.textContent = "YOU<br>Will Ascend to Godhood in";
+			} else {
+			pharaohdoc.textContent = "0x" + a_pharaoh + "<br>Will Ascend to Godhood in";
+			}
+		else {
+			if(a_pharaoh === n_account) {
+				pharaohdoc.textContent = "YOU ARE THE SNAILGOD!<br>Claim your winnings by starting a new round.";
+			} else {
+			pharaohdoc.textContent = "0x" + a_pharaoh + " is the SnailGod!<br>To the victor the spoils. Start a new round to be next in line!";
+			}
 		}
 	});
 }
@@ -183,6 +193,7 @@ function updateGodTimer(){
 		//Check if round is over
 		if(godtimer_in_seconds <= 0){
 			godtimerdoc.textContent = "[Round is over. Press the magic button to start new round.]";
+			god_roundover = true;
 		} else {
 			//Convert result to hour minute second format
 			god_numhours = Math.floor(godtimer_in_seconds / 3600);
@@ -191,6 +202,7 @@ function updateGodTimer(){
 
 			a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
 			godtimerdoc.textContent = a_godTimer;
+			god_roundover = false;
 		}
 	});
 }
@@ -484,6 +496,32 @@ function webAscendGod(){
 }
 
 /* NETWORK CHECK */
+
+//New Metamask privacy change
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+            web3.eth.sendTransaction({/* ... */});
+        } catch (error) {
+            // User denied account access...
+        }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+        window.web3 = new Web3(web3.currentProvider);
+        // Acccounts always exposed
+        web3.eth.sendTransaction({/* ... */});
+    }
+    // Non-dapp browsers...
+    else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+});
 
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
