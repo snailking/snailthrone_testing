@@ -13,10 +13,67 @@
 	</head>
 	
 	<body>
-	
-		<!-- TITLE. -->
+		<!-- MODAL. EXPLAINS EVERYTHING. OPENED BY HELP. -->
+		<div id="modal" class="modal">
+			<div class="jumbotron modal-content">
+				<span class="close">&times;</span><h2 align="center">Welcome to the Great Pyramid of Snails!</h2>
+				<br><p><b>WHAT IS SNAILTHRONE?</b></p>
+				<div class="infobox">
+					<p>SnailThrone is a King of the Hill game: your goal is to climb to the top of the pyramid, and stay there long enough without anyone booting you off the throne.</p>
+					<p>To claim the throne, you must sacrifice snails. Snails can be bought, hatched, and sold back to the game itself.</p>
+					<p>In practical terms, SnailThrone is a smart contract running on the Ethereum blockchain. You must have MetaMask or a compatible Ethereum wallet to play.</p>
+					<p align="right"><a href="https://medium.com/publicaio/a-complete-guide-to-using-metamask-updated-version-cd0d6f8c338f" target="_blank">More info on MetaMask</a></p>
+				</div>
+				<br><p><b>WHAT IS ETHEREUM?</b></p>
+				<div class="infobox">
+					<p>Ethereum is a decentralized network where programs can run autonomously. SnailThrone is one such program. 
+					Nobody owns the game, and thousands of computers all over the world execute the game's programming as part of the Ethereum network.</p>
+					<p>You may also know Ethereum as a cryptocurrency. The currency of the Ethereum network is called ether, or ETH. ETH is used to pay for transactions, as well as exchanges of value.</p>
+					<p>SnailThrone requires ETH for both transactions and exchanges of value.</p>
+					<p align="right"><a href="https://blockonomi.com/ethereum-guide/" target="_blank">Learn about Ethereum</a></p>
+				</div>
+				<br><p><b>HOW DOES SNAILTHRONE WORK?</b></p>
+				<div class="infobox">
+					<p>SnailThrone is a deterministic game. There is no randomness to the rules. Your actions have fixed outcomes, and the same goes for every player.</p>
+					<p>To start, you will need to buy snails. Once you own a few snails, a variety of actions is available to you.
+					<p>You can sacrifice some of your snails to claim the throne as the Pharaoh. If no other player is willing to sacrifice enough snails until the timer is over, you win this round's jackpot.
+					<p>Your snails lay eggs consistently. You can hatch these eggs into even more snails, or you can feed these eggs to the FrogKing to get some ETH back.
+					<p>At any point in the game, you can sell your snails back to the game. The ETH you will get for this action may be higher or lower than the ETH you spent to buy your snails, based on several factors expanded below.</p>
+					<p>Last but not least, holding snails entitles you to a share of the ETH spent on buying or hatching snails.</p>
+					<p>As long as you have snails, you will passively get ETH for as long as other players participate.</p>
+					<p align="right"><a href="#info" onclick="closeModal()">Game rules explained</a></p>
+				</div>
+				<br><p><b>IS THE GAME SECURE?</b></p>
+				<div class="infobox">
+					<p>Smart contracts act exactly as defined, and the source code is open for anyone to read.</p>
+					<p>The game lives on the Ethereum blockchain and would go on without interruption even if the website went down.</p>
+					<p>The Ethereum blockchain itself is secured by hundreds of millions of dollars worth of redundancy. Your bank is less secure than this!</p>
+					<p>The biggest risks with decentralized applications have to do with *your own* security.
+					<p>Transactions are irreversible, and nobody can refund you if you're not happy with your purchase.
+					<p>Make sure you write your private key down. Keep it safe, and don't share it with anyone else.
+					<p align="right"><a href="https://hackernoon.com/everything-you-need-to-know-about-smart-contracts-a-beginners-guide-c13cc138378a?gi=d005680f1f69" target="_blank">Further reading on Smart Contracts</a></p>
+				</div>
+				<br><p><b>IS THIS AN INVESTMENT VEHICLE?</b></p>
+				<div class="infobox">
+					<p>No! This is a zero-sum game, meaning each participant's gains are balanced by another participant's losses.</p>
+					<p>SnailThrone is a game of math and logic, with no randomness involved. The correct strategy will lead to success, and there can be many winners.
+					But there will be many losers as well.</p>
+					<p>Even though SnailThrone isn't gambling, you shouldn't play this game if you're susceptible to gambling addiction.</p>
+					<p>Make sure you familiarize yourself with the rules, and don't play with ETH you can't afford to lose. If you want to try out the game in a safe environment,
+					head over to the TEST version on the Ropsten network, where ETH is free.</p>
+					<p align="right"><a href="https://www.helpguide.org/articles/addictions/gambling-addiction-and-problem-gambling.htm" target="_blank">Gambling Addiction</a></p>
+				</div>
+				<br><p><b>I HAVE MORE QUESTIONS!</b></p>
+				<div class="infobox">
+					<p>Come join us on Discord!</p>
+					<p>There's a wealth of information available in previous discussions, and the community can answer your questions.</p>
+					<p align="right"><a href="https://discord.gg/8h3Emyb" target="_blank">Discord Link</a></p>
+				</div>
+			</div>
+		</div>
+		<!-- TITLE. ICONS LINKING TO CONTRACT, SOCIAL MEDIA, HELP. -->
 		<div class="jumbotron">
-			<a href="#info"><img class="icon-align-right" src="img/question_circle.png"></a>
+			<input type="image" src="img/question_circle.png" class="icon-align-right" id="helpmodal" />
 			<a href="https://ropsten.etherscan.io/address/0xcf9bb23c49f5b32128665282dab483ed2d414235"><img class="icon-align-right" src="img/contract_circle.png"></a>
 			<a href="https://discord.gg/8h3Emyb"><img class="icon-align-right" src="img/discord_circle.png"></a>
 			<a href="https://twitter.com/EtherSnailFarm"><img class="icon-align-right" src="img/twitter_circle.png"></a>

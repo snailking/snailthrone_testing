@@ -160,4 +160,70 @@ code {
 	border: 4px solid maroon;
 	padding: 1rem;
 	background-color: indianred;
+	padding-bottom: 0.2rem;
+}
+
+.modalbox {
+	border: 4px solid maroon;
+	padding: 1rem;
+	background-color: indianred;
+	padding-top: 0.5rem;
+	padding-bottom: 0rem;
+}
+
+.modal-subtitle{
+	font-size: 24px;
+	font-style: bold;
+	line-height: 20px;
+	height: 20px;
+}
+
+/* Modal (from W3Schools) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 120px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #250405;
+    margin: auto;
+    padding: 20px;
+    border: 4px solid maroon;
+    width: 80%;
+	max-width: 860px;
+    color: white;
+}
+
+/* The Close Button */
+.close {
+    font-size: 40px;
+    font-weight: bold;
+	color: white;
+	vertical-align: text-top;
+    float: right;
+}
+
+.close:hover,
+.close:focus {
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a {
+	color:  maroon;
+}
+
+a:hover {
+	color: red;
 }
