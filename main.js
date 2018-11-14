@@ -121,6 +121,7 @@ function refreshData(){
 	updatePlayerEarning();
 	updatePlayerRef();
 	updateMaxDiv();
+	updateButton();
 }
 
 //Refreshes some game data faster
@@ -169,16 +170,16 @@ function updatePharaoh(){
 		a_pharaoh = req.substring(26, 66);
 		if(god_roundover === false) {
 			if(a_pharaoh === n_account) {
-				pharaohdoc.textContent = "YOU<br>Will Ascend to Godhood in";
+				pharaohdoc.innerHTML = "YOU<br>Will Ascend to Godhood in";
 			} else {
-			pharaohdoc.textContent = "0x" + a_pharaoh + "<br>Will Ascend to Godhood in";
+			pharaohdoc.innerHTML = "0x" + a_pharaoh + "<br>Will Ascend to Godhood in";
 			}
 		}
 		else {
 			if(a_pharaoh === n_account) {
-				pharaohdoc.textContent = "YOU ARE THE SNAILGOD!<br>Claim your winnings by starting a new round.";
+				pharaohdoc.innerHTML = "YOU ARE THE SNAILGOD!<br>Claim your winnings by starting a new round.";
 			} else {
-			pharaohdoc.textContent = "0x" + a_pharaoh + " is the SnailGod!<br>To the victor the spoils. Start a new round to be next in line!";
+			pharaohdoc.innerHTML = "0x" + a_pharaoh + " is the SnailGod!<br>To the victor the spoils. Start a new round to be next in line!";
 			}
 		}
 	});
@@ -193,7 +194,7 @@ function updateGodTimer(){
 		
 		//Check if round is over
 		if(godtimer_in_seconds <= 0){
-			godtimerdoc.textContent = "[Round is over. Press the magic button to start new round.]";
+			godtimerdoc.textContent = "[Round is over. Press the magic button below!]";
 			god_roundover = true;
 		} else {
 			//Convert result to hour minute second format
@@ -206,6 +207,17 @@ function updateGodTimer(){
 			god_roundover = false;
 		}
 	});
+}
+
+//Show or hide relevant sacrifice/new round buttons
+function updateButton(){
+	if (god_roundover === false) {
+		document.getElementById('showroundon').style.display = "block";
+		document.getElementById('showroundoff').style.display = "none";
+	} else {
+		document.getElementById('showroundoff').style.display = "block";
+		document.getElementById('showroundon').style.display = "none";
+	}
 }
 
 //Fast local update for godtimer
