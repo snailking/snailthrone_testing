@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Title, Favicon -->
+		<title>SnailThrone Testing</title>
+		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">		
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="theme_bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="theme_snailthrone.css">		
+	</head>
+	
+	<body>
+	
+		<!-- TITLE. -->
+		<div class="jumbotron">
+			<a href="#info"><img class="icon-align-right" src="img/question_circle.png"></a>
+			<a href="https://ropsten.etherscan.io/address/0xcf9bb23c49f5b32128665282dab483ed2d414235"><img class="icon-align-right" src="img/contract_circle.png"></a>
+			<a href="https://discord.gg/8h3Emyb"><img class="icon-align-right" src="img/discord_circle.png"></a>
+			<a href="https://twitter.com/EtherSnailFarm"><img class="icon-align-right" src="img/twitter_circle.png"></a>
+			<a name="top"><h1>SNAILTHRONE</h1></a>
+		</div>
+		<br>		
+		<!-- HEADER. CONTAINS CURRENT WINNER, TIMER, AND POT. -->
+		<div class="container">
+			<div align="center">
+				<h4>Round <span id="godround">[Loading...]</span></h4><br>
+				<div class="ether">
+					<br><h2 class="pot"><span id="roundpot">[Loading...]</span> ETH</h2><br>
+				</div><br>
+				<div class="pyramid">
+				<h2><span id="pharaoh">[Loading...]</span></h2>
+				
+					<h4>Will Ascend to Godhood in</h4>
+					<h1><span id="godtimer">[Loading...]</span></h1>
+					<br><br>
+					<button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">Claim the Throne</button>
+					<br><small>Sacrifice required: <span id="pharaohreq">[Loading...]</span> Snails</small>
+					<p>------</p>
+					<button type="button" class="btn btn-danger" onclick="webAscendGod()">Start new Round</button>
+					<br><small>(will only work if timer is at 0)</small>
+					<p>------</p>
+					<br><br>
+				</div>
+			</div>
+		</div>
+		
+		<!-- SNAILS -->
+		<!-- BUY ON LEFT, SNAILS ON MIDDLE, SELL ON RIGHT. -->
+		<div class="jumbotron border-double" align="center">
+			<img class="icon-align-left" src="img/snail_circle.png"><img class="icon-align-right" src="img/snail_circle.png">
+			<h2>MY SNAILS</h2>
+			<h4><span id="playersnail">[Loading...]</span> Snails</h4>
+			<h6>(estimate worth: <span id="playersnailvalue">[Loading...]</span> ETH)</h6><br>
+			<div class="card-deck" style="max-width: 60rem;">
+				<div class="card mb-3">
+					<div class="card-header">
+						<h4>Buy</h4>
+					</div>
+					<div class="card-body">
+						<p>Snail cost: <span id="tokenprice">[Loading...]</span> ETH</p>
+						<p>ETH to spend? <input type="text" id="fieldBuy" value="0.1" size="4"> ETH</p>
+						<button type="button" class="btn btn-danger" onclick="webBuySnail()">Buy <span id="fieldBuy2">[Loading...]</span> ETH in Snails</button>
+						<br><small>(maximum: 4 ETH)</small>
+					</div>
+				</div>
+				<div class="card mb-3">
+					<div class="card-header" align="center">
+						<h4>Rule</h4>
+					</div>
+					<div class="card-body">
+						<p>Sacrifice required: <span id="pharaohreq2">[Loading...]</span> Snails</p>
+						<p>Snails to sacrifice? <input type="text" id="fieldSacrifice" value="40" size="4"></p>
+						<button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">Sacrifice <span id="fieldSacrifice2">[Loading...]</span> Snails</button>
+						<br><small>(minimum requirement for next pharaoh will increase by the number of snails you sacrifice)</small>
+					</div>
+				</div>
+				<div class="card mb-3">
+					<div class="card-header" align="center">
+						<h4>Sell</h4>
+					</div>
+					<div class="card-body">
+						<p>Snail value: <span id="tokensellprice">[Loading...]</span> ETH
+						<p>Maximum sale: <span id="maxsnailsell">[Loading...]</span> Snails</p>
+						<p>Snails to sell? <input type="text" id="fieldSell" value="1000" size="4"></p>
+						<button type="button" class="btn btn-danger" onclick="webSellSnail()">Sell <span id="fieldSell2">[Loading...]</span> Snails</button>
+						<br><small>(approximately <span id="sellEstimate">[Loading...]</span> ETH)</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<!-- EGGS -->
+		<!-- HATCH ON LEFT, FEED ON RIGHT. -->
+		<div class="jumbotron" align="center">
+			<img class="icon-align-left" src="img/egg_circle.png"><img class="icon-align-right" src="img/egg_circle.png">
+			<h2>MY EGGS</h2>
+			<h4><span id="playeregg">[Loading...]</span> eggs</h4>
+			<h6>(producing <span id="playerprod">[Loading...]</span> eggs per hour)</h6><br>
+			<div class="card-deck" style="max-width: 52rem;">
+				<div class="card mb-3">
+					<div class="card-header">
+						<h4>Hatch</h2>
+					</div>
+					<div class="card-body">
+						<p>ETH needed to hatch: <span id="fullhatchcost">[Loading...]</span> (<span id="hatchprice">[Loading...]</span> per egg)</p>
+						<button type="button" class="btn btn-danger" onclick="webHatchEgg()">Hatch My Eggs</button>
+					</div>
+				</div>
+				<div class="card mb-3">
+					<div class="card-header" align="center">
+						<h4>Feed</h2>
+					</div>
+					<div class="card-body">
+						<p>ETH reward: <span id="fullfeedreward">[Loading...]</span> (<span id="feedreward">[Loading...]</span> per egg)</p>
+						<button type="button" class="btn btn-danger" onclick="webFeedFrog()">Feed The Frogking</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<!-- REWARDS -->
+		<!-- CLAIM ON LEFT, WITHDRAW ON RIGHT. -->
+		<div class="jumbotron" align="center">
+			<img class="icon-align-left" src="img/ether_circle.png"><img class="icon-align-right" src="img/ether_circle.png">
+			<h2>MY REWARDS</h2><br>
+			<div class="card-deck" style="max-width: 40rem;">
+				<div class="card mb-3">
+					<div class="card-header">
+						<h4>Claim</h2>
+					</div>
+					<div class="card-body">
+						<p>Unclaimed dividends: <span id="playerdiv">[Loading...]</span> ETH</p>
+						<button type="button" class="btn btn-danger" onclick="webClaimDiv()">Claim Dividends</button>
+					</div>
+				</div>
+				<div class="card mb-3">
+					<div class="card-header" align="center">
+						<h4>Withdraw</h2>
+					</div>
+					<div class="card-body">
+						<p>Current balance: <span id="playerearning">[Loading...]</span> ETH</p>
+						<button type="button" class="btn btn-danger" onclick="webWithdrawEarning()">Withdraw My Earnings</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<!-- REF LINK -->
+		<div class="jumbotron" align="center">
+			<h2>MY REFERRAL</h2><br>
+			<h5>Your referral link is <span id="playerreflink">[Loading...]</span></h5><br>
+			<p>When someone else uses your referral link to buy snails, you receive <h4>6%</h4> of the ETH spent.</p>
+			<p>In the absence of a referral, this 6% fee goes to the GodPot. There is nothing to lose from using a referral link!</p>
+		</div>
+		<br>
+		<!-- MISC STATS -->
+		<div class="jumbotron border-solid" align="center">
+			<h4>STATISTICS</h4>
+			<p>Total number of snails: <span id="maxsnail">[Loading...]</span></p>
+			<p>Maximum lifetime dividends per snail: <span id="maxdiv">[Loading...]</span> ETH</p>
+			<p>ETH in contract: <span id="contractbalance">[Loading...]</span> ETH</p>
+			<p>Godpot: <span id="godpot">[Loading...]</span> ETH</p>
+			<p>Frogking pot: <span id="frogpot">[Loading...]</span> ETH</p>
+			<p>Snailpot: <span id="snailpot">[Loading...]</span> ETH</p>
+		</div>
+		<br>		
+		<!-- EXPLANATION -->
+		<div class="jumbotron border-dashed">
+			<a name="info"><h4>QUICK START</h4></a><br>
+			<div class="infobox">
+				<p>BUY and SELL snails (pyramid tokens) directly from the contract.</p>
+				<p>Snail holders receive proportional DIVIDENDS from buys and hatches, as well as from other Snail games (in the future).</p>
+				<p>Token price correlates with snail max supply. More snails = higher price.</p>
+				<p>Snails produce EGGS, at a rate of 8% per day. A hatchery can hold as many eggs as there are snails.</p>
+				<p>Players can HATCH these eggs to turn them into more snails. Hatching still costs ether, but only half of the normal price.</p>
+				<p>Players can also FEED their eggs to the FrogKing for an ETH reward.</p>
+				<p>Players can SACRIFICE a certain amount of snails to hold the title of Pharaoh. The Pharaoh earns dividends on every buy, and if the timer runs out, the Pharaoh can claim the GodPot.</p>
+			</div>
+			<br>	
+			<p><b>ETH distribution on buy:</b></p>
+			<div class="infobox">
+				<p>- 50% saved for the SnailPot (token price on sale)</p>
+				<p>- 20% distributed in divs</p>
+				<p>- 20% go to the FrogPot</p>
+				<p>- 2% is given to the current Pharaoh</p>
+				<p>- 2% goes to the GodPot</p>
+				<p>- 6% goes to the referral. If there is no referral, it goes to the SnailGod pot</p>
+			</div>
+			<br>	
+			<p><b>ETH distribution on hatch:</b></p>
+			<div class="infobox">
+				<p>- 40% in divs</p>
+				<p>- 40% to the FrogPot</p>
+				<p>- 4% to the current Pharaoh</p>
+				<p>- 16% to the GodPot</p>
+			</div>
+			<br>
+			<p><b>SNAILPOT (sell fund)</b></p>
+			<div class="infobox">
+				<p>Snails can be sold to the SnailPot for ETH.</p> 
+				<p>Price per snail is 50% of the current buy price.</p>
+				<p>No more than 10% of the SnailPot can be drained in one sale!</p>
+				<p>This means it is easier to sell small quantities of snails than large ones.</p>
+				<p>Regardless, a player can chain sales one after another, without downtime.</p>
+			</div>
+			<br>
+			<p><b>FROGPOT (feed egg fund)</b></p>
+			<div class="infobox">
+				<p>Feeding eggs to the frogking grants a reward.</p>
+				<p>ETH earned = frogpot * eggs fed / total snails</p>
+			</div>
+			<br>
+			<p><b>GODPOT (jackpot fund)</b></p>
+			<div class="infobox">
+				<p>Given to the current Pharaoh when the timer hits 0. This timer starts at 24 hours on each new round.</p>
+				<p>Sacrifice the indicated snail amount to become the Pharaoh. While the Pharaoh sits on the throne, he receives ETH from every buy and hatch.</p>
+				<p>Every 12 seconds, one snail is removed from the required sacrifice. The minimum required is 40 snails.
+				<p>A successful sacrifice will bump the timer back up by 8 minutes, and add the amount of snails sacrificed to the requirement.</p>
+				<p>Once the timer hits 0, whoever holds the Pharaoh title ascends to godhood. This new SnailGod can claim the round pot.</p>
+				<p>After the pot is claimed, the timer resets at 24 hours. Whoever starts the new round is Pharaoh.</p>
+			</div>
+			<br>
+			<p><b>REFERRALS</b>
+			<div class="infobox">
+				<p>Unlocked by owning at least 300 snails. Every buy through a referral link gives 6% to the referred address.</p>
+				<p>Addresses aren't bound to their referral link. Referrals don't profit from hatching eggs.</p>
+				<p>Referring your own address won't work! Grab your nearest friend instead.</p>
+			</div>
+			<br>
+			<a href="#top"><img class="icon-align-center" src="img/arrow_circle.png"></a>
+		</div>	
+		
+		<!-- Main Javascript -->
+		<script src="main_mm.js"></script>		
+		<!-- Web3 ABI -->
+		<script src="snailabi.js"></script>			
+	    <!-- Execute main() once -->
+		<script>
+			main()
+		</script>
+		
+	</body>
+</html>
