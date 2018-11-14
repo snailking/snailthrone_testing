@@ -5311,7 +5311,7 @@ input[type="button"].btn-block {
   border-color: #1b1e21;
 }
 
-.close {
+/*.close {
   float: right;
   font-size: 1.5rem;
   font-weight: 700;
@@ -5509,7 +5509,7 @@ button.close {
   .modal-lg {
     max-width: 800px;
   }
-}
+}*/
 
 .tooltip {
   position: absolute;
