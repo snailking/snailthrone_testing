@@ -74,7 +74,7 @@
 		<!-- TITLE. ICONS LINKING TO CONTRACT, SOCIAL MEDIA, HELP. -->
 		<div class="jumbotron">
 			<input type="image" src="img/question_circle.png" class="icon-align-right" id="helpmodal" />
-			<a href="https://ropsten.etherscan.io/address/0xcf9bb23c49f5b32128665282dab483ed2d414235"><img class="icon-align-right" src="img/contract_circle.png"></a>
+			<a href="https://ropsten.etherscan.io/address/0x7cccf2220530e82b6935961516a05ef202db18ce"><img class="icon-align-right" src="img/contract_circle.png"></a>
 			<a href="https://discord.gg/8h3Emyb"><img class="icon-align-right" src="img/discord_circle.png"></a>
 			<a href="https://twitter.com/EtherSnailFarm"><img class="icon-align-right" src="img/twitter_circle.png"></a>
 			<a name="top"><h1>SNAILTHRONE</h1></a>
@@ -117,7 +117,7 @@
 						<p>Snail cost: <span id="tokenprice">[Loading...]</span> ETH</p>
 						<p>ETH to spend? <input type="text" id="fieldBuy" value="0.1" size="4"> ETH</p>
 						<button type="button" class="btn btn-danger" onclick="webBuySnail()">Buy <span id="fieldBuy2">[Loading...]</span> ETH in Snails</button>
-						<br><small>(maximum: 4 ETH)</small>
+						<br><small>(approximately <span id="buyEstimate">[Loading...]</span> snails. Maximum buy: 4 ETH)</small>
 					</div>
 				</div>
 				<div class="card mb-3">
@@ -214,7 +214,6 @@
 		<div class="jumbotron border-solid" align="center">
 			<h4>STATISTICS</h4>
 			<p>Total number of snails: <span id="maxsnail">[Loading...]</span></p>
-			<p>Maximum lifetime dividends per snail: <span id="maxdiv">[Loading...]</span> ETH</p>
 			<p>ETH in contract: <span id="contractbalance">[Loading...]</span> ETH</p>
 			<p>Godpot: <span id="godpot">[Loading...]</span> ETH</p>
 			<p>Frogking pot: <span id="frogpot">[Loading...]</span> ETH</p>
@@ -254,6 +253,7 @@
 			<br>
 			<p><b>SNAILPOT (sell fund)</b></p>
 			<div class="infobox">
+				<p>WARNING: selling snails will make you lose a proportional amount of eggs. Hatch them or feed the FrogKing before a sacrifice!</p>
 				<p>Snails can be sold to the SnailPot for ETH.</p> 
 				<p>Price per snail is 50% of the current buy price.</p>
 				<p>No more than 10% of the SnailPot can be drained in one sale!</p>
@@ -275,6 +275,7 @@
 				<p>A successful sacrifice will bump the timer back up by 8 minutes, and add the amount of snails sacrificed to the requirement.</p>
 				<p>Once the timer hits 0, whoever holds the Pharaoh title ascends to godhood. This new SnailGod can claim the round pot.</p>
 				<p>After the pot is claimed, the timer resets at 24 hours. Whoever starts the new round is Pharaoh.</p>
+				<p>PLEASE NOTE: sacrificing snails will make you lose a proportional amount of eggs. Hatch them or feed the FrogKing before a sacrifice!</p>
 			</div>
 			<br>
 			<p><b>REFERRALS</b>
