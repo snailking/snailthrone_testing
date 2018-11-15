@@ -153,7 +153,6 @@ function refreshData(){
 	updateUnclaimedDiv();
 	updatePlayerEarning();
 	updatePlayerRef();
-	updateMaxDiv();
 	updateButton();
 }
 
@@ -165,6 +164,7 @@ function refreshDataFast(){
 	updateFieldSacrifice2();
 	updateFieldSell2();
 	updateSellEstimate();
+	updateBuyEstimate();
 }
 
 //Current ETH address in use
@@ -443,7 +443,7 @@ function updatePlayerRef(){
 	}
 }
 
-//Lifetime divs
+//Lifetime divs - UNUSED
 function updateMaxDiv(){
 	var maxdivdoc = document.getElementById('maxdiv');
 	divsPerSnail(function(req) {
@@ -464,6 +464,12 @@ function updateFieldBuy2(){
 	fieldbuy2doc.textContent = f_buy;
 }
 
+//Buy estimate
+function updateBuyEstimate(){
+	var buyEstimatedoc = document.getElementById('buyestimate');
+	buyEstimatedoc.textContent = parseFloat(f_buy * a_tokenPrice).toFixed(0);
+}
+	
 //Player input on sell
 function updateFieldSell2(){
 	//var fieldbuydoc = document.getElementById('fieldBuy');
