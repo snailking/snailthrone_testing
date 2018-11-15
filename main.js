@@ -467,7 +467,7 @@ function updateFieldBuy2(){
 //Buy estimate
 function updateBuyEstimate(){
 	var buyEstimatedoc = document.getElementById('buyestimate');
-	buyEstimatedoc.textContent = parseFloat(f_buy * a_tokenPrice).toFixed(0);
+	buyEstimatedoc.textContent = parseFloat(f_buy / a_tokenPrice).toFixed(0);
 }
 	
 //Player input on sell
