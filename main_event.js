@@ -2,8 +2,8 @@
 
 var modal2 = document.getElementById("modal2");
 
-//var Web3 = require('web3');
-
+var Web3 = require('web3');
+var web3 = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794");
 
 window.addEventListener("load", function() {
 	if (typeof web3 !== "undefined") {
