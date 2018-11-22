@@ -6,7 +6,7 @@ contractAddress="0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" // ROPSTEN V5
 function TestEvent(callback){
 	var contractAbi = web3.eth.contract(abiDefinition);
     var myContract = contractAbi.at(contractAddress);
-	myContract.getPastEvents("allEvents", , function(error, events){ console.log(events); })
+	myContract.getPastEvents("allEvents", function(error, events){ console.log(events); })
 	.then(function(events){
 		console.log(events) // same results as the optional callback above
 	});
