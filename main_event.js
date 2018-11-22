@@ -2,6 +2,9 @@
 
 var modal2 = document.getElementById("modal2");
 
+//var Web3 = require('web3');
+
+
 window.addEventListener("load", function() {
 	if (typeof web3 !== "undefined") {
         web3 = new Web3(web3.currentProvider);
@@ -18,7 +21,7 @@ window.addEventListener("load", function() {
     } else {
         console.log("Error: web3 library not found.");
 		modal2.style.display = "block";
-        web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
+        web3 = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794");
     }
 });
 
