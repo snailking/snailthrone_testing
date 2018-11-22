@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
 });
 
 // Get the <span> element that closes the modal
-var span2 = document.getElementById("close2")[0];
+var span2 = document.getElementById("close2");
 
 // When the user clicks on <span> (x), close the modal
 span2.onclick = function() {
@@ -73,7 +73,7 @@ var modal = document.getElementById("modal");
 var b_helpmodal = document.getElementById("helpmodal");
 
 // Get the <span> element that closes the modal
-var span = document.getElementById("close")[0];
+var span = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
 b_helpmodal.onclick = function() {
