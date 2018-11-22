@@ -549,20 +549,22 @@ function webAscendGod(){
 
 /* NETWORK CHECK */
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function(event) {
+	console.log("Are you still here?");
     if (typeof web3 !== "undefined") {
         web3 = new Web3(web3.currentProvider);
         web3.version.getNetwork(function(error, result) {
             if (!error) {
                 if (result == "3") {
                     setup(true);
+					console.log("Worked!");
                 } else {
                     console.log("Error: you must be on Ropsten Network to use this website.");
                 }
             }
         });
     } else {
-        console.log('Error: web3 library not found. Please install the <a class="text-warning" href="https://metamask.io/">MetaMask</a> plugin to use this website.');
+        console.log("Error: web3 library not found. Please install the <a class="text-warning" href="https://metamask.io/">MetaMask</a> plugin to use this website.");
         $("#error").toggle(true);
         web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/2tXmBfvMC1sfg10iQAm4"));
         setup(false);
