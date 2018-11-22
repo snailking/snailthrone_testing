@@ -6,7 +6,6 @@ window.addEventListener("load", function() {
         web3.version.getNetwork(function(error, result) {
             if (!error) {
                 if (result == "3") {
-                    setup(true);
 					console.log("Worked!");
                 } else {
                     console.log("Error: you must be on Ropsten Network to use this website.");
@@ -16,9 +15,7 @@ window.addEventListener("load", function() {
         });
     } else {
         console.log("Error: web3 library not found.");
-        $("#error").toggle(true);
         web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
-        setup(false);
     }
 });
 
