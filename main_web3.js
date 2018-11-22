@@ -1,5 +1,9 @@
 /* VARIABLES */
 
+window.addEventListener("load", function() {
+	console.log('Are you still here?');
+});
+
 var a_godTimer = "";
 var godtimer_in_seconds = 0;
 var god_numhours = 0;
@@ -549,9 +553,7 @@ function webAscendGod(){
 
 /* NETWORK CHECK */
 
-window.addEventListener("load", function(event) {
-	console.log("Are you still here?");
-});
+
 /*
     if (typeof web3 !== "undefined") {
         web3 = new Web3(web3.currentProvider);
