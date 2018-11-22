@@ -1,3 +1,35 @@
+/* WEB3 DETECTION */
+
+var modal2 = document.getElementById("modal2");
+
+window.addEventListener("load", function() {
+	if (typeof web3 !== "undefined") {
+        web3 = new Web3(web3.currentProvider);
+        web3.version.getNetwork(function(error, result) {
+            if (!error) {
+                if (result == "3") {
+					console.log("Worked!");
+                } else {
+                    console.log("Error: you must be on Ropsten Network to use this website.");
+					modal2.style.display = "block";
+                }
+            }
+        });
+    } else {
+        console.log("Error: web3 library not found.");
+		modal2.style.display = "block";
+        web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
+    }
+});
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementById("close2");
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+    modal2.style.display = "none";
+}
+
 /* VARIABLES */
 
 var a_godTimer = "";
@@ -29,7 +61,7 @@ var a_removeSnailReq = 0;
 var f_buy = 0;
 var f_sell = 0;
 var f_sacrifice = 40;
-var m_account = "";
+var m_account = "waiting for web3";
 var n_account = "";
 
 /* MODAL */
@@ -41,7 +73,7 @@ var modal = document.getElementById("modal");
 var b_helpmodal = document.getElementById("helpmodal");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
 b_helpmodal.onclick = function() {
@@ -60,8 +92,9 @@ function closeModal() {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target == modal || event.target == modal2) {
         modal.style.display = "none";
+		modal2.style.display = "none";
     }
 }
 
@@ -72,6 +105,7 @@ function main(){
     console.log('Main loop started.');
     controlLoop();
 	controlLoopFast();
+	TestEvent();
 }
 
 //Main loop
@@ -121,7 +155,7 @@ function copyRef() {
 
 var playerreflinkdoc = document.getElementById('playerreflink'); 
 var a_refLink = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0];
-var copyText = document.getElementById("copytextthing"); 
+var copyText = "no" //document.getElementById("copytextthing"); 
 copyText.value = playerreflinkdoc.textContent;
 
 /* STATE UPDATES */
@@ -549,6 +583,28 @@ function webAscendGod(){
 
 /* NETWORK CHECK */
 
+
+/*
+    if (typeof web3 !== "undefined") {
+        web3 = new Web3(web3.currentProvider);
+        web3.version.getNetwork(function(error, result) {
+            if (!error) {
+                if (result == "3") {
+                    setup(true);
+					console.log("Worked!");
+                } else {
+                    console.log("Error: you must be on Ropsten Network to use this website.");
+                }
+            }
+        });
+    } else {
+        console.log("Error: web3 library not found. Please install the <a class="text-warning" href="https://metamask.io/">MetaMask</a> plugin to use this website.");
+        $("#error").toggle(true);
+        web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/2tXmBfvMC1sfg10iQAm4"));
+        setup(false);
+    }
+
+/*
 //New Metamask privacy change
 window.addEventListener('load', async () => {
     // Modern dapp browsers...
@@ -557,8 +613,6 @@ window.addEventListener('load', async () => {
         try {
             // Request account access if needed
             await ethereum.enable();
-            // Acccounts now exposed
-            web3.eth.sendTransaction({/* ... */});
         } catch (error) {
             // User denied account access...
         }
@@ -566,15 +620,12 @@ window.addEventListener('load', async () => {
     // Legacy dapp browsers...
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
-        // Acccounts always exposed
-        web3.eth.sendTransaction({/* ... */});
     }
     // Non-dapp browsers...
     else {
         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
 });
-
 //Check if user is on proper network
 web3.version.getNetwork((err, netId) => {
     if(netId!="3"){
@@ -594,5 +645,6 @@ web3.version.getNetwork((err, netId) => {
     default:
       console.log('This is an unknown network.')
       
-  }*/
+  }*//*
 })
+*/

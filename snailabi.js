@@ -3,9 +3,11 @@ abiDefinition=[{"constant": false,"inputs": [],"name": "ClaimDivs","outputs": []
 
 contractAddress="0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" // ROPSTEN V5
 
+var contractAbi = web3.eth.contract(abiDefinition);
+var myContract = contractAbi.at(contractAddress);
+
+	
 function AscendGod(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.AscendGod.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -21,8 +23,6 @@ function AscendGod(callback){
 
 
 function BecomePharaoh(_snails,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.BecomePharaoh.getData(_snails);
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -38,8 +38,6 @@ function BecomePharaoh(_snails,callback){
 
 
 function BuySnail(_ref,eth,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.BuySnail.getData(_ref);
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData,value: eth},
     function(error,result){
@@ -55,8 +53,6 @@ function BuySnail(_ref,eth,callback){
 
 
 function ClaimDivs(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.ClaimDivs.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -72,8 +68,6 @@ function ClaimDivs(callback){
 
 
 function FeedEgg(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.FeedEgg.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -89,8 +83,6 @@ function FeedEgg(callback){
 
 
 function HatchEgg(eth,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.HatchEgg.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData,value: eth},
     function(error,result){
@@ -106,8 +98,6 @@ function HatchEgg(eth,callback){
 
 
 function SellSnail(_tokensSold,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.SellSnail.getData(_tokensSold);
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -123,8 +113,6 @@ function SellSnail(_tokensSold,callback){
 
 
 function StartGame(eth,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.StartGame.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData,value: eth},
     function(error,result){
@@ -140,8 +128,6 @@ function StartGame(eth,callback){
 
 
 function WithdrawEarnings(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.WithdrawEarnings.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -157,8 +143,6 @@ function WithdrawEarnings(callback){
 
 
 function claimedDivs(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.claimedDivs.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -174,8 +158,6 @@ function claimedDivs(callback){
 
 
 function ComputeBuy(_ether,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.ComputeBuy.getData(_ether);
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -191,8 +173,6 @@ function ComputeBuy(_ether,callback){
 
 
 function ComputeMyDivs(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.ComputeMyDivs.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -208,8 +188,6 @@ function ComputeMyDivs(callback){
 
 
 function ComputeMyEggs(adr,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.ComputeMyEggs.getData(adr);
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -225,8 +203,6 @@ function ComputeMyEggs(adr,callback){
 
 
 function ComputePharaohReq(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.ComputePharaohReq.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -242,8 +218,6 @@ function ComputePharaohReq(callback){
 
 
 function ComputeTokenPrice(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.ComputeTokenPrice.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -259,8 +233,6 @@ function ComputeTokenPrice(callback){
 
 
 function divsPerSnail(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.divsPerSnail.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -276,8 +248,6 @@ function divsPerSnail(callback){
 
 
 function frogPot(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.frogPot.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -293,8 +263,6 @@ function frogPot(callback){
 
 
 function gameOwner(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.gameOwner.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -310,8 +278,6 @@ function gameOwner(callback){
 
 
 function gameStarted(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.gameStarted.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -327,8 +293,6 @@ function gameStarted(callback){
 
 
 function GetContractBalance(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.GetContractBalance.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -344,8 +308,6 @@ function GetContractBalance(callback){
 
 
 function GetMyEarnings(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.GetMyEarnings.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -361,8 +323,6 @@ function GetMyEarnings(callback){
 
 
 function GetMySnails(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.GetMySnails.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -378,8 +338,6 @@ function GetMySnails(callback){
 
 
 function GOD_TIMER_BOOST(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.GOD_TIMER_BOOST.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -395,8 +353,6 @@ function GOD_TIMER_BOOST(callback){
 
 
 function GOD_TIMER_INTERVAL(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.GOD_TIMER_INTERVAL.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -412,8 +368,6 @@ function GOD_TIMER_INTERVAL(callback){
 
 
 function GOD_TIMER_START(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.GOD_TIMER_START.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -429,8 +383,6 @@ function GOD_TIMER_START(callback){
 
 
 function godPot(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.godPot.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -446,8 +398,6 @@ function godPot(callback){
 
 
 function godRound(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.godRound.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -463,8 +413,6 @@ function godRound(callback){
 
 
 function godTimer(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.godTimer.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -480,8 +428,6 @@ function godTimer(callback){
 
 
 function hatcherySnail(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.hatcherySnail.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -497,8 +443,6 @@ function hatcherySnail(callback){
 
 
 function lastClaim(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.lastClaim.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -514,8 +458,6 @@ function lastClaim(callback){
 
 
 function lastHatch(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.lastHatch.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -531,8 +473,6 @@ function lastHatch(callback){
 
 
 function maxSnail(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.maxSnail.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -548,8 +488,6 @@ function maxSnail(callback){
 
 
 function pharaoh(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.pharaoh.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -565,8 +503,6 @@ function pharaoh(callback){
 
 
 function PHARAOH_REQ_START(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.PHARAOH_REQ_START.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -582,8 +518,6 @@ function PHARAOH_REQ_START(callback){
 
 
 function pharaohReq(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.pharaohReq.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -599,8 +533,6 @@ function pharaohReq(callback){
 
 
 function playerEarnings(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.playerEarnings.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -616,8 +548,6 @@ function playerEarnings(callback){
 
 
 function SNAIL_REQ_REF(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.SNAIL_REQ_REF.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -633,8 +563,6 @@ function SNAIL_REQ_REF(callback){
 
 
 function snailPot(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.snailPot.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -650,8 +578,6 @@ function snailPot(callback){
 
 
 function TIME_TO_HATCH_1SNAIL(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.TIME_TO_HATCH_1SNAIL.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -667,8 +593,6 @@ function TIME_TO_HATCH_1SNAIL(callback){
 
 
 function TOKEN_MAX_BUY(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.TOKEN_MAX_BUY.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -684,8 +608,6 @@ function TOKEN_MAX_BUY(callback){
 
 
 function TOKEN_PRICE_FLOOR(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.TOKEN_PRICE_FLOOR.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -701,8 +623,6 @@ function TOKEN_PRICE_FLOOR(callback){
 
 
 function TOKEN_PRICE_MULT(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.TOKEN_PRICE_MULT.getData();
     var endstr=web3.eth.call({to:contractAddress, from:null, data: outputData},
     function(error,result){
