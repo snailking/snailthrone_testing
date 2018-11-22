@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
             }
         });
     } else {
-        console.log("Error: web3 library not found. Please install the <a class="text-warning" href="https://metamask.io/">MetaMask</a> plugin to use this website.");
+        console.log("Error: web3 library not found.");
         $("#error").toggle(true);
         web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/2tXmBfvMC1sfg10iQAm4"));
         setup(false);
