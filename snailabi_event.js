@@ -3,18 +3,20 @@ abiDefinition=[{"constant": false,"inputs": [],"name": "ClaimDivs","outputs": []
 
 contractAddress="0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" // ROPSTEN V5
 
+var contractAbi = web3.eth.contract(abiDefinition);
+var myContract = contractAbi.at(contractAddress);
+
+/*
 function TestEvent(callback){
 	var contractAbi = web3.eth.contract(abiDefinition);
     var myContract = contractAbi.at(contractAddress);
-	myContract.getPastEvents("allEvents", function(error, events){ console.log(events); })
+	myContract.getPastEvents("allEvents", {}, function(error, events){ console.log(events); })
 	.then(function(events){
 		console.log(events) // same results as the optional callback above
 	});
-}
+}*/
 	
 function AscendGod(callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.AscendGod.getData();
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -30,8 +32,6 @@ function AscendGod(callback){
 
 
 function BecomePharaoh(_snails,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.BecomePharaoh.getData(_snails);
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
@@ -47,8 +47,6 @@ function BecomePharaoh(_snails,callback){
 
 
 function BuySnail(_ref,eth,callback){
-    var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
     var outputData = myContract.BuySnail.getData(_ref);
     var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData,value: eth},
     function(error,result){
