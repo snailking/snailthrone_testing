@@ -551,6 +551,8 @@ function webAscendGod(){
 
 window.addEventListener("load", function(event) {
 	console.log("Are you still here?");
+});
+/*
     if (typeof web3 !== "undefined") {
         web3 = new Web3(web3.currentProvider);
         web3.version.getNetwork(function(error, result) {
@@ -569,7 +571,6 @@ window.addEventListener("load", function(event) {
         web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/2tXmBfvMC1sfg10iQAm4"));
         setup(false);
     }
-});
 
 /*
 //New Metamask privacy change
