@@ -1,7 +1,6 @@
 /* VARIABLES */
 
 window.addEventListener("load", function() {
-	console.log('Are you still here?');
 	if (typeof web3 !== "undefined") {
         web3 = new Web3(web3.currentProvider);
         web3.version.getNetwork(function(error, result) {
@@ -51,7 +50,7 @@ var a_removeSnailReq = 0;
 var f_buy = 0;
 var f_sell = 0;
 var f_sacrifice = 40;
-var m_account = "";
+var m_account = "waiting for web3";
 var n_account = "";
 
 /* MODAL */
@@ -143,7 +142,7 @@ function copyRef() {
 
 var playerreflinkdoc = document.getElementById('playerreflink'); 
 var a_refLink = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0];
-var copyText = document.getElementById("copytextthing"); 
+var copyText = "no" //document.getElementById("copytextthing"); 
 copyText.value = playerreflinkdoc.textContent;
 
 /* STATE UPDATES */
