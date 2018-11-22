@@ -1,4 +1,6 @@
-/* VARIABLES */
+/* WEB3 DETECTION */
+
+var modal2 = document.getElementById("modal2");
 
 window.addEventListener("load", function() {
 	if (typeof web3 !== "undefined") {
@@ -9,15 +11,26 @@ window.addEventListener("load", function() {
 					console.log("Worked!");
                 } else {
                     console.log("Error: you must be on Ropsten Network to use this website.");
-					web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
+					modal2.style.display = "block";
                 }
             }
         });
     } else {
         console.log("Error: web3 library not found.");
+		modal2.style.display = "block";
         web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
     }
 });
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementsByClassName("close2")[0];
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+    modal2.style.display = "none";
+}
+
+/* VARIABLES */
 
 var a_godTimer = "";
 var godtimer_in_seconds = 0;
@@ -79,8 +92,9 @@ function closeModal() {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target == modal) || (event.target == modal2) {
         modal.style.display = "none";
+		modal2.style.display = "none";
     }
 }
 
