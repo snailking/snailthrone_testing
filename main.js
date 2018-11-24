@@ -7,18 +7,18 @@ window.addEventListener("load", function() {
         web3 = new Web3(web3.currentProvider);
         web3.version.getNetwork(function(error, result) {
             if (!error) {
-                if (result == "3") {
-					console.log("Worked!");
+                if (result == "1") {
+					console.log("Web3 Mainnet successfully loaded!");
                 } else {
-                    console.log("Error: you must be on Ropsten Network to use this website.");
+                    console.log("Error: you must be on the Mainnet to use this website.");
 					modal2.style.display = "block";
                 }
             }
         });
     } else {
-        console.log("Error: web3 library not found.");
+        console.log("Web3 library not found.");
 		modal2.style.display = "block";
-        web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
+        web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
     }
 });
 
@@ -62,7 +62,6 @@ var f_buy = 0;
 var f_sell = 0;
 var f_sacrifice = 40;
 var m_account = "waiting for web3";
-var n_account = "";
 
 /* MODAL */
 
@@ -105,7 +104,6 @@ function main(){
     console.log('Main loop started.');
     controlLoop();
 	controlLoopFast();
-	TestEvent();
 }
 
 //Main loop
@@ -204,7 +202,6 @@ function refreshDataFast(){
 //Current ETH address in use
 function updateEthAccount(){
 	m_account = web3.eth.accounts[0];
-	n_account = m_account.substring(2);
 }
 
 //Current round
@@ -234,19 +231,19 @@ function updateRoundPot(){
 function updatePharaoh(){
 	var pharaohdoc = document.getElementById('pharaoh');
 	pharaoh(function(req) {
-		a_pharaoh = req.substring(26, 66);
+		a_pharaoh = req.substring(24, 66);
 		if(god_roundover === false) {
-			if(a_pharaoh === n_account) {
+			if(a_pharaoh === m_account) {
 				pharaohdoc.innerHTML = "YOU<br>Will Ascend to Godhood in";
 			} else {
-			pharaohdoc.innerHTML = "0x" + a_pharaoh + "<br>Will Ascend to Godhood in";
+			pharaohdoc.innerHTML = a_pharaoh + "<br>Will Ascend to Godhood in";
 			}
 		}
 		else {
-			if(a_pharaoh === n_account) {
+			if(a_pharaoh === m_account) {
 				pharaohdoc.innerHTML = "YOU ARE THE SNAILGOD!<br>Claim your winnings by starting a new round.";
 			} else {
-			pharaohdoc.innerHTML = "0x" + a_pharaoh + " is the SnailGod!<br>To the victor the spoils. Start a new round to be next in line!";
+			pharaohdoc.innerHTML = a_pharaoh + " is the SnailGod!<br>To the victor the spoils. Start a new round to be next in line!";
 			}
 		}
 	});
