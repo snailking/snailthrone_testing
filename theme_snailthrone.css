@@ -302,8 +302,8 @@ a:hover {
 }
 
 .scroll-box {
-	width: 800px; 
+	width: 80%; 
 	overflow: auto; 
 	overflow-x: hidden; 
-	height: 100px;
+	height: 110px;
 }

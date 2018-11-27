@@ -1246,3 +1246,15 @@ soldEvent.watch(function(error, result){
 	}
 });
 
+var boughtEvent = myContract.BoughtSnail();
+
+boughtEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		var _ethspent = result.args.ethspent;
+		_ethspent = formatEthValue(web3.fromWei(_ethspent,'ether'));
+		eventdoc.innerHTML += "<br>" + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
+		logboxscroll.scrollTop = logboxscroll.scrollHeight;
+	}
+});
+
