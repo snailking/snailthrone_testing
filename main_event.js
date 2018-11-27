@@ -8,7 +8,7 @@ window.addEventListener("load", function() {
         web3.version.getNetwork(function(error, result) {
             if (!error) {
                 if (result == "3") {
-					console.log("Go go go!");
+					console.log("OK!");
                 } else {
                     console.log("Error: you must be on Ropsten Network to use this website.");
 					modal2.style.display = "block";
@@ -1243,7 +1243,7 @@ var storetxhash = [9];
 
 //Use array of arrays, in case players spam transactions
 for (var i = 0; i < 9; i++) {
-	storetxhash[i] = new Array();
+	storetxhash[i] = new Array(1);
 }
 
 //Check equivalency
