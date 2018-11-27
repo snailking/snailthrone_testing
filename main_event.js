@@ -1230,6 +1230,17 @@ var logboxscroll = document.getElementById('logboxscroll');
 var eventdoc = document.getElementById("event");
 var storetxhash = []; //Store transaction hash for each event, and check before executing result, as web3 events fire twice
 var hatchEvent = myContract.HatchedSnail();
+var datetext;
+
+function date24 {
+	d = new Date();
+	// d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+	datetext = d.toTimeString();
+	// datestring is "20:32:01 GMT+0530 (India Standard Time)"
+	// Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
+	// Take the first value from array :)
+	datetext = datetext.split(' ')[0];
+}
 
 hatchEvent.watch(function(error, result){
     if(!error){
@@ -1266,9 +1277,10 @@ boughtEvent.watch(function(error, result){
 		console.log(result);
 		if(result.transactionHash != storetxhash[2]) {
 			storetxhash[2] = result.transactionHash;
+			date24();
 			var _ethspent = result.args.ethspent;
 			_ethspent = formatEthValue2(web3.fromWei(_ethspent,'ether'));
-			eventdoc.innerHTML += "<br>" + Date() + " " + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
+			eventdoc.innerHTML += "<br>" + datetext + " " + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
 	}
