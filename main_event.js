@@ -1239,10 +1239,11 @@ var soldEvent = myContract.SoldSnail();
 soldEvent.watch(function(error, result){
     if(!error){
 		console.log(result);
+		if(result.removed) {
 		var _ethreward = result.args.ethreward;
 		_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
 		eventdoc.innerHTML += "<br>" + result.args.player + " sold " + result.args.snail + " snails for " + _ethreward + " ETH." ;
-		logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		logboxscroll.scrollTop = logboxscroll.scrollHeight; }
 	}
 });
 
@@ -1251,10 +1252,11 @@ var boughtEvent = myContract.BoughtSnail();
 boughtEvent.watch(function(error, result){
     if(!error){
 		console.log(result);
+		if(!result.removed) {
 		var _ethspent = result.args.ethspent;
 		_ethspent = formatEthValue(web3.fromWei(_ethspent,'ether'));
 		eventdoc.innerHTML += "<br>" + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
-		logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		logboxscroll.scrollTop = logboxscroll.scrollHeight; }
 	}
 });
 
