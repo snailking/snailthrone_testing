@@ -8,7 +8,7 @@ window.addEventListener("load", function() {
         web3.version.getNetwork(function(error, result) {
             if (!error) {
                 if (result == "3") {
-					console.log("Worked!");
+					console.log("Go go go!");
                 } else {
                     console.log("Error: you must be on Ropsten Network to use this website.");
 					modal2.style.display = "block";
@@ -1232,7 +1232,7 @@ var storetxhash = []; //Store transaction hash for each event, and check before 
 var hatchEvent = myContract.HatchedSnail();
 var datetext;
 
-function date24 {
+function date24() {
 	d = new Date();
 	// d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
 	datetext = d.toTimeString();
