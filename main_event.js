@@ -131,6 +131,15 @@ function formatEthValue2(ethstr){
 	return parseFloat(parseFloat(ethstr).toFixed(6));
 }
 
+//Conversion of Date to hh:mm:ss
+var datetext;
+
+function date24() {
+	d = new Date();
+	datetext = d.toTimeString();
+	datetext = datetext.split(' ')[0];
+}
+
 //Referrals
 function getQueryVariable(variable){
        var query = window.location.search.substring(1);
@@ -1228,25 +1237,36 @@ function TOKEN_PRICE_MULT(callback){
 
 var logboxscroll = document.getElementById('logboxscroll');
 var eventdoc = document.getElementById("event");
-var storetxhash = []; //Store transaction hash for each event, and check before executing result, as web3 events fire twice
-var hatchEvent = myContract.HatchedSnail();
-var datetext;
 
-function date24() {
-	d = new Date();
-	// d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
-	datetext = d.toTimeString();
-	// datestring is "20:32:01 GMT+0530 (India Standard Time)"
-	// Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
-	// Take the first value from array :)
-	datetext = datetext.split(' ')[0];
+//Store transaction hash for each event, and check before executing result, as web3 events fire twice
+var storetxhash = [9];
+
+//Use array of arrays, in case players spam transactions
+for (var i = 0; i < 9; i++) {
+	storetxhash[i] = new Array();
 }
+
+//Check equivalency
+function checkHash(storetxarray, txhash) {
+	var i = 0;
+	do {
+		if(storetxarray[i] == txhash) {
+			return 0;
+		}
+		i++;
+	}
+	while(i < storetxarray.length);
+	storetxarray.push(txhash);
+}
+			
+//Events
+
+var hatchEvent = myContract.HatchedSnail();
 
 hatchEvent.watch(function(error, result){
     if(!error){
 		console.log(result);
-		if(result.transactionHash != storetxhash[0]) {
-			storetxhash[0] = result.transactionHash;
+		if(checkHash(storetxhash[0], result.transactionHash) != 0) {
 			var _ethspent = result.args.ethspent;
 			_ethspent = formatEthValue2(web3.fromWei(_ethspent,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " hatched " + result.args.snail + " snails for " + _ethspent + " ETH." ;
