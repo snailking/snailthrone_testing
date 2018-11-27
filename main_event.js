@@ -1237,7 +1237,7 @@ hatchEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[0]) {
 			storetxhash[0] = result.transactionHash;
 			var _ethspent = result.args.ethspent;
-			_ethspent = formatEthValue(web3.fromWei(_ethspent,'ether'));
+			_ethspent = formatEthValue2(web3.fromWei(_ethspent,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " hatched " + result.args.snail + " snails for " + _ethspent + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
@@ -1252,7 +1252,7 @@ soldEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[1]) {
 			storetxhash[1] = result.transactionHash;
 			var _ethreward = result.args.ethreward;
-			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			_ethreward = formatEthValue2(web3.fromWei(_ethreward,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " sold " + result.args.snail + " snails for " + _ethreward + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
@@ -1267,7 +1267,7 @@ boughtEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[2]) {
 			storetxhash[2] = result.transactionHash;
 			var _ethspent = result.args.ethspent;
-			_ethspent = formatEthValue(web3.fromWei(_ethspent,'ether'));
+			_ethspent = formatEthValue2(web3.fromWei(_ethspent,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
@@ -1295,7 +1295,7 @@ withdrewEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[4]) {
 			storetxhash[4] = result.transactionHash;
 			var _ethreward = result.args.ethreward;
-			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			_ethreward = formatEthValue2(web3.fromWei(_ethreward,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " withdrew " + _ethreward + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
@@ -1310,7 +1310,7 @@ claimedEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[5]) {
 			storetxhash[5] = result.transactionHash;
 			var _ethreward = result.args.ethreward;
-			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			_ethreward = formatEthValue2(web3.fromWei(_ethreward,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " claimed " + _ethreward + " ETH in divs." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
@@ -1325,7 +1325,7 @@ fedEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[6]) {
 			storetxhash[6] = result.transactionHash;
 			var _ethreward = result.args.ethreward;
-			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			_ethreward = formatEthValue2(web3.fromWei(_ethreward,'ether'));
 			eventdoc.innerHTML += "<br>" + result.args.player + " fed the Frogking " + result.args.egg + " eggs and won " + _ethreward + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
@@ -1340,7 +1340,7 @@ ascendedEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[7]) {
 			storetxhash[7] = result.transactionHash;
 			var _ethreward = result.args.ethreward;
-			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			_ethreward = formatEthValue2(web3.fromWei(_ethreward,'ether'));
 			var _roundwon = result.args.round - 1;
 			eventdoc.innerHTML += "<br>" + result.args.player + " ASCENDS!<br>The new SnailGod wins " + _roundwon + " and claims " + _ethreward + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1356,7 +1356,7 @@ divEvent.watch(function(error, result){
 		if(result.transactionHash != storetxhash[8]) {
 			storetxhash[8] = result.transactionHash;
 			var _ethreward = result.args.ethreward;
-			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			_ethreward = formatEthValue2(web3.fromWei(_ethreward,'ether'));
 			eventdoc.innerHTML += "<br>Another snail game just paid out " + _ethreward + " ETH in divs to all holders!" ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
