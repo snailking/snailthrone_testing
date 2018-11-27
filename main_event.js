@@ -1219,15 +1219,30 @@ function TOKEN_PRICE_MULT(callback){
 
 /* EVENT WATCH */
 
-var sampleEvent = myContract.HatchedSnail();
-var hatcheventdoc = document.getElementById("hatchevent");
+var logboxscroll = document.getElementById('logboxscroll');
+var eventdoc = document.getElementById("event");
 
-sampleEvent.watch(function(error, result){
+var hatchEvent = myContract.HatchedSnail();
+
+hatchEvent.watch(function(error, result){
     if(!error){
 		console.log(result);
 		var _ethspent = result.args.ethspent;
 		_ethspent = formatEthValue(web3.fromWei(_ethspent,'ether'));
-		hatcheventdoc.innerHTML = result.args.player + " hatched " + result.args.snail + " snails for " + _ethspent + " ETH." ;
+		eventdoc.innerHTML += result.args.player + " hatched " + result.args.snail + " snails for " + _ethspent + " ETH." ;
+		logboxscroll.scrollTop = logboxscroll.scrollHeight;
+	}
+});
+
+var soldEvent = myContract.SoldSnail();
+
+soldEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		var _ethreward = result.args.ethreward;
+		_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+		eventdoc.innerHTML += result.args.player + " sold " + result.args.snail + " snails for " + _ethreward + " ETH." ;
+		logboxscroll.scrollTop = logboxscroll.scrollHeight;
 	}
 });
 
