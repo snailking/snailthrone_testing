@@ -198,6 +198,7 @@ function refreshDataFast(){
 	updateFieldSell2();
 	updateSellEstimate();
 	updateBuyEstimate();
+	updatePharaohEstimate();
 }
 
 //Current ETH address in use
@@ -525,6 +526,12 @@ function updateFieldSacrifice2(){
 	}
 	var fieldsacrifice2doc = document.getElementById('fieldSacrifice2');
 	fieldsacrifice2doc.textContent = f_sacrifice;
+}
+
+//Next requirement estimate
+function updatePharaohEstimate(){
+	var pharaohEstimatedoc = document.getElementById('pharaohestimate');
+	pharaohEstimatedoc.textContent = parseInt(f_sacrifice + 40);
 }
 
 /* WEB3 TRANSACTIONS */
