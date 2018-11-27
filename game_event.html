@@ -131,10 +131,14 @@
 						<h4>Buy</h4>
 					</div>
 					<div class="card-body">
-						<p>Snail cost: <span id="tokenprice">[Loading...]</span> ETH</p>
+						<p>Cost per snail: <span id="tokenprice">[Loading...]</span> ETH</p>
+						<p>Maximum buy: 4 ETH</p>
 						<p>ETH to spend? <input type="text" id="fieldBuy" value="0.1" size="4"> ETH</p>
+						<br><small>(You will get around <span id="buyestimate">[Loading...]</span> snails)</small>
+					</div>
+					<div class="card-footer">
 						<button type="button" class="btn btn-danger" onclick="webBuySnail()">Buy <span id="fieldBuy2">[Loading...]</span> ETH in Snails</button>
-						<br><small>(approximately <span id="buyestimate">[Loading...]</span> snails. Maximum buy: 4 ETH)</small>
+						
 					</div>
 				</div>
 				<div class="card mb-3">
@@ -142,10 +146,14 @@
 						<h4>Rule</h4>
 					</div>
 					<div class="card-body">
-						<p>Sacrifice required: <span id="pharaohreq2">[Loading...]</span> Snails</p>
+						<p>Requirement: <span id="pharaohreq2">[Loading...]</span> Snails</p>
+						<p>No upper limit.</p>
 						<p>Snails to sacrifice? <input type="text" id="fieldSacrifice" value="40" size="4"></p>
+						<br><small>(Requirement jumps to <span id="pharaohestimate">[Loading...]</span> snails)</small>
+					</div>
+					<div class="card-footer">
 						<button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">Sacrifice <span id="fieldSacrifice2">[Loading...]</span> Snails</button>
-						<br><small>(minimum requirement for next pharaoh will increase by the number of snails you sacrifice)</small>
+						
 					</div>
 				</div>
 				<div class="card mb-3">
@@ -153,11 +161,14 @@
 						<h4>Sell</h4>
 					</div>
 					<div class="card-body">
-						<p>Snail value: <span id="tokensellprice">[Loading...]</span> ETH
+						<p>Value per snail: <span id="tokensellprice">[Loading...]</span> ETH
 						<p>Maximum sale: <span id="maxsnailsell">[Loading...]</span> Snails</p>
 						<p>Snails to sell? <input type="text" id="fieldSell" value="1000" size="4"></p>
+						<br><small>(You will get around <span id="sellEstimate">[Loading...]</span> ETH)</small>
+					</div>
+					<div class="card-footer">
 						<button type="button" class="btn btn-danger" onclick="webSellSnail()">Sell <span id="fieldSell2">[Loading...]</span> Snails</button>
-						<br><small>(approximately <span id="sellEstimate">[Loading...]</span> ETH)</small>
+						
 					</div>
 				</div>
 			</div>
@@ -176,7 +187,9 @@
 						<h4>Hatch</h2>
 					</div>
 					<div class="card-body">
-						<p>ETH needed to hatch: <span id="fullhatchcost">[Loading...]</span> (<span id="hatchprice">[Loading...]</span> per egg)</p>
+						<p>ETH needed: <span id="fullhatchcost">[Loading...]</span> (<span id="hatchprice">[Loading...]</span> per egg)</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webHatchEgg()">Hatch My Eggs</button>
 					</div>
 				</div>
@@ -186,6 +199,8 @@
 					</div>
 					<div class="card-body">
 						<p>ETH reward: <span id="fullfeedreward">[Loading...]</span> (<span id="feedreward">[Loading...]</span> per egg)</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webFeedFrog()">Feed The Frogking</button>
 					</div>
 				</div>
@@ -203,7 +218,9 @@
 						<h4>Claim</h2>
 					</div>
 					<div class="card-body">
-						<p>Unclaimed dividends: <span id="playerdiv">[Loading...]</span> ETH</p>
+						<p>Unclaimed divs: <span id="playerdiv">[Loading...]</span> ETH</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webClaimDiv()">Claim Dividends</button>
 					</div>
 				</div>
@@ -213,6 +230,8 @@
 					</div>
 					<div class="card-body">
 						<p>Current balance: <span id="playerearning">[Loading...]</span> ETH</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webWithdrawEarning()">Withdraw My Earnings</button>
 					</div>
 				</div>

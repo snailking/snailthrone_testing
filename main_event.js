@@ -1279,3 +1279,79 @@ newpharaohEvent.watch(function(error, result){
 		}
 	}
 });
+
+var withdrewEvent = myContract.WithdrewEarnings();
+
+withdrewEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		if(result.transactionHash != storetxhash[4]) {
+			storetxhash[4] = result.transactionHash;
+			var _ethreward = result.args.ethreward;
+			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			eventdoc.innerHTML += "<br>" + result.args.player + " withdrew " + _ethreward + " ETH." ;
+			logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		}
+	}
+});
+
+var claimedEvent = myContract.ClaimedDivs();
+
+claimedEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		if(result.transactionHash != storetxhash[5]) {
+			storetxhash[5] = result.transactionHash;
+			var _ethreward = result.args.ethreward;
+			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			eventdoc.innerHTML += "<br>" + result.args.player + " claimed " + _ethreward + " ETH in divs." ;
+			logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		}
+	}
+});
+
+var fedEvent = myContract.FedFrogking();
+
+fedEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		if(result.transactionHash != storetxhash[6]) {
+			storetxhash[6] = result.transactionHash;
+			var _ethreward = result.args.ethreward;
+			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			eventdoc.innerHTML += "<br>" + result.args.player + " fed the Frogking " + result.args.egg + " eggs and won " + _ethreward + " ETH." ;
+			logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		}
+	}
+});
+
+var ascendedEvent = myContract.Ascended();
+
+ascendedEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		if(result.transactionHash != storetxhash[7]) {
+			storetxhash[7] = result.transactionHash;
+			var _ethreward = result.args.ethreward;
+			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			var _roundwon = result.args.round - 1;
+			eventdoc.innerHTML += "<br>" + result.args.player + " ASCENDS!<br>The new SnailGod wins " + _roundwon + " and claims " + _ethreward + " ETH." ;
+			logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		}
+	}
+});
+
+var divEvent = myContract.NewDivs();
+
+divEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		if(result.transactionHash != storetxhash[8]) {
+			storetxhash[8] = result.transactionHash;
+			var _ethreward = result.args.ethreward;
+			_ethreward = formatEthValue(web3.fromWei(_ethreward,'ether'));
+			eventdoc.innerHTML += "<br>Another snail game just paid out " + _ethreward + " ETH in divs to all holders!" ;
+			logboxscroll.scrollTop = logboxscroll.scrollHeight;
+		}
+	}
+});
