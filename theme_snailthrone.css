@@ -300,3 +300,10 @@ a:hover {
 .answer {
 	padding: 1rem;
 }
+
+.scroll-box {
+	width: 800px; 
+	overflow: auto; 
+	overflow-x: hidden; 
+	height: 100px;
+}
