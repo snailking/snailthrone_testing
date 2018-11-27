@@ -531,7 +531,7 @@ function updateFieldSacrifice2(){
 //Next requirement estimate
 function updatePharaohEstimate(){
 	var pharaohEstimatedoc = document.getElementById('pharaohestimate');
-	pharaohEstimatedoc.textContent = parseInt(f_sacrifice + 40);
+	pharaohEstimatedoc.innerHTML = parseInt(f_sacrifice) + parseInt(40);
 }
 
 /* WEB3 TRANSACTIONS */
