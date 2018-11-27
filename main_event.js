@@ -1220,9 +1220,12 @@ function TOKEN_PRICE_MULT(callback){
 /* EVENT WATCH */
 
 var sampleEvent = myContract.HatchedSnail();
+var hatcheventdoc = document.getElementById("hatchevent");
 
 sampleEvent.watch(function(error, result){
-    if (!error)
-        console.log(result);
+    if(!error){
+		console.log(result);
+		hatcheventdoc.innerHTML = result.args.player + " " + result.args.ethspent + " " + result.args.round;
+	}
 });
 
