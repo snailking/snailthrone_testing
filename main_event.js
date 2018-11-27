@@ -1225,7 +1225,9 @@ var hatcheventdoc = document.getElementById("hatchevent");
 sampleEvent.watch(function(error, result){
     if(!error){
 		console.log(result);
-		hatcheventdoc.innerHTML = result.args.player + " " + result.args.ethspent + " " + result.args.round;
+		var _ethspent = result.args.ethspent;
+		_ethspent = formatEthValue(_ethspent.fromWei(req,'ether'));
+		hatcheventdoc.innerHTML = result.args.player + " hatched " + result.args.snail + " snails for " + _ethspent + " ETH." ;
 	}
 });
 
