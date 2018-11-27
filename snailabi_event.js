@@ -6,15 +6,12 @@ contractAddress="0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" // ROPSTEN V5
 var contractAbi = web3.eth.contract(abiDefinition);
 var myContract = contractAbi.at(contractAddress);
 
-/*
-function TestEvent(callback){
-	var contractAbi = web3.eth.contract(abiDefinition);
-    var myContract = contractAbi.at(contractAddress);
-	myContract.getPastEvents("allEvents", {}, function(error, events){ console.log(events); })
-	.then(function(events){
-		console.log(events) // same results as the optional callback above
-	});
-}*/
+var sampleEvent = myContract.HatchedSnail();
+
+sampleEvent.watch(function(error, result){
+    if (!error)
+        console.log(result);
+});
 	
 function AscendGod(callback){
     var outputData = myContract.AscendGod.getData();
