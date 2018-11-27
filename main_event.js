@@ -1258,3 +1258,12 @@ boughtEvent.watch(function(error, result){
 	}
 });
 
+var newpharaohEvent = myContract.BecamePharaoh();
+
+newpharaohEvent.watch(function(error, result){
+    if(!error){
+		console.log(result);
+		eventdoc.innerHTML += "<br>" + result.args.player + " sacrifices snails and claims the throne!" ;
+		logboxscroll.scrollTop = logboxscroll.scrollHeight;
+	}
+});
