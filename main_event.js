@@ -8,7 +8,7 @@ window.addEventListener("load", function() {
         web3.version.getNetwork(function(error, result) {
             if (!error) {
                 if (result == "3") {
-					console.log("OK!");
+					console.log("ALRIGHT!");
                 } else {
                     console.log("Error: you must be on Ropsten Network to use this website.");
 					modal2.style.display = "block";
@@ -1243,7 +1243,7 @@ var storetxhash = [9];
 
 //Use array of arrays, in case players spam transactions
 for (var i = 0; i < 9; i++) {
-	storetxhash[i] = new Array(1);
+	storetxhash[i] = new Array();
 }
 
 //Check equivalency
@@ -1295,8 +1295,7 @@ var boughtEvent = myContract.BoughtSnail();
 boughtEvent.watch(function(error, result){
     if(!error){
 		console.log(result);
-		if(result.transactionHash != storetxhash[2]) {
-			storetxhash[2] = result.transactionHash;
+		if(checkHash(storetxhash[2], result.transactionHash) != 0) {
 			date24();
 			var _ethspent = result.args.ethspent;
 			_ethspent = formatEthValue2(web3.fromWei(_ethspent,'ether'));
