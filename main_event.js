@@ -1268,7 +1268,7 @@ boughtEvent.watch(function(error, result){
 			storetxhash[2] = result.transactionHash;
 			var _ethspent = result.args.ethspent;
 			_ethspent = formatEthValue2(web3.fromWei(_ethspent,'ether'));
-			eventdoc.innerHTML += "<br>" + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
+			eventdoc.innerHTML += "<br>" + Date() + " " + result.args.player + " bought " + result.args.snail + " snails for " + _ethspent + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
 	}
