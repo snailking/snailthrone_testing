@@ -108,7 +108,7 @@ function main(){
     console.log('Main loop started.');
     controlLoop();
 	controlLoopFast();
-	TestEvent();
+	//TestEvent();
 }
 
 //Main loop
