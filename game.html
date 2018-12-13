@@ -9,7 +9,7 @@
 		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">		
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="theme_bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="theme_snailthrone.css">		
+		<link rel="stylesheet" type="text/css" href="theme_snailthrone_2.css">		
 	</head>
 	
 	<body>
@@ -18,7 +18,17 @@
 			<div class="jumbotron modal-content" align="center">
 				<span id="close2" class="close">&times;</span><h2 align="center">YOU NEED A WEB3 EXTENSION TO PLAY SNAILTHRONE.</h2>
 				<br><p>Hello! It seems you're lacking a Web3 extension, such as <a href="https://metamask.io" target="_blank">MetaMask</a>. This is required for SnailThrone.</p>
-				<p>If you have MetaMask, make sure you're connected to the Ropsten network.</p>
+				<p>If you have MetaMask, make sure you're connected to the Mainnet Network.</p>
+			</div>
+		</div>
+		<!-- SACRIFICE MODAL, TO WARN PLAYERS. -->
+		<div id="modal3" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<span id="close3" class="close">&times;</span><h3 align="center">YOUR SACRIFICE IS BELOW THE PHARAOH REQUIREMENT.</h2>
+				<br><p>Due to the latency of Ethereum, this can make sense.</p>
+				<p>However, if you're not sure why you're seeing this message it's likely you will not become pharaoh</p>
+				<p>You can close this infobox and simply use the "Claim Throne" button on the pyramid.</p>
+				<p><button type="button" class="btn btn-danger" onclick="CloseModal3()">Get me out of here!</button> <button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">I know what I'm doing.</button></p>
 			</div>
 		</div>
 		<!-- MODAL. EXPLAINS EVERYTHING. OPENED BY HELP. -->
@@ -81,11 +91,13 @@
 		</div>
 		<!-- TITLE. ICONS LINKING TO CONTRACT, SOCIAL MEDIA, HELP. -->
 		<div class="jumbotron">
-			<input type="image" src="img/question_circle.png" class="icon-align-right" id="helpmodal" />
-			<a href="https://ropsten.etherscan.io/address/0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" target="_blank"><img class="icon-align-right" src="img/contract_circle.png"></a>
-			<a href="https://discord.gg/8h3Emyb" target="_blank"><img class="icon-align-right" src="img/discord_circle.png"></a>
-			<a href="https://twitter.com/EtherSnailFarm" target="_blank"><img class="icon-align-right" src="img/twitter_circle.png"></a>
-			<a name="top"><h1>GRUG</h1></a>
+			<input type="image" src="img/question_circle.png" class="social-align-right" id="helpmodal" />
+			<a href="https://ropsten.etherscan.io/address/0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" target="_blank"><img class="social-align-right" src="img/contract_circle.png"></a>
+			<a href="https://discord.gg/8h3Emyb" target="_blank"><img class="social-align-right" src="img/discord_circle.png"></a>
+			<a href="https://twitter.com/EtherSnailFarm" target="_blank"><img class="social-align-right" src="img/twitter_circle.png"></a>
+			<a href="https://reddit.com/r/SnailThrone/" target="_blank"><img class="social-align-right" src="img/reddit_circle.png"></a>
+			<a href="https://medium.com/@thesnailking/snailthrone-the-new-fip-game-on-ethereum-dedff7660e98" target="_blank"><img class="social-align-right" src="img/medium_circle.png"></a>
+			<a name="top"><h1>SNAILTHRONE</h1></a>
 		</div>
 		<br>		
 		<!-- HEADER. CONTAINS CURRENT WINNER, TIMER, AND POT. -->
@@ -99,8 +111,8 @@
 				<h2><span id="pharaoh">[Loading...]</span></h2>
 				<h1><span id="godtimer">[Loading...]</span></h1>
 				<br><br>
-				<span id="showroundon"><button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">Claim the Throne</button>
-				<br><small>Sacrifice required: <span id="pharaohreq">[Loading...]</span> Snails</small></span>
+				<span id="showroundon"><button type="button" class="btn btn-danger" onclick="webClaimThrone()">Claim the Throne</button>
+				<br><small>You will sacrifice <span id="pharaohreq">[Loading...]</span> Snails</small></span>
 				<br><br>
 				<span id="showroundoff"><button type="button" class="btn btn-danger" onclick="webAscendGod()">Start new Round</button>
 				<br><small>(will only work if timer is at 0)</small></span>
@@ -108,7 +120,15 @@
 				</div>
 			</div>
 		</div>
-		
+		<!-- LOGGER -->
+		<!-- SHOWS ALL EVENTS -->	
+		<div class="jumbotron border-solid" align="center">
+			<h2>EVENT LOG</h2>
+			<div class="scroll-box" id="logboxscroll">
+				<p><span id="event">[Waiting for events...]</span></p>
+			</div>
+		</div>
+		<br>
 		<!-- SNAILS -->
 		<!-- BUY ON LEFT, SNAILS ON MIDDLE, SELL ON RIGHT. -->
 		<div class="jumbotron border-double" align="center">
@@ -122,10 +142,14 @@
 						<h4>Buy</h4>
 					</div>
 					<div class="card-body">
-						<p>Snail cost: <span id="tokenprice">[Loading...]</span> ETH</p>
+						<p>Cost per snail: <span id="tokenprice">[Loading...]</span> ETH</p>
+						<p>Maximum buy: 4 ETH</p>
 						<p>ETH to spend? <input type="text" id="fieldBuy" value="0.1" size="4"> ETH</p>
+						<br><small>(You will get around <span id="buyestimate">[Loading...]</span> snails)</small>
+					</div>
+					<div class="card-footer">
 						<button type="button" class="btn btn-danger" onclick="webBuySnail()">Buy <span id="fieldBuy2">[Loading...]</span> ETH in Snails</button>
-						<br><small>(approximately <span id="buyestimate">[Loading...]</span> snails. Maximum buy: 4 ETH)</small>
+						
 					</div>
 				</div>
 				<div class="card mb-3">
@@ -133,10 +157,14 @@
 						<h4>Rule</h4>
 					</div>
 					<div class="card-body">
-						<p>Sacrifice required: <span id="pharaohreq2">[Loading...]</span> Snails</p>
+						<p>Requirement: <span id="pharaohreq2">[Loading...]</span> Snails</p>
+						<p>No upper limit.</p>
 						<p>Snails to sacrifice? <input type="text" id="fieldSacrifice" value="40" size="4"></p>
-						<button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">Sacrifice <span id="fieldSacrifice2">[Loading...]</span> Snails</button>
-						<br><small>(minimum requirement for next pharaoh will increase by the number of snails you sacrifice)</small>
+						<br><small>(Requirement jumps to <span id="pharaohestimate">[Loading...]</span> snails)</small>
+					</div>
+					<div class="card-footer">
+						<button type="button" class="btn btn-danger" onclick="CheckSacrifice()">Sacrifice <span id="fieldSacrifice2">[Loading...]</span> Snails</button>
+						
 					</div>
 				</div>
 				<div class="card mb-3">
@@ -144,11 +172,14 @@
 						<h4>Sell</h4>
 					</div>
 					<div class="card-body">
-						<p>Snail value: <span id="tokensellprice">[Loading...]</span> ETH
+						<p>Value per snail: <span id="tokensellprice">[Loading...]</span> ETH
 						<p>Maximum sale: <span id="maxsnailsell">[Loading...]</span> Snails</p>
 						<p>Snails to sell? <input type="text" id="fieldSell" value="1000" size="4"></p>
+						<br><small>(You will get around <span id="sellEstimate">[Loading...]</span> ETH)</small>
+					</div>
+					<div class="card-footer">
 						<button type="button" class="btn btn-danger" onclick="webSellSnail()">Sell <span id="fieldSell2">[Loading...]</span> Snails</button>
-						<br><small>(approximately <span id="sellEstimate">[Loading...]</span> ETH)</small>
+						
 					</div>
 				</div>
 			</div>
@@ -167,7 +198,9 @@
 						<h4>Hatch</h2>
 					</div>
 					<div class="card-body">
-						<p>ETH needed to hatch: <span id="fullhatchcost">[Loading...]</span> (<span id="hatchprice">[Loading...]</span> per egg)</p>
+						<p>ETH needed: <span id="fullhatchcost">[Loading...]</span> (<span id="hatchprice">[Loading...]</span> per egg)</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webHatchEgg()">Hatch My Eggs</button>
 					</div>
 				</div>
@@ -177,6 +210,8 @@
 					</div>
 					<div class="card-body">
 						<p>ETH reward: <span id="fullfeedreward">[Loading...]</span> (<span id="feedreward">[Loading...]</span> per egg)</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webFeedFrog()">Feed The Frogking</button>
 					</div>
 				</div>
@@ -194,7 +229,9 @@
 						<h4>Claim</h2>
 					</div>
 					<div class="card-body">
-						<p>Unclaimed dividends: <span id="playerdiv">[Loading...]</span> ETH</p>
+						<p>Unclaimed divs: <span id="playerdiv">[Loading...]</span> ETH</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webClaimDiv()">Claim Dividends</button>
 					</div>
 				</div>
@@ -204,6 +241,8 @@
 					</div>
 					<div class="card-body">
 						<p>Current balance: <span id="playerearning">[Loading...]</span> ETH</p>
+					</div>
+					<div class="card-footer">	
 						<button type="button" class="btn btn-danger" onclick="webWithdrawEarning()">Withdraw My Earnings</button>
 					</div>
 				</div>
@@ -239,6 +278,7 @@
 				<p>Players can HATCH these eggs to turn them into more snails. Hatching still costs ether, but only half of the normal price.</p>
 				<p>Players can also FEED their eggs to the FrogKing for an ETH reward.</p>
 				<p>Players can SACRIFICE a certain amount of snails to hold the title of Pharaoh. The Pharaoh earns dividends on every buy, and if the timer runs out, the Pharaoh can claim the GodPot.</p>
+				<p>NOTE: buying more snails will reset your eggs to 0, and selling or making a sacrifice will reduce your number of eggs. Make sure to hatch or feed before any other action if you have a significant number of eggs!</p>
 			</div>
 			<br>	
 			<p><b>ETH distribution on buy:</b></p>
@@ -297,9 +337,7 @@
 		</div>	
 		
 		<!-- Main Javascript -->
-		<script src="main.js"></script>		
-		<!-- Web3 ABI -->
-		<script src="snailabi.js"></script>			
+		<script src="main.js"></script>				
 	    <!-- Execute main() once -->
 		<script>
 			main()
