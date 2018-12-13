@@ -45,7 +45,7 @@ var god_numminutes = 0;
 var god_numseconds = 0;
 
 var god_roundover = false;
-var godtimer_lastminute = 0;
+var godtimer_lastminute = 8;
 
 var godtimerdoc;
 var playereggdoc;
