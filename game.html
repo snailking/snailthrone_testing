@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Title, Favicon -->
-		<title>SnailThrone Testing</title>
+		<title>SnailThrone</title>
 		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">		
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="theme_bootstrap.css">
@@ -13,24 +13,6 @@
 	</head>
 	
 	<body>
-		<!-- WEB3 MODAL, IN CASE NO WEB3 DETECTED. -->
-		<div id="modal2" class="modal">
-			<div class="jumbotron modal-content" align="center">
-				<span id="close2" class="close">&times;</span><h2 align="center">YOU NEED A WEB3 EXTENSION TO PLAY SNAILTHRONE.</h2>
-				<br><p>Hello! It seems you're lacking a Web3 extension, such as <a href="https://metamask.io" target="_blank">MetaMask</a>. This is required for SnailThrone.</p>
-				<p>If you have MetaMask, make sure you're connected to the Mainnet Network.</p>
-			</div>
-		</div>
-		<!-- SACRIFICE MODAL, TO WARN PLAYERS. -->
-		<div id="modal3" class="modal">
-			<div class="jumbotron modal-content" align="center">
-				<span id="close3" class="close">&times;</span><h3 align="center">YOUR SACRIFICE IS BELOW THE PHARAOH REQUIREMENT.</h2>
-				<br><p>Due to the latency of Ethereum, this can make sense.</p>
-				<p>However, if you're not sure why you're seeing this message it's likely you will not become pharaoh</p>
-				<p>You can close this infobox and simply use the "Claim Throne" button on the pyramid.</p>
-				<p><button type="button" class="btn btn-danger" onclick="CloseModal3()">Get me out of here!</button> <button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">I know what I'm doing.</button></p>
-			</div>
-		</div>
 		<!-- MODAL. EXPLAINS EVERYTHING. OPENED BY HELP. -->
 		<div id="modal" class="modal">
 			<div class="jumbotron modal-content">
@@ -85,19 +67,44 @@
 				<div class="infobox">
 					<p>Come join us on Discord!</p>
 					<p>There's a wealth of information available in previous discussions, and the community can answer your questions.</p>
-					<p align="right"><a href="https://discord.gg/8h3Emyb" target="_blank">Discord Link</a></p>
+					<p align="right"><a href="https://discord.gg/JU8P4Ru" target="_blank">Discord Link</a></p>
 				</div>
+			</div>
+		</div>
+		<!-- WEB3 MODAL, IN CASE NO WEB3 DETECTED. -->
+		<div id="modal2" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<span id="close2" class="close">&times;</span><h2 align="center">YOU NEED A WEB3 EXTENSION TO PLAY SNAILTHRONE.</h2>
+				<br><p>Hello! It seems you're lacking a Web3 extension, such as <a href="https://metamask.io" target="_blank">MetaMask</a>. This is required for SnailThrone.</p>
+				<p>If you have MetaMask, make sure you're connected to the Mainnet Network.</p>
+			</div>
+		</div>
+		<!-- SACRIFICE MODAL, TO WARN PLAYERS. -->
+		<div id="modal3" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<span id="close3" class="close">&times;</span><h3 align="center">YOUR SACRIFICE IS BELOW THE PHARAOH REQUIREMENT.</h2>
+				<br><p>Due to the latency of Ethereum, this can make sense.</p>
+				<p>However, if you're not sure why you're seeing this message it's likely you will not become pharaoh</p>
+				<p>You can close this infobox and simply use the "Claim Throne" button on the pyramid.</p>
+				<p><button type="button" class="btn btn-danger" onclick="CloseModal3()">Get me out of here!</button> <button type="button" class="btn btn-danger" onclick="webSacrificeSnail()">I know what I'm doing.</button></p>
 			</div>
 		</div>
 		<!-- TITLE. ICONS LINKING TO CONTRACT, SOCIAL MEDIA, HELP. -->
 		<div class="jumbotron">
-			<input type="image" src="img/question_circle.png" class="social-align-right" id="helpmodal" />
-			<a href="https://ropsten.etherscan.io/address/0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" target="_blank"><img class="social-align-right" src="img/contract_circle.png"></a>
-			<a href="https://discord.gg/8h3Emyb" target="_blank"><img class="social-align-right" src="img/discord_circle.png"></a>
-			<a href="https://twitter.com/EtherSnailFarm" target="_blank"><img class="social-align-right" src="img/twitter_circle.png"></a>
-			<a href="https://reddit.com/r/SnailThrone/" target="_blank"><img class="social-align-right" src="img/reddit_circle.png"></a>
-			<a href="https://medium.com/@thesnailking/snailthrone-the-new-fip-game-on-ethereum-dedff7660e98" target="_blank"><img class="social-align-right" src="img/medium_circle.png"></a>
-			<a name="top"><h1>SNAILTHRONE</h1></a>
+			<div class="row">
+				<div class="col-sm" align="left">
+					<a name="top"><h1>SNAILTHRONE</h1></a>
+				</div>
+				<div class="col-sm" align="right">
+					<input type="image" src="img/question_circle.png" class="social-align-right" id="helpmodal">
+					<a href="https://etherscan.io/address/0x261d650a521103428c6827a11fc0cbce96d74dbc" target="_blank"><img class="social-align-right" src="img/contract_circle.png"></a>
+					<a href="https://discord.gg/JU8P4Ru" target="_blank"><img class="social-align-right" src="img/discord_circle.png"></a>
+					<a href="https://twitter.com/EtherSnailFarm" target="_blank"><img class="social-align-right" src="img/twitter_circle.png"></a>
+					<a href="https://reddit.com/r/SnailThrone/" target="_blank"><img class="social-align-right" src="img/reddit_circle.png"></a>
+					<a href="https://medium.com/@thesnailking/snailthrone-the-new-fip-game-on-ethereum-dedff7660e98" target="_blank"><img class="social-align-right" src="img/medium_circle.png"></a>
+					<a href="hall_of_slime.html" target="_blank"><img class="social-align-right" src="img/trophy_circle.png"></a>
+				</div>
+			</div>
 		</div>
 		<br>		
 		<!-- HEADER. CONTAINS CURRENT WINNER, TIMER, AND POT. -->
@@ -337,7 +344,7 @@
 		</div>	
 		
 		<!-- Main Javascript -->
-		<script src="main.js"></script>				
+		<script src="snailthrone.js"></script>				
 	    <!-- Execute main() once -->
 		<script>
 			main()
