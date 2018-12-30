@@ -37,8 +37,8 @@ span2.onclick = function() {
 
 /* PAST EVENT LOG */
 
-var timeLaunch = 1543059065;
-var launchBlock = 6763682;
+var timeLaunch = 1546099245;
+var launchBlock = 6974738;
 
 var twoDaysBlock = 0;
 var ranLog = false;
