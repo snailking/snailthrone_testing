@@ -176,6 +176,13 @@ function formatEthValue2(ethstr){
 	return parseFloat(parseFloat(ethstr).toFixed(6));
 }
 
+//Truncates ETH address to first 8 numbers
+function formatEthAdr(adr){
+	var _smallAdr = adr.substring(0, 10);
+	var _stringLink = '<a href="https://etherscan.io/address/' + adr + '">' + _smallAdr + '</a>';
+	return _stringLink;
+}
+
 //Conversion of Date to hh:mm:ss
 var datetext;
 
@@ -1338,29 +1345,29 @@ function runLog(){
 					if(checkHash(storetxhash, result[i].transactionHash) != 0) {
 						dateLog(result[i].blockNumber);
 						if(result[i].event == "HatchedSnail"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " hatched " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " hatched " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
 							
 						} else if(result[i].event == "SoldSnail"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " sold " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " sold " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
 							
 						} else if(result[i].event == "BoughtSnail"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " bought " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " bought " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
 
 						} else if(result[i].event == "BecamePharaoh"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " sacrifices snails and claims the throne!" ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " sacrifices snails and claims the throne!" ;
 	
 						} else if(result[i].event == "WithdrewEarnings"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " withdrew " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " withdrew " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
 
 						} else if(result[i].event == "ClaimedDivs"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " claimed " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " claimed " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs." ;
 
 						} else if(result[i].event == "FedFrogking"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " fed the Frogking " + result[i].args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')); + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " fed the Frogking " + result[i].args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')); + " ETH." ;
 
 						} else if(result[i].event == "Ascended"){
 							var _roundwon = result[i].args.round - 1;
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + result[i].args.player + " ASCENDS!<br>The new SnailGod wins Round " + _roundwon + " and claims " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " ASCENDS!<br>The new SnailGod wins Round " + _roundwon + " and claims " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
 
 						} else if(result[i].event == "NewDivs"){
 							eventdoc.innerHTML += "<br>[~" + datetext + "] Another snail game just paid out " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs to all holders!" ;
