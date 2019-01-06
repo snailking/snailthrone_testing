@@ -330,7 +330,7 @@ function updateGodPot(){
 	var godpotdoc = document.getElementById('godpot');
 	console.log("updating god pot...");
 	godPot(function(req) {
-		console.log("godpot is " + formatEthValue(web3.fromWei(req,'ether'));
+		console.log("godpot is " + formatEthValue(web3.fromWei(req,'ether')));
 		a_godPot = formatEthValue(web3.fromWei(req,'ether'));
 		godpotdoc.textContent = a_godPot;
 	});
