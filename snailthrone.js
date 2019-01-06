@@ -329,7 +329,7 @@ function updateGodRound(){
 function updateGodPot(){
 	var godpotdoc = document.getElementById('godpot');
 	console.log("updating god pot...");
-	godPot(function(req) {
+	godPot(function(req, error) {
 		console.log("godpot is " + formatEthValue(web3.fromWei(req,'ether')));
 		a_godPot = formatEthValue(web3.fromWei(req,'ether'));
 		godpotdoc.textContent = a_godPot;
@@ -820,7 +820,7 @@ function HatchEgg(eth,callback){
 
 function SellSnail(_tokensSold,callback){
     var outputData = myContract.SellSnail.getData(_tokensSold);
-    var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
+    var endstr=web3.eth.sendTransaction({to:contractAddress, from:m_account, data: outputData},
     function(error,result){
         if(!error){
             //console.log('SellSnail ',result);
