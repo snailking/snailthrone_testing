@@ -3,7 +3,7 @@ contractAddress="0x261d650a521103428C6827a11fc0CBCe96D74DBc" // MAINNET
 /* WEB3 DETECTION */
 
 var web3;
-
+var a_web3 = false;
 var modal2 = document.getElementById("modal2");
 
 window.addEventListener('load', async () => {
@@ -14,6 +14,7 @@ window.addEventListener('load', async () => {
             // Request account access if needed
             await ethereum.enable();
             // Acccounts now exposed
+	    a_web3 = true;
             web3.eth.sendTransaction({/* ... */});
         } catch (error) {
             // User denied account access...
@@ -23,6 +24,7 @@ window.addEventListener('load', async () => {
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
+	a_web3 = true;
         web3.eth.sendTransaction({/* ... */});
     }
     // Non-dapp browsers...
@@ -171,10 +173,20 @@ window.onclick = function(event) {
 
 /* GLOBAL LOOP */
 
-//Started once, to trigger the main loop and the egg loop
+var a_init = false;
+//Started once, to wait for web3 then trigger loops
 function main(){
-    console.log('Main loop started.');
-    controlLoop();
+	
+	if(a_web3 == true && a_init == false){
+		a_init = true;
+		initLoop();
+	}
+	setTimeout(main, 4000);
+    	console.log('Main loop started.');
+}
+
+function initLoop(){
+    	controlLoop();
 	controlLoopFast();
 }
 
