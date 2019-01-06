@@ -15,7 +15,7 @@ window.addEventListener('load', async () => {
             await ethereum.enable();
             // Acccounts now exposed
 	    a_web3 = true;
-            web3.eth.sendTransaction({/* ... */});
+            //web3.eth.sendTransaction({/* ... */});
         } catch (error) {
             // User denied account access...
         }
@@ -25,12 +25,12 @@ window.addEventListener('load', async () => {
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
 	a_web3 = true;
-        web3.eth.sendTransaction({/* ... */});
+        //web3.eth.sendTransaction({/* ... */});
     }
     // Non-dapp browsers...
     else {
         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-	web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));    
+	//web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));    
     }
 });
 /*
