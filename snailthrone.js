@@ -820,7 +820,7 @@ function HatchEgg(eth,callback){
 
 function SellSnail(_tokensSold,callback){
     var outputData = myContract.SellSnail.getData(_tokensSold);
-    var endstr=web3.eth.sendTransaction({to:contractAddress, from:m_account, data: outputData},
+    var endstr=web3.eth.sendTransaction({to:contractAddress, from:web3.eth.accounts[0], data: outputData},
     function(error,result){
         if(!error){
             //console.log('SellSnail ',result);
