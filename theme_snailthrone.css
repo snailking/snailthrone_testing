@@ -48,7 +48,7 @@ body {
 	color: white;
 }
 
-@media all and (max-width:900px), (max-device-width:900px){
+@media only screen and (max-width:900px), (max-device-width:900px){
 body{
 	background-attachment: scroll;
 }
