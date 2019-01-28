@@ -50,7 +50,7 @@ body {
 
 @media all and (max-width:900px), (max-device-width:900px){
 body{
-	background-image: url("img/red_background_mobile.jpg");
+	background-attachment: scroll;
 }
 }
 
@@ -312,6 +312,7 @@ a:hover {
 
 .answer {
 	padding: 1rem;
+	background-color: black;
 }
 
 /* Added since _event */
