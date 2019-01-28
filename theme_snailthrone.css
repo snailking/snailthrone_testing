@@ -40,18 +40,25 @@
 }
 
 body {
-	/*background-image: url(img/mayan_pyramid3.png);
-	background-position: 50% 20%; /* Center the image */
-	background-repeat: no-repeat; /* Do not repeat the image */
+	background-image: url("img/red_background.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
 	background-color: black;
 	color: white;
+}
+
+@media all and (max-width:900px), (max-device-width:900px){
+body{
+	background-image: url("img/red_background_mobile.jpg");
+}
 }
 
 .pyramid {
 	background-image: url(img/mayan_pyramid3.png);
 	background-position: center center;
     background-repeat: no-repeat;
-	background-color: black;
+	background-color: #9d2020;
 }
 
 .ether {
@@ -136,6 +143,12 @@ code {
 
 .btn {
 	box-shadow: 0 0 4px 4px maroon;
+}
+
+.social-align-right {
+	width: 48px;
+	float: right;
+	margin: 1px;
 }
 
 .icon-align-right {
@@ -227,7 +240,7 @@ code {
 }
 
 a {
-	color:  maroon;
+	color: red;
 }
 
 a:hover {
@@ -304,7 +317,7 @@ a:hover {
 /* Added since _event */
 
 .scroll-box {
-	width: 80%; 
+	width: 100%; 
 	overflow: auto; 
 	overflow-x: hidden; 
 	height: 110px;
