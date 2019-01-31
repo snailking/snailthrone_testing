@@ -12,7 +12,7 @@ window.addEventListener("load", function() {
         web3.version.getNetwork(function(error, result) {
             if (!error) {
                 if (result == "1") {
-					console.log("Web3 Testnet successfully loaded!");
+					console.log("Web3 Mainnet successfully loaded!");
                 } else {
                     console.log("Error: you must be on the Mainnet to use this website.");
 					web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
@@ -187,8 +187,8 @@ function runBought(){
 }
 
 runBought();
-showArray();
-sortArray();
-showArray();
-parseArray();
-showArray();
+showArray(hatcheryArray);
+sortArray(hatcheryArray);
+showArray(hatcheryArray);
+parseArray(hatcheryArray);
+showArray(hatcheryArray);
