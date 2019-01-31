@@ -179,6 +179,7 @@ function runBought(){
 			var i = 0;
 			for(i = 0; i < result.length; i++){
 				pushToArray(result[i].args.player, result[i].args.snail);
+				console.log("Player " + i + ": " + result[i].args.player);
 			}
 		} else {
 			console.log("problem!");
