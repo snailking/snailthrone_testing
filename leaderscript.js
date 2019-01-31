@@ -173,7 +173,7 @@ function sortArray(_array){
 //Events
 
 function runBought(){
-	myContract.getPastEvents(BoughtSnail, { fromBlock: 6000000, toBlock: 'latest' }, (error, result) => { console.log(event); });/*{
+	myContract.getPastEvents('BoughtSnail', { fromBlock: 6000000, toBlock: 'latest' }, (error, result) => { console.log(event); });/*{
 		if(!error){
 			console.log(result);
 			var i = 0;
