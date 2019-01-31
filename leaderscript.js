@@ -185,10 +185,3 @@ function runBought(){
 		}
 	});
 }
-
-runBought();
-showArray(hatcheryArray);
-sortArray(hatcheryArray);
-showArray(hatcheryArray);
-parseArray(hatcheryArray);
-showArray(hatcheryArray);
