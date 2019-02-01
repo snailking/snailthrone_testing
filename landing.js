@@ -219,6 +219,7 @@ function updateContractBalance(){
 //Update text
 function updateText(){
 	doc_snailBought.innerHTML = e_snailBought;
+	doc_snailHatched.innerHTML = e_snailHatched;
 	doc_snailSold.innerHTML = e_snailSold;
 	doc_snailSacrificed.innerHTML = parseInt(e_snailBought) + parseInt(e_snailHatched) - parseInt(e_snailSold);
 	doc_ethIn.innerHTML = e_ethSpent;
@@ -865,10 +866,10 @@ function TOKEN_PRICE_MULT(callback){
 }
 
 /* EVENT WATCH */
-/*
+
 var logboxscroll = document.getElementById('logboxscroll');
 var eventdoc = document.getElementById("event");
-*/
+
 //Store transaction hash for each event, and check before executing result, as web3 events fire twice
 var storetxhash = [];
 
@@ -929,7 +930,58 @@ function runLog(){
 		console.log("condition failed");
 	}
 }
-/*
+
+
+function runLogOrig(){
+	if(ranLog == false && twoDaysBlock > 0){
+		ranLog = true;
+		myContract.allEvents({ fromBlock: twoDaysBlock, toBlock: 'latest' }).get(function(error, result){
+			if(!error){
+				console.log(result);
+				var i = 0;
+				for(i = 0; i < result.length; i++){
+					if(checkHash(storetxhash, result[i].transactionHash) != 0) {
+						dateLog(result[i].blockNumber);
+						if(result[i].event == "HatchedSnail"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " hatched " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
+							
+						} else if(result[i].event == "SoldSnail"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " sold " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+							
+						} else if(result[i].event == "BoughtSnail"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " bought " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
+
+						} else if(result[i].event == "BecamePharaoh"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " sacrifices snails and claims the throne!" ;
+	
+						} else if(result[i].event == "WithdrewEarnings"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " withdrew " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+
+						} else if(result[i].event == "ClaimedDivs"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " claimed " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs." ;
+
+						} else if(result[i].event == "FedFrogking"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " fed the Frogking " + result[i].args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+
+						} else if(result[i].event == "Ascended"){
+							var _roundwon = result[i].args.round - 1;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " ASCENDS!<br>The new SnailGod wins Round " + _roundwon + " and claims " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
+
+						} else if(result[i].event == "NewDivs"){
+							eventdoc.innerHTML += "<br>[~" + datetext + "] Another snail game just paid out " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs to all holders!" ;
+						}
+						logboxscroll.scrollTop = logboxscroll.scrollHeight;
+					}
+				}
+			}
+			else{
+				console.log("problem!");
+			}
+		});
+	}
+}
+
+
 var hatchEvent = myContract.HatchedSnail();
 
 hatchEvent.watch(function(error, result){
