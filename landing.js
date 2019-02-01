@@ -927,6 +927,7 @@ function runLog(){
 		});
 	} else {
 		console.log("condition failed");
+	}
 }
 /*
 var hatchEvent = myContract.HatchedSnail();
