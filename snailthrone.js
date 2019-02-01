@@ -3,39 +3,9 @@ contractAddress="0x261d650a521103428C6827a11fc0CBCe96D74DBc" // MAINNET
 /* WEB3 DETECTION */
 
 var web3;
-var a_web3 = false;
-var modal2 = document.getElementById("modal2");
 
-window.addEventListener('load', async () => {
-    // Modern dapp browsers...
-    if (window.ethereum) {
-        window.web3 = new Web3(ethereum);
-        try {
-            // Request account access if needed
-            await ethereum.enable();
-            // Acccounts now exposed
-	    a_web3 = true;
-		console.log("web3 started with ethereum.enable");
-            //web3.eth.sendTransaction({/* ... */});
-        } catch (error) {
-            // User denied account access...
-        }
-    }
-    // Legacy dapp browsers...
-    else if (window.web3) {
-        window.web3 = new Web3(web3.currentProvider);
-        // Acccounts always exposed
-	a_web3 = true;
-	    console.log("web3 started with old inject");
-        //web3.eth.sendTransaction({/* ... */});
-    }
-    // Non-dapp browsers...
-    else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-	//web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));    
-    }
-});
-/*
+var modal2 = document.getElementById("modal2");
+/* OLD 
 window.addEventListener("load", function() {
 	if (typeof web3 !== "undefined") {
         web3 = new Web3(web3.currentProvider);
@@ -57,6 +27,34 @@ window.addEventListener("load", function() {
     }
 });
 */
+
+/* NEW */
+
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+            web3.eth.sendTransaction({/* ... */});
+        } catch (error) {
+            // User denied account access...
+        }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+        window.web3 = new Web3(web3.currentProvider);
+        // Acccounts always exposed
+        web3.eth.sendTransaction({/* ... */});
+    }
+    // Non-dapp browsers...
+    else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+});
+
 // Get the <span> element that closes the modal
 var span2 = document.getElementById("close2");
 
@@ -175,33 +173,16 @@ window.onclick = function(event) {
 
 /* GLOBAL LOOP */
 
-var a_init = false;
-//Started once, to wait for web3 then trigger loops
+//Started once, to trigger the main loop and the egg loop
 function main(){
-	
-	if(a_web3 == true && a_init == false){
-		a_init = true;
-		console.log("a_init is now true!");
-		initLoop();
-	} 
-	setTimeout(main, 4000);
-    	//console.log('Main loop started.');
+    console.log('Main loop started.');
+    controlLoop();
+	controlLoopFast();
 }
 
-function initLoop(){
-	console.log("initLoop started");
-    	controlLoop();
-	controlLoopFast();
-}
-/*
-function main(){
-	controlLoop();
-	controlLoopFast();
-}*/
 //Main loop
 function controlLoop(){
     refreshData();
-	console.log("refreshing data...");
     setTimeout(controlLoop,4000);
 }
 
@@ -269,7 +250,6 @@ copyText.value = playerreflinkdoc.textContent;
 
 //Refreshes game data
 function refreshData(){
-	console.log("refreshing data!");
 	updateEthAccount();
 	updateGodRound();
 	updateGodPot();
@@ -313,7 +293,6 @@ function refreshDataFast(){
 
 //Current ETH address in use
 function updateEthAccount(){
-	console.log("updating eth account");
 	m_account = web3.eth.accounts[0];
 }
 
@@ -328,9 +307,7 @@ function updateGodRound(){
 //Full godpot
 function updateGodPot(){
 	var godpotdoc = document.getElementById('godpot');
-	console.log("updating god pot...");
-	godPot(function(req, error) {
-		console.log("godpot is " + formatEthValue(web3.fromWei(req,'ether')));
+	godPot(function(req) {
 		a_godPot = formatEthValue(web3.fromWei(req,'ether'));
 		godpotdoc.textContent = a_godPot;
 	});
@@ -820,7 +797,7 @@ function HatchEgg(eth,callback){
 
 function SellSnail(_tokensSold,callback){
     var outputData = myContract.SellSnail.getData(_tokensSold);
-    var endstr=web3.eth.sendTransaction({to:contractAddress, from:web3.eth.accounts[0], data: outputData},
+    var endstr=web3.eth.sendTransaction({to:contractAddress, from:null, data: outputData},
     function(error,result){
         if(!error){
             //console.log('SellSnail ',result);
@@ -1414,7 +1391,7 @@ function runLog(){
 							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " claimed " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs." ;
 
 						} else if(result[i].event == "FedFrogking"){
-							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " fed the Frogking " + result[i].args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')); + " ETH." ;
+							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " fed the Frogking " + result[i].args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH." ;
 
 						} else if(result[i].event == "Ascended"){
 							var _roundwon = result[i].args.round - 1;
@@ -1519,7 +1496,7 @@ fedEvent.watch(function(error, result){
 		//console.log(result);
 		if(checkHash(storetxhash, result.transactionHash) != 0) {
 			date24();
-			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " fed the Frogking " + result.args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')); + " ETH." ;
+			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " fed the Frogking " + result.args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
 		}
 	}
