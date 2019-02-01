@@ -893,8 +893,10 @@ function checkHash(txarray, txhash) {
 //Events
 
 function runLog(){
+	console.log("Running log...");
 	if(ranLog == false){
 		ranLog = true;
+		console.log("Logging starts");
 		myContract.allEvents({ fromBlock: 0, toBlock: 'latest' }).get(function(error, result){
 			if(!error){
 				console.log(result);
@@ -923,7 +925,8 @@ function runLog(){
 				console.log("problem!");
 			}
 		});
-	}
+	} else {
+		console.log("condition failed");
 }
 /*
 var hatchEvent = myContract.HatchedSnail();
