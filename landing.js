@@ -898,7 +898,7 @@ function runLog(){
 	if(ranLog == false){
 		ranLog = true;
 		console.log("Logging starts");
-		myContract.allEvents({ fromBlock: 0, toBlock: 'latest' }).get(function(error, result){
+		myContract.allEvents({ fromBlock: twoDaysBlock, toBlock: 'latest' }).get(function(error, result){
 			if(!error){
 				console.log(result);
 				var i = 0;
