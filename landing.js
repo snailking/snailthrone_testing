@@ -898,7 +898,7 @@ function runLog(){
 	if(ranLog == false){
 		ranLog = true;
 		console.log("Logging starts");
-		myContract.allEvents({ fromBlock: twoDaysBlock, toBlock: 'latest' }).get(function(error, result){
+		myContract.allEvents({ fromBlock: 6763682, toBlock: 'latest' }).get(function(error, result){
 			if(!error){
 				console.log(result);
 				var i = 0;
@@ -907,7 +907,8 @@ function runLog(){
 						//dateLog(result[i].blockNumber);
 						if(result[i].event == "HatchedSnail"){
 							e_snailHatched += result[i].args.snail;
-							e_ethSpent += formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether'));							
+							e_ethSpent += formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether'));
+							console.log("Hatch total: " + e_snailHatched);
 						} else if(result[i].event == "SoldSnail"){
 							e_snailSold += result[i].args.snail;							
 						} else if(result[i].event == "BoughtSnail"){
