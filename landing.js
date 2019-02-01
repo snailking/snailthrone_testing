@@ -892,13 +892,13 @@ function checkHash(txarray, txhash) {
 }
 			
 //Events
-
+//6763682
 function runLog(){
 	console.log("Running log...");
 	if(ranLog == false){
 		ranLog = true;
 		console.log("Logging starts");
-		myContract.allEvents({ fromBlock: 6763682, toBlock: 'latest' }).get(function(error, result){
+		myContract.allEvents({ fromBlock: 7160000, toBlock: 'latest' }).get(function(error, result){
 			if(!error){
 				console.log(result);
 				var i = 0;
