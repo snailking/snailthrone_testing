@@ -69,7 +69,7 @@ function checkBlock(){
 	});
 }
 
-//checkBlock();
+checkBlock();
 
 //Get timestamp for log
 function dateLog(_blockNumber) {
