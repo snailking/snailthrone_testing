@@ -61,7 +61,7 @@ var timeLaunch = 1546099245;
 var launchBlock = 6974738;
 
 var twoDaysBlock = 0;
-var ranLog = false;
+var ranLog = 0;
 
 function checkBlock(){
 	web3.eth.getBlockNumber(function (error, result){
@@ -893,12 +893,17 @@ function checkHash(txarray, txhash) {
 			
 //Events
 //6763682
+//Doesn't work if we parse from that long ago... How do other people do it?
+//Maybe we'll run logs 40k blocks per 40k blocks?...
+
+var blockStart = 6764000;
+var blockEnd = 6804000;
+
 function runLog(){
 	console.log("Running log...");
-	if(ranLog == false){
-		ranLog = true;
+	if(ranLog < 10){
 		console.log("Logging starts");
-		myContract.allEvents({ fromBlock: 7160000, toBlock: 'latest' }).get(function(error, result){
+		myContract.allEvents({ fromBlock: blockStart, toBlock: blockEnd }).get(function(error, result){
 			if(!error){
 				console.log(result);
 				var i = 0;
@@ -906,19 +911,19 @@ function runLog(){
 					if(checkHash(storetxhash, result[i].transactionHash) != 0) {
 						//dateLog(result[i].blockNumber);
 						if(result[i].event == "HatchedSnail"){
-							e_snailHatched += result[i].args.snail;
-							e_ethSpent += formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether'));
+							e_snailHatched = parseInt(e_snailHatched) + parseInt(result[i].args.snail);
+							e_ethSpent = parseFloat(e_ethSpent) + parseFloat(formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')));
 							console.log("Hatch total: " + e_snailHatched);
 						} else if(result[i].event == "SoldSnail"){
-							e_snailSold += result[i].args.snail;							
+							e_snailSold = parseInt(e_snailSold) + parseInt(result[i].args.snail);							
 						} else if(result[i].event == "BoughtSnail"){
-							e_snailBought += result[i].args.snail;
-							e_ethSpent += formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether'));
+							e_snailBought = parseInt(e_snailBought) + parseInt(result[i].args.snail);
+							e_ethSpent = parseFloat(e_ethSpent) + parseFloat(formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')));
 						} else if(result[i].event == "WithdrewEarnings"){
-							e_ethWon += formatEthValue2(web3.fromWei(result[i].args.ethreward));
+							e_ethWon = parseFloat(e_ethWon) + parseFloat(formatEthValue2(web3.fromWei(result[i].args.ethreward)));
 						} else if(result[i].event == "NewDivs"){
-							e_ethWon += formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether'));
-							e_ethOtherGame += formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether'));
+							e_ethWon = parseFloat(e_ethWon) + parseFloat(formatEthValue2(web3.fromWei(result[i].args.ethreward)));
+							e_ethOtherGame = parseFloat(e_ethOtherGame) + parseFloat(formatEthValue2(web3.fromWei(result[i].args.ethreward)));
 						}
 					}
 				}
@@ -927,6 +932,9 @@ function runLog(){
 				console.log("problem!");
 			}
 		});
+		ranLog++;
+		blockStart = blockEnd;
+		blockEnd = parseInt(blockEnd) + parseInt(40000);
 	} else {
 		console.log("condition failed");
 	}
@@ -934,8 +942,7 @@ function runLog(){
 
 
 function runLogOrig(){
-	if(ranLog == false && twoDaysBlock > 0){
-		ranLog = true;
+	if(ranLog < 10 && twoDaysBlock > 0){
 		myContract.allEvents({ fromBlock: twoDaysBlock, toBlock: 'latest' }).get(function(error, result){
 			if(!error){
 				console.log(result);
