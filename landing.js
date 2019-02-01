@@ -911,7 +911,7 @@ function runLog(){
 							e_snailBought += result[i].args.snail;
 							e_ethSpent += formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether'));
 						} else if(result[i].event == "WithdrewEarnings"){
-							e_ethWon += formatEthValue2(web3.fromWei(result[i].args.ethreward;
+							e_ethWon += formatEthValue2(web3.fromWei(result[i].args.ethreward));
 						} else if(result[i].event == "NewDivs"){
 							e_ethWon += formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether'));
 							e_ethOtherGame += formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether'));
