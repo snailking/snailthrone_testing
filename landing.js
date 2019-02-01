@@ -38,7 +38,7 @@ window.addEventListener('load', async () => {
             // Request account access if needed
             await ethereum.enable();
             // Acccounts now exposed
-            web3.eth.sendTransaction({/* ... */});
+            //web3.eth.sendTransaction({/* ... */});
         } catch (error) {
             // User denied account access...
         }
@@ -47,7 +47,7 @@ window.addEventListener('load', async () => {
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
-        web3.eth.sendTransaction({/* ... */});
+        //web3.eth.sendTransaction({/* ... */});
     }
     // Non-dapp browsers...
     else {
@@ -142,7 +142,7 @@ function date24() {
 	datetext = d.toTimeString();
 	datetext = datetext.split(' ')[0];
 }
-
+/*
 //Referrals
 function getQueryVariable(variable){
        var query = window.location.search.substring(1);
@@ -168,7 +168,7 @@ var playerreflinkdoc = document.getElementById('playerreflink');
 var a_refLink = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0];
 var copyText = "no" //document.getElementById("copytextthing"); 
 copyText.value = playerreflinkdoc.textContent;
-
+*/
 /* STATE UPDATES */
 		
 var doc_snailBought = document.getElementById("snailbought");
