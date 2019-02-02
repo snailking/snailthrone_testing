@@ -185,7 +185,7 @@ function refreshData(){
 	updateEthAccount();
 	updateMaxSnail();
 	updateContractBalance();
-	updateText();
+	//updateText();
 }
 
 //Refreshes some game data faster
@@ -221,12 +221,25 @@ function updateText(){
 	doc_snailBought.innerHTML = e_snailBought;
 	doc_snailHatched.innerHTML = e_snailHatched;
 	doc_snailSold.innerHTML = e_snailSold;
-	doc_snailSacrificed.innerHTML = parseInt(e_snailBought) + parseInt(e_snailHatched) - parseInt(e_snailSold);
+	doc_snailSacrificed.innerHTML = parseInt(e_snailBought) + parseInt(e_snailHatched) - parseInt(e_snailSold) - parseInt(a_maxSnail);
 	doc_ethIn.innerHTML = e_ethSpent;
 	doc_ethOut.innerHTML = e_ethWon;
 	doc_ethOtherGame.innerHTML = e_ethOtherGame;
 }
-	
+
+/*
+1271535 Snails bought
+633247 Snails hatched
+1545276 Snails sacrificed // obviously wrong calculation missing snails sold and not adding max snail
+359506 Snails sold // wrong because many events are ignored due to claim divs
+
+13.199216 ETH IN CONTRACT
+
+42.450363000000046 ETH invested
+37.901999 ETH redistributed
+
+4.251707000000001 ETH from Snail games
+*/	
 
 /* CONTRACT ABI */
 
