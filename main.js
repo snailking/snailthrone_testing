@@ -1,5 +1,4 @@
-contractAddress="0xc9F2B548Ccbfb8d909D4f0925DcE0096dD02c8C6" // ROPSTEN V5
-//contractAddress="0x261d650a521103428C6827a11fc0CBCe96D74DBc" // MAINNET
+contractAddress="0x261d650a521103428C6827a11fc0CBCe96D74DBc" // MAINNET
 
 /* WEB3 DETECTION */
 
@@ -12,11 +11,11 @@ window.addEventListener("load", function() {
         web3 = new Web3(web3.currentProvider);
         web3.version.getNetwork(function(error, result) {
             if (!error) {
-                if (result == "3") {
+                if (result == "1") {
 					console.log("Web3 Testnet successfully loaded!");
                 } else {
                     console.log("Error: you must be on the Mainnet to use this website.");
-					web3 = new Web3(new Web3.providers.HttpProvider("https://testnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));//("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
+					web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
 					modal2.style.display = "block";
                 }
             }
@@ -24,7 +23,7 @@ window.addEventListener("load", function() {
     } else {
         console.log("Web3 library not found.");
 		modal2.style.display = "block";
-        web3 = new Web3(new Web3.providers.HttpProvider("https://testnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));//("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
+        web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/f423492af8504d94979d522c3fbf3794"));
     }
 });
 
@@ -45,7 +44,7 @@ var god_numminutes = 0;
 var god_numseconds = 0;
 
 var god_roundover = false;
-var godtimer_lastminute = 8;
+var godtimer_lastminute = 16;
 
 var godtimerdoc;
 var playereggdoc;
@@ -299,7 +298,7 @@ function updateGodTimer(){
 			a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
 			godtimerdoc.textContent = a_godTimer;
 			god_roundover = false;
-		} else if(godtimer_in_seconds <= 0 && godtimer_lastminute < 8){ //32seconds of delay to make sure the round is over
+		} else if(godtimer_in_seconds <= 0 && godtimer_lastminute < 16){ //64seconds of delay to make sure the round is over
 			godtimerdoc.textContent = "[Waiting for blockchain confirmation...]";
 			godtimer_lastminute++;
 			god_roundover = false;
