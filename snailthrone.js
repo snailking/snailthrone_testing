@@ -38,7 +38,7 @@ window.addEventListener('load', async () => {
             // Request account access if needed
             await ethereum.enable();
             // Acccounts now exposed
-            //web3.eth.sendTransaction({/* ... */});
+            web3.eth.sendTransaction({/* ... */});
         } catch (error) {
             // User denied account access...
         }
@@ -47,7 +47,7 @@ window.addEventListener('load', async () => {
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
-        //web3.eth.sendTransaction({/* ... */});
+        web3.eth.sendTransaction({/* ... */});
     }
     // Non-dapp browsers...
     else {
@@ -67,13 +67,15 @@ span2.onclick = function() {
 
 var timeLaunch = 1546099245;
 var launchBlock = 6974738;
-
-var twoDaysBlock = 0;
+var blockSpan = 14; //14s blocks on ETH mainnet
+var startBlock = 0;
 var ranLog = false;
 
 function checkBlock(){
 	web3.eth.getBlockNumber(function (error, result){
-		twoDaysBlock = result - 24000; //4 days
+		////console.log("block number is " + result);
+		startBlock = parseInt(result - (172800 / blockSpan)); //~2 days
+		if(startBlock < launchBlock) { startBlock = launchBlock };
 	});
 }
 
@@ -81,8 +83,8 @@ checkBlock();
 
 //Get timestamp for log
 function dateLog(_blockNumber) {
-	d = new Date((timeLaunch + ((_blockNumber - launchBlock) * 14.5)) * 1000);
-	console.log(d);
+	d = new Date((timeLaunch + ((_blockNumber - launchBlock) * blockSpan)) * 1000);
+	//////////console.log(d);
 	datetext = d.toTimeString();
 	datetext = datetext.split(' ')[0];
 }
@@ -120,6 +122,9 @@ var f_buy = 0;
 var f_sell = 0;
 var f_sacrifice = 40;
 var m_account = "waiting for web3";
+
+var u_updateEvent = false;
+var p_keepUpdating = false;
 
 /* MODAL */
 
@@ -172,6 +177,18 @@ window.onclick = function(event) {
 }
 
 /* GLOBAL LOOP */
+
+//Changes u_updateLog to true, manual choice in case event watching fails
+function startLogging(){
+	u_updateEvent = true;
+}
+
+//Update log every few seconds if player chose to
+function updateLog(){
+	if(u_updateEvent == true || p_keepUpdating == true){
+		runLog();
+	}
+}
 
 //Started once, to trigger the main loop and the egg loop
 function main(){
@@ -232,7 +249,7 @@ function getQueryVariable(variable){
 }
 
 function copyRef() {
-  var copyText = document.getElementById("copytextthing");
+  copyText.value = playerreflinkdoc.textContent;
   copyText.style.display="block"
   copyText.select();
   document.execCommand("Copy");
@@ -243,8 +260,7 @@ function copyRef() {
 
 var playerreflinkdoc = document.getElementById('playerreflink'); 
 var a_refLink = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0];
-var copyText = "no" //document.getElementById("copytextthing"); 
-copyText.value = playerreflinkdoc.textContent;
+var copyText = document.getElementById("copytextthing"); 
 
 /* STATE UPDATES */
 
@@ -1336,43 +1352,55 @@ function TOKEN_PRICE_MULT(callback){
 
 /* EVENT WATCH */
 
-var logboxscroll = document.getElementById('logboxscroll');
-var eventdoc = document.getElementById("event");
+//Store transaction hash and event name for each event, and check before executing result, as web3 events fire twice (metamask?)
+var store_hash = [];
+var store_event = [];
 
-//Store transaction hash for each event, and check before executing result, as web3 events fire twice
-var storetxhash = [];
-
-//Check equivalency
-function checkHash(txarray, txhash) {
+function checkHash(txhash, eventname) {
 	var i = 0;
+	var _name = false;
 	do {
-		if(txarray[i] == txhash) {
-			return 0;
+		if(store_hash[i] == txhash) {
+			if(store_event[i] == eventname) {
+				return 0;
+			}
 		}
 		i++;
 	}
-	while(i < txarray.length);
-	//Add new tx hash
-	txarray.push(txhash);
-	//Remove first tx hash if there's more than 16 hashes saved
-	if(txarray.length > 16) {
-		txarray.shift();
+	while(i < store_event.length);
+	
+	//Add new tx hash and event name
+	store_hash.push(txhash);
+	store_event.push(eventname);
+	
+	//Remove first entry if there's more than 8 entries saved
+	if(store_hash.length > 8){
+		store_hash.shift();
+	}
+	if(store_event.length > 8){
+		store_event.shift();
 	}
 }
-			
-//Events
+
+/* EVENTS */
+
+var logboxscroll = document.getElementById('logboxscroll');
+var eventlogdoc = document.getElementById("eventlog");
 
 function runLog(){
-	if(ranLog == false && twoDaysBlock > 0){
-		ranLog = true;
-		myContract.allEvents({ fromBlock: twoDaysBlock, toBlock: 'latest' }).get(function(error, result){
-			if(!error){
-				console.log(result);
-				var i = 0;
-				for(i = 0; i < result.length; i++){
-					if(checkHash(storetxhash, result[i].transactionHash) != 0) {
-						dateLog(result[i].blockNumber);
-						if(result[i].event == "HatchedSnail"){
+	ranLog = true;
+	myContract.allEvents({ fromBlock: startBlock, toBlock: 'latest' }).get(function(error, result){
+		if(!error){
+			//////console.log(result);
+			var i = 0;
+			if(result.length > 0){ //check if we have events, if not stop the loop
+				p_keepUpdating = true;
+				for(i = 0; i < 40; i++){ //loop through only 40 events at most
+					if(i < result.length){ //make sure there's enough events
+						if(checkHash(result[i].transactionHash, result[i].event) != 0) {
+							startBlock = result[i].blockNumber; //store the last blocknumber to start next loop
+							dateLog(result[i].blockNumber);
+							if(result[i].event == "HatchedSnail"){
 							eventdoc.innerHTML += "<br>[~" + datetext + "] " + formatEthAdr(result[i].args.player) + " hatched " + result[i].args.snail + " snails for " + formatEthValue2(web3.fromWei(result[i].args.ethspent,'ether')) + " ETH." ;
 							
 						} else if(result[i].event == "SoldSnail"){
@@ -1401,22 +1429,25 @@ function runLog(){
 							eventdoc.innerHTML += "<br>[~" + datetext + "] Another snail game just paid out " + formatEthValue2(web3.fromWei(result[i].args.ethreward,'ether')) + " ETH in divs to all holders!" ;
 						}
 						logboxscroll.scrollTop = logboxscroll.scrollHeight;
-					}
+						}
+					}	
 				}
+			} else {
+				p_keepUpdating = false;
 			}
-			else{
-				console.log("problem!");
-			}
-		});
-	}
+		}
+		else{
+			////////console.log("problem!");
+		}
+	});
 }
-
+			
 var hatchEvent = myContract.HatchedSnail();
 
 hatchEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " hatched " + result.args.snail + " snails for " + formatEthValue2(web3.fromWei(result.args.ethspent,'ether')) + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1429,7 +1460,7 @@ var soldEvent = myContract.SoldSnail();
 soldEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " sold " + result.args.snail + " snails for " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1442,7 +1473,7 @@ var boughtEvent = myContract.BoughtSnail();
 boughtEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " bought " + result.args.snail + " snails for " + formatEthValue2(web3.fromWei(result.args.ethspent,'ether')) + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1455,7 +1486,7 @@ var newpharaohEvent = myContract.BecamePharaoh();
 newpharaohEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " sacrifices snails and claims the throne!" ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1468,7 +1499,7 @@ var withdrewEvent = myContract.WithdrewEarnings();
 withdrewEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " withdrew " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1481,7 +1512,7 @@ var claimedEvent = myContract.ClaimedDivs();
 claimedEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " claimed " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH in divs." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1494,7 +1525,7 @@ var fedEvent = myContract.FedFrogking();
 fedEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " fed the Frogking " + result.args.egg + " eggs and won " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH." ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
@@ -1507,7 +1538,7 @@ var ascendedEvent = myContract.Ascended();
 ascendedEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			var _roundwon = result.args.round - 1;
 			eventdoc.innerHTML += "<br>[" + datetext + "] " + formatEthAdr(result.args.player) + " ASCENDS!<br>The new SnailGod wins Round " + _roundwon + " and claims " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH." ;
@@ -1521,7 +1552,7 @@ var divEvent = myContract.NewDivs();
 divEvent.watch(function(error, result){
     if(!error){
 		//console.log(result);
-		if(checkHash(storetxhash, result.transactionHash) != 0) {
+		if(checkHash(result.transactionHash, result.event) != 0) {
 			date24();
 			eventdoc.innerHTML += "<br>[" + datetext + "] Another snail game just paid out " + formatEthValue2(web3.fromWei(result.args.ethreward,'ether')) + " ETH in divs to all holders!" ;
 			logboxscroll.scrollTop = logboxscroll.scrollHeight;
