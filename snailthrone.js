@@ -99,6 +99,7 @@ var god_numseconds = 0;
 
 var god_roundover = false;
 var godtimer_lastminute = 300;
+var i_godTimer = false;
 
 var godtimerdoc;
 var playereggdoc;
@@ -363,27 +364,29 @@ godtimerdoc = document.getElementById('godtimer');
 
 //Local timer update
 function fastupdateGodTimer(){
-	var _blocktime = (new Date()).getTime(); //current "blocktime" in milliseconds
-	var _timer = a_godTimer - (_blocktime / 1000);
-	
-	if(_timer > 0){
-		godtimer_lastminute = 0;
-		var _hours = Math.floor(_timer / 3600);
-		if(_hours < 10) { _hours = "0" + _hours }
-		var _minutes = Math.floor((_timer % 3600) / 60);
-		if(_minutes < 10) { _minutes = "0" + _minutes }
-		var _seconds = parseFloat((_timer % 3600) % 60).toFixed(0);
-		if(_seconds < 10) { _seconds = "0" + _seconds }
-			
-		godtimerdoc.innerHTML = _hours + ":" + _minutes + ":" + _seconds;
-		god_roundover = false;
-	} else if(_timer <= 0 && godtimer_lastminute < 300){
-		godtimerdoc.innerHTML = "[Waiting for blockchain confirmation...]";
-		godtimer_lastminute++;
-		god_roundover = false;
-	} else {
-		godtimerdoc.textContent = "[Round is over. Press the magic button below!]";
-		god_roundover = true;		
+	if(i_godTimer == true) {
+		var _blocktime = (new Date()).getTime(); //current "blocktime" in milliseconds
+		var _timer = a_godTimer - (_blocktime / 1000);
+		
+		if(_timer > 0){
+			godtimer_lastminute = 0;
+			var _hours = Math.floor(_timer / 3600);
+			if(_hours < 10) { _hours = "0" + _hours }
+			var _minutes = Math.floor((_timer % 3600) / 60);
+			if(_minutes < 10) { _minutes = "0" + _minutes }
+			var _seconds = parseFloat((_timer % 3600) % 60).toFixed(0);
+			if(_seconds < 10) { _seconds = "0" + _seconds }
+				
+			godtimerdoc.innerHTML = _hours + ":" + _minutes + ":" + _seconds;
+			god_roundover = false;
+		} else if(_timer <= 0 && godtimer_lastminute < 300){
+			godtimerdoc.innerHTML = "[Waiting for blockchain confirmation...]";
+			godtimer_lastminute++;
+			god_roundover = false;
+		} else {
+			godtimerdoc.textContent = "[Round is over. Press the magic button below!]";
+			god_roundover = true;		
+		}
 	}
 }
 
@@ -391,6 +394,7 @@ function fastupdateGodTimer(){
 function updateGodTimer(){
 	godTimer(function(result) {
 		a_godTimer = result;
+		i_godTimer = true;
 	});
 }
 
