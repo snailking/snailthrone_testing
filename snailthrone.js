@@ -292,6 +292,7 @@ function refreshData(){
 	updatePlayerEarning();
 	updatePlayerRef();
 	updateButton();
+	updateLog();
 	//runLog();
 }
 
@@ -385,17 +386,6 @@ function updateGodTimer(){
 	});
 }
 
-//Show or hide relevant sacrifice/new round buttons
-function updateButton(){
-	if (god_roundover === false) {
-		document.getElementById('showroundon').style.display = "block";
-		document.getElementById('showroundoff').style.display = "none";
-	} else {
-		document.getElementById('showroundoff').style.display = "block";
-		document.getElementById('showroundon').style.display = "none";
-	}
-}
-
 //Fast local update for godtimer
 function fastupdateGodTimer(){
 	
@@ -411,6 +401,19 @@ function fastupdateGodTimer(){
 		godtimerdoc.textContent = a_godTimer;
 	}
 }	
+
+//Show or hide relevant sacrifice/new round buttons
+function updateButton(){
+	if (god_roundover === false) {
+		document.getElementById('showroundon').style.display = "block";
+		document.getElementById('showroundoff').style.display = "none";
+	} else {
+		document.getElementById('showroundoff').style.display = "block";
+		document.getElementById('showroundon').style.display = "none";
+	}
+}
+
+
 	
 //Current pharaoh requirement
 function updatePharaohReq(){
