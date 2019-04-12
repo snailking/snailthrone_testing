@@ -576,7 +576,7 @@ function updatePlayerEarning(){
 function updatePlayerRef(){
 	if(a_playerSnail >= 300){
 		a_refLink = window.location.protocol + '//' + window.location.host + window.location.pathname + "?ref=" + web3.eth.accounts[0];
-		playerreflinkdoc.innerHTML = "<br>" + a_refLink;
+		playerreflinkdoc.innerHTML = "<br><span class='pulse'>" + a_refLink + "</span>";
 	} else {
 		playerreflinkdoc.textContent = "NOT active. You must have at least 300 snails in your hatchery.";
 	}
