@@ -359,6 +359,7 @@ function updatePharaoh(){
 	});
 }
 
+godtimerdoc = document.getElementById('godtimer');
 
 //Local timer update
 function fastupdateGodTimer(){
