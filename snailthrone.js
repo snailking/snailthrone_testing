@@ -1385,7 +1385,7 @@ function checkHash(txhash, eventname) {
 /* EVENTS */
 
 var logboxscroll = document.getElementById('logboxscroll');
-var eventdoc = document.getElementById("eventlog");
+var eventdoc = document.getElementById("event");
 
 function runLog(){
 	ranLog = true;
