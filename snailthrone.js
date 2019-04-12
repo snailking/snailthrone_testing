@@ -98,7 +98,7 @@ var god_numminutes = 0;
 var god_numseconds = 0;
 
 var god_roundover = false;
-var godtimer_lastminute = 16;
+var godtimer_lastminute = 300;
 
 var godtimerdoc;
 var playereggdoc;
@@ -359,48 +359,39 @@ function updatePharaoh(){
 	});
 }
 
-//Current round timer
-function updateGodTimer(){
-	var blocktime = Math.round((new Date()).getTime() / 1000); //current blocktime should be Unix timestamp
-	godtimerdoc = document.getElementById('godtimer');
-	godTimer(function(req) {
-		godtimer_in_seconds = req - blocktime; //godTimer is the planned blocktime for the end		
-		//Check if round is over
-		if(godtimer_in_seconds > 1){
-			godtimer_lastminute = 0;
-			//Convert result to hour minute second format
-			god_numhours = Math.floor(godtimer_in_seconds / 3600);
-			god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
-			god_numseconds = (godtimer_in_seconds % 3600) % 60;
-			a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
-			godtimerdoc.textContent = a_godTimer;
-			god_roundover = false;
-		} else if(godtimer_in_seconds <= 0 && godtimer_lastminute < 16){ //64seconds of delay to make sure the round is over
-			godtimerdoc.textContent = "[Waiting for blockchain confirmation...]";
-			godtimer_lastminute++;
-			god_roundover = false;
-		} else {
-			godtimerdoc.textContent = "[Round is over. Press the magic button below!]";
-			god_roundover = true;
-		}
-	});
+
+//Local timer update
+function fastupdateGodTimer(){
+	var _blocktime = (new Date()).getTime(); //current "blocktime" in milliseconds
+	var _timer = a_godTimer - (_blocktime / 1000);
+	
+	if(_timer > 0){
+		godtimer_lastminute = 0;
+		var _hours = Math.floor(_timer / 3600);
+		if(_hours < 10) { _hours = "0" + _hours }
+		var _minutes = Math.floor((_timer % 3600) / 60);
+		if(_minutes < 10) { _minutes = "0" + _minutes }
+		var _seconds = parseFloat((_timer % 3600) % 60).toFixed(0);
+		if(_seconds < 10) { _seconds = "0" + _seconds }
+			
+		godtimerdoc.innerHTML = _hours + ":" + _minutes + ":" + _seconds;
+		god_roundover = false;
+	} else if(_timer <= 0 && godtimer_lastminute < 300){
+		godtimerdoc.innerHTML = "[Waiting for blockchain confirmation...]";
+		godtimer_lastminute++;
+		god_roundover = false;
+	} else {
+		godtimerdoc.textContent = "[Round is over. Press the magic button below!]";
+		god_roundover = true;		
+	}
 }
 
-//Fast local update for godtimer
-function fastupdateGodTimer(){
-	
-	//Check if round is ongoing
-	if(godtimer_in_seconds > 0){
-		godtimer_in_seconds = godtimer_in_seconds - 0.2;
-		////console.log(godtimer_in_seconds);
-		god_numhours = Math.floor(godtimer_in_seconds / 3600);
-		god_numminutes = Math.floor((godtimer_in_seconds % 3600) / 60);
-		god_numseconds = parseFloat((godtimer_in_seconds % 3600) % 60).toFixed(0);
-		
-		a_godTimer = god_numhours + "h " + god_numminutes + "m " + god_numseconds + "s ";
-		godtimerdoc.textContent = a_godTimer;
-	}
-}	
+//Current round timer
+function updateGodTimer(){
+	godTimer(function(result) {
+		a_godTimer = result;
+	});
+}
 
 //Show or hide relevant sacrifice/new round buttons
 function updateButton(){
