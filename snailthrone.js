@@ -341,12 +341,12 @@ function updatePharaoh(){
 	var pharaohdoc = document.getElementById('pharaoh');
 	pharaoh(function(req) {
 		a_pharaoh = req.substring(26, 66);
-		var b_pharaoh = "0x" + a_pharaoh;
+		var b_pharaoh = formatEthAdr(a_pharaoh);
 		if(god_roundover === false) {
 			if(b_pharaoh === m_account) {
-				pharaohdoc.innerHTML = "YOU<br>Will Ascend to Godhood in";
+				pharaohdoc.innerHTML = "You Ascend in";
 			} else {
-			pharaohdoc.innerHTML = b_pharaoh + "<br>Will Ascend to Godhood in";
+			pharaohdoc.innerHTML = b_pharaoh + "Ascends in";
 			}
 		}
 		else {
