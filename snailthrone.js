@@ -214,7 +214,7 @@ function controlLoopFast(){
 
 //Truncates ETH value to 3 decimals
 function formatEthValue(ethstr){
-    return parseFloat(parseFloat(ethstr).toFixed(3));
+    return parseFloat(parseFloat(ethstr).toFixed(4));
 }
 
 //Truncates ETH value to 6 decimals
@@ -446,7 +446,7 @@ function updateMaxSnail(){
 function updateContractBalance(){
 	var contractbalancedoc = document.getElementById('contractbalance');
 	GetContractBalance(function(req) {
-		contractbalancedoc.textContent = formatEthValue2(web3.fromWei(req,'ether'));
+		contractbalancedoc.textContent = formatEthValue(web3.fromWei(req,'ether'));
 	});
 }
 
